@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מחשבון נומרולוגיה – מפת הנשמה</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Heebo:wght@300;400;500&display=swap');
+
+  :root {
+    --void: #0a0118;
+    --deep: #12022a;
+    --mid: #1a0533;
+    --rim: #2d2150;
+    --gold: #c9a84c;
+    --gold-light: #e8d08a;
+    --violet: #7c5cbf;
+    --violet-light: #a98de0;
+    --rose: #c06080;
+    --teal: #3abbb0;
+    --text: #e8e0f0;
+    --text-dim: #9b91b8;
+    --card: linear-gradient(145deg,#12022a,#0d1b3e);
+    --card-border: rgba(201,168,76,0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: linear-gradient(160deg, #1a0533 0%, #0d1b3e 50%, #1a0533 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: 'Heebo', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Stars background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(201,168,76,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 10%, rgba(160,130,220,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 80%, rgba(201,168,76,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 60%, rgba(160,130,220,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 40%, rgba(201,168,76,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 70%, rgba(160,130,220,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 90%, rgba(201,168,76,0.2) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 30%, rgba(201,168,76,0.15) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; position: relative; z-index: 1; }
+
+  /* Header */
+  header { text-align: center; padding: 3rem 0 2rem; }
+  .mandala {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    animation: breathe 4s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%,100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    background: linear-gradient(135deg, var(--gold), var(--violet-light), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    color: var(--gold);
+    opacity: 0.5;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  /* Form */
+  .form-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+  @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+
+  label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+  input {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    font-family: 'Heebo', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    outline: none;
+  }
+  input:focus { border-color: var(--gold); }
+  input::placeholder { color: var(--text-dim); }
+
+  .gender-row { display: flex; gap: 0.6rem; }
+  .gender-btn {
+    flex: 1;
+    padding: 0.75rem 0.5rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 8px;
+    color: var(--text-dim);
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .gender-btn.active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201,168,76,0.1);
+  }
+
+  .date-row { display: grid; grid-template-columns: 1fr 1fr 1.5fr; gap: 0.8rem; }
+
+  .full-width { grid-column: 1 / -1; }
+
+  .btn-calc {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--violet), var(--gold));
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .btn-calc:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-calc:active { transform: translateY(0); }
+
+  /* Results */
+  #results { display: none; }
+
+  .section-title {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.4rem;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  /* Number map */
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .num-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .num-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124,92,191,0.1), transparent);
+    pointer-events: none;
+  }
+  .num-card .num-label { font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.4rem; letter-spacing: 0.05em; }
+  .num-card .num-value {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .num-card .num-value.master { color: var(--violet-light); }
+  .num-card .num-name { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.3rem; }
+  .master-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background: var(--violet);
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Detail sections */
+  .detail-section {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .detail-section h3 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.1rem;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .interp-block {
+    margin-bottom: 1.2rem;
+    padding: 1rem;
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    border-right: 3px solid var(--gold);
+  }
+  .interp-block h4 { font-size: 0.9rem; color: var(--gold); margin-bottom: 0.5rem; }
+  .interp-block p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.7; }
+
+  .light-shadow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.8rem;
+  }
+  @media (max-width: 600px) { .light-shadow { grid-template-columns: 1fr; } }
+
+  .light-box, .shadow-box {
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 0.84rem;
+    line-height: 1.6;
+  }
+  .light-box { background: rgba(58,187,176,0.08); border: 1px solid rgba(58,187,176,0.25); }
+  .light-box strong { color: var(--teal); }
+  .shadow-box { background: rgba(192,96,128,0.08); border: 1px solid rgba(192,96,128,0.25); }
+  .shadow-box strong { color: var(--rose); }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
+  .tag {
+    background: rgba(124,92,191,0.2);
+    border: 1px solid rgba(124,92,191,0.4);
+    border-radius: 20px;
+    padding: 0.2rem 0.8rem;
+    font-size: 0.78rem;
+    color: var(--violet-light);
+  }
+  .tag.missing { background: rgba(192,96,128,0.15); border-color: rgba(192,96,128,0.4); color: var(--rose); }
+  .tag.karma { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.4); color: var(--gold); }
+
+  /* AI Section */
+  .ai-section {
+    background: linear-gradient(135deg, rgba(124,92,191,0.1), rgba(201,168,76,0.05));
+    border: 1px solid rgba(124,92,191,0.4);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  .ai-section h2 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.3rem;
+    color: var(--violet-light);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  #ai-output {
+    font-size: 0.92rem;
+    line-height: 1.9;
+    color: var(--text);
+    white-space: pre-wrap;
+  }
+  #ai-output.loading {
+    color: var(--text-dim);
+    font-style: italic;
+  }
+
+  .pulse-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--violet-light);
+    border-radius: 50%;
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  @media print {
+    body { background: white !important; color: black !important; }
+    body::before { display: none; }
+    .form-card, .btn-calc, .btn-ai, .btn-print, header .mandala { display: none !important; }
+    .container { max-width: 100%; padding: 0; }
+    h1 { color: black !important; -webkit-text-fill-color: black !important; font-size: 1.6rem; }
+    .subtitle { color: #333 !important; }
+    .divider { color: #999; }
+    .num-card, .detail-section, .ai-section, .wound-card, .ego-card, .interp-block {
+      background: white !important;
+      border: 1px solid #ccc !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      break-inside: avoid;
+    }
+    .num-card .num-value { color: black !important; }
+    .num-card .num-label, .num-card .num-name { color: #444 !important; }
+    .section-title, h2, h3, h4 { color: black !important; }
+    .detail-section h3 { border-bottom-color: #ccc !important; }
+    .interp-block { border-right-color: #999 !important; }
+    .interp-block h4 { color: #222 !important; }
+    .interp-block p, .wound-card p, .ego-card p { color: #333 !important; }
+    .light-box, .shadow-box { background: #f5f5f5 !important; border-color: #bbb !important; }
+    .light-box strong { color: #006655 !important; }
+    .shadow-box strong { color: #882244 !important; }
+    .tag { background: #eee !important; color: #333 !important; border-color: #bbb !important; }
+    .master-badge { background: #555 !important; }
+    .ego-card { border-right-color: #555 !important; background: #f9f9f9 !important; }
+    .ego-card h4 { color: #333 !important; }
+    .ego-card .release { color: #006655 !important; }
+    .ai-section { background: #f9f9f9 !important; border-color: #ccc !important; }
+    .ai-section h2 { color: #333 !important; }
+    #ai-output { color: #222 !important; }
+    footer { color: #666 !important; }
+    #results { display: block !important; }
+  }
+
+  .btn-ai {
+    width: 100%;
+    padding: 0.9rem;
+    background: linear-gradient(135deg, rgba(124,92,191,0.4), rgba(201,168,76,0.3));
+    border: 1px solid var(--violet);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 1rem;
+  }
+  .btn-ai:hover { background: linear-gradient(135deg, rgba(124,92,191,0.6), rgba(201,168,76,0.4)); }
+
+  .btn-print {
+    display: block;
+    width: 100%;
+    margin: 1rem 0;
+    padding: 0.85rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 10px;
+    color: var(--gold);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+  }
+  .btn-print:hover { background: rgba(201,168,76,0.1); }
+
+  .wound-card {
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(201,168,76,0.2);
+    background: rgba(255,255,255,0.02);
+    margin-bottom: 0.8rem;
+  }
+  .wound-card h4 { color: var(--gold); font-size: 0.9rem; margin-bottom: 0.4rem; }
+  .wound-card p { font-size: 0.84rem; color: var(--text-dim); line-height: 1.65; }
+
+  .ego-card {
+    padding: 1rem;
+    border-radius: 10px;
+    border-right: 3px solid var(--violet);
+    background: rgba(124,92,191,0.05);
+    margin-bottom: 0.8rem;
+  }
+  .ego-card h4 { color: var(--violet-light); font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .ego-card p { font-size: 0.84rem; color: var(--text-dim); line-height: 1.65; margin-bottom: 0.4rem; }
+  .ego-card .release { font-size: 0.82rem; color: var(--teal); font-style: italic; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <span class="mandala">✦</span>
+    <h1>מפת הנשמה הנומרולוגית</h1>
+    <p class="subtitle">נומרולוגיה קבלית ופיתגוראית • תוכנית הלימודים • פענוח מפה תודעתית</p>
+  </header>
+
+  <div class="divider">✦</div>
+
+  <div class="form-card">
+    <div class="form-grid">
+      <div>
+        <label>שם פרטי (לפי ת.ז.)</label>
+        <input type="text" id="firstName" placeholder="למלא כאן" />
+      </div>
+      <div>
+        <label>שם משפחה (לפי שם הנעורים בת.ז.)</label>
+        <input type="text" id="lastName" placeholder="למלא כאן" />
+      </div>
+      <div>
+        <label>מין</label>
+        <div class="gender-row">
+          <button type="button" class="gender-btn active" id="genderF" onclick="setGender('נקבה')">♀ נקבה</button>
+          <button type="button" class="gender-btn" id="genderM" onclick="setGender('זכר')">♂ זכר</button>
+        </div>
+      </div>
+      <div class="full-width">
+        <label>תאריך לידה</label>
+        <div class="date-row">
+          <input type="number" id="bDay" placeholder="יום" min="1" max="31" />
+          <input type="number" id="bMonth" placeholder="חודש" min="1" max="12" />
+          <input type="number" id="bYear" placeholder="שנה" min="1900" max="2025" />
+        </div>
+      </div>
+    </div>
+    <button class="btn-calc" onclick="calculate()">✦ חשב/י את מפת הנשמה שלך ✦</button>
+  </div>
+
+  <div id="results">
+    <!-- Numbers Map -->
+    <div class="section-title">✦ מפת המספרים שלך</div>
+    <div class="numbers-grid" id="numbers-grid"></div>
+
+    <!-- Missing & Karma -->
+    <div class="detail-section" id="missing-section">
+      <h3>⬡ מספרים חסרים – שיעורי הנשמה</h3>
+      <div id="missing-content"></div>
+    </div>
+
+    <!-- Karma Debts -->
+    <div class="detail-section" id="karma-section" style="display:none">
+      <h3>⟳ חוב קארמתי</h3>
+      <div id="karma-content"></div>
+    </div>
+
+    <!-- Master Numbers -->
+    <div class="detail-section" id="master-section" style="display:none">
+      <h3>★ מספרי מאסטר</h3>
+      <div id="master-content"></div>
+    </div>
+
+    <!-- Light & Shadow per dominant numbers -->
+    <div class="detail-section" id="tones-section">
+      <h3>☀ תדר אור וצל – לפי המספרים הדומיננטיים</h3>
+      <div id="tones-content"></div>
+    </div>
+
+    <!-- Soul Wounds -->
+    <div class="detail-section" id="wounds-section">
+      <h3>🜁 פצעי הנשמה</h3>
+      <div id="wounds-content"></div>
+    </div>
+
+    <!-- Ego Suit -->
+    <div class="detail-section" id="ego-section">
+      <h3>🎭 חליפת האגו – זיהוי ושחרור</h3>
+      <div id="ego-content"></div>
+    </div>
+
+    <!-- Personal Year -->
+    <div class="detail-section" id="personal-year-section">
+      <h3>🗓 שנה אישית 2026</h3>
+      <div id="personal-year-content"></div>
+    </div>
+
+    <!-- AI Analysis -->
+    <div class="ai-section">
+      <h2>✦ ניתוח אישי – סוכן AI</h2>
+      <button class="btn-ai" onclick="getAIAnalysis()">✦ פענוח אישי מהנשמה ✦</button>
+      <div id="ai-output" style="margin-top:1.2rem"></div>
+    </div>
+  </div>
+
+  <button class="btn-print" onclick="window.print()">🖨 הדפס / שמור כ-PDF – שחור על לבן</button>
+
+  <footer style="text-align:center;padding:2rem 1rem 3rem;color:var(--text-dim);font-size:0.78rem;line-height:1.8;letter-spacing:0.03em">
+    © 2026 הדר נדב | מפת הנשמה הנומרולוגית<br>
+    כל הזכויות שמורות | אין לשכפל ללא רשות
+  </footer>
+
+</div>
+
+<script>
+// ============================================================
+// GEMATRIA TABLE (Hebrew letters)
+// ============================================================
+const GEMATRIA = {
+  'א':1,'ב':2,'ג':3,'ד':4,'ה':5,'ו':6,'ז':7,'ח':8,'ט':9,
+  'י':10,'כ':20,'ך':20,'ל':30,'מ':40,'ם':40,'נ':50,'ן':50,
+  'ס':60,'ע':70,'פ':80,'ף':80,'צ':90,'ץ':90,'ק':100,'ר':200,
+  'ש':300,'ת':400
+};
+
+// Pythagorean reduction of Hebrew (1-9 cycle)
+const PYTH_HEB = {
+  'א':1,'ב':2,'ג':3,'ד':4,'ה':5,'ו':6,'ז':7,'ח':8,'ט':9,
+  'י':1,'כ':2,'ך':2,'ל':3,'מ':4,'ם':4,'נ':5,'ן':5,
+  'ס':6,'ע':7,'פ':8,'ף':8,'צ':9,'ץ':9,'ק':1,'ר':2,
+  'ש':3,'ת':4
+};
+
+const MASTER = [11, 22, 33];
+const KARMA_NUMS = [13, 14, 16, 19];
+
+function reduce(n, keepMaster = true) {
+  while (n > 9) {
+    if (keepMaster && MASTER.includes(n)) return n;
+    n = String(n).split('').reduce((a, d) => a + parseInt(d), 0);
+  }
+  return n;
+}
+
+function nameValue(str) {
+  let sum = 0;
+  for (const ch of str) { sum += PYTH_HEB[ch] || 0; }
+  return sum;
+}
+
+function digitList(str) {
+  const digits = [];
+  for (const ch of str) { if (PYTH_HEB[ch]) digits.push(PYTH_HEB[ch]); }
+  return digits;
+}
+
+// ============================================================
+// INTERPRETATIONS
+// ============================================================
+const NUM_NAMES = {
+  1:'מספר האני – יוצר ומוביל', 2:'מספר השותפות – רגשי ומאזן',
+  3:'מספר הביטוי – יצירתי ומשמח', 4:'מספר היסוד – בונה ומשמעת',
+  5:'מספר החירות – חוקר ומשתנה', 6:'מספר האחריות – דואג ומחבר',
+  7:'מספר החוכמה – מסתורי ומעמיק', 8:'מספר הכוח – שפע ומנהיגות',
+  9:'מספר החסד – אנושי ורחב לב',
+  11:'מספר מאסטר – שליח ומאיר', 22:'מספר מאסטר – בונה גדול',
+  33:'מספר מאסטר – מורה הלב'
+};
+
+const LIGHT_SHADOW = {
+  1: {
+    light: 'יצירתיות, מנהיגות, ייחודיות, יוזמה, אומץ להתחיל',
+    shadow: 'שתלטנות, אגוצנטריות, בדידות, קושי לקבל עזרה',
+    body: 'כאבי ראש, לחץ דם, בעיות גב עליון, מתח בעמוד השדרה'
+  },
+  2: {
+    light: 'אמפתיה, שיתוף פעולה, רגישות, כישרון תיווך ושלום',
+    shadow: 'ריצוי, מחיקה עצמית, תלות, פחד מדחייה ועימות',
+    body: 'בעיות עיכול, חרדה, כאבי בטן, בעיות כליות'
+  },
+  3: {
+    light: 'שמחה, ביטוי עצמי, יצירתיות, הומור, חיוניות',
+    shadow: 'פיזור, רדידות, ביקורת עצמית, קושי לסיים דברים',
+    body: 'בעיות גרון ודיבור, בלוטת התריס, בעיות עור'
+  },
+  4: {
+    light: 'יציבות, אחריות, מסירות, עבודה קשה, בניית יסודות',
+    shadow: 'נוקשות, פחד משינוי, שחיקה, שעבוד לחובה',
+    body: 'בעיות מפרקים, ברכיים, עצמות, מחלות כרוניות'
+  },
+  5: {
+    light: 'חירות, הרפתקנות, גמישות, כושר הסתגלות, חיים מלאים',
+    shadow: 'פזיזות, בריחה מאחריות, התמכרות, חוסר יציבות',
+    body: 'מערכת עצבים, עייפות כרונית ושחיקה, בעיות נשימה'
+  },
+  6: {
+    light: 'אהבה, טיפוח, יצירת בית ומשפחה, יופי, אחריות',
+    shadow: 'שליטה מתוך דאגה, ביטול עצמי, עול הצלה, דאגת יתר',
+    body: 'לב, חזה, לחץ, כאבי גב תחתון, בעיות לב'
+  },
+  7: {
+    light: 'חוכמה פנימית, רוחניות עמוקה, אינטואיציה חדה, יכולת מחקר ופילוסופיה. כשמאוזן – הופך למורה רוחני, חוקר מבריק או הילר שמביא אור גדול מתוך השקט הפנימי.',
+    shadow: 'ספקנות קיצונית וציניות – צורך "להוכיח" הכל באופן הגיוני. בדידות מבודדת, ריחוק רגשי ופחד מאינטימיות כהגנה על הנפש הרגישה. תחושת "לא מכאן", בריחה למציאות חלופית או התמכרויות. השיעור: לעבור מהבדידות המבודדת אל הלבד המקודש – ומהספק האינטלקטואלי לאמונה רוחנית שמחוברת למציאות.',
+    body: 'מערכת עצבים, בעיות ראייה, מערכת החיסון, כאבי ראש, משברים נפשיים'
+  },
+  8: {
+    light: 'שפע, כוח, יכולת ניהול, קארמה חיובית עם כסף',
+    shadow: 'שחיקה, שליטה, אובססיה לכסף, חוסר גבולות',
+    body: 'בעיות לב וכלי דם, מתח, בעיות בגב'
+  },
+  9: {
+    light: 'חמלה, רוחניות, נתינה, חוכמה של חיים, אנושיות',
+    shadow: 'ויתור עצמי, מרירות, קושי לקבל, פחד מסיומים',
+    body: 'מחלות אוטואימוניות, בעיות בדם, כאבי רגליים'
+  },
+  11: {
+    light: 'תובנה רוחנית גבוהה, ייעוד ציבורי, כוח השראה, ערוץ לאור',
+    shadow: 'חרדה, רגישות יתר, בלבול בין האני לאנרגיות חיצוניות',
+    body: 'מערכת עצבים, עייפות כרונית, בעיות שינה, לחץ'
+  },
+  22: {
+    light: 'בניית עולם, חזון ענק, יכולת להגשים את הבלתי אפשרי',
+    shadow: 'עומס, ייאוש, תחושת כישלון מול החזון הגדול',
+    body: 'שחיקה, לב, לחץ דם, כאבי שכם'
+  },
+  33: {
+    light: 'מורה אנושי, ריפוי, אהבה ללא תנאי, חכמת הלב',
+    shadow: 'קורבנות, ביטול עצמי, נשיאת כאב של אחרים',
+    body: 'כאבי לב, מחלות כרוניות, תשישות'
+  }
+};
+
+const MISSING_LESSONS = {
+  1: { lesson: 'ללמוד להיות ראשון, לומר "אני" ללא אשמה, לפתח ביטחון עצמי ויוזמה', challenge: 'קושי לקחת מקום ולהוביל' },
+  2: { lesson: 'ללמוד שיתוף פעולה, לפתח רגישות רגשית ויכולת קבלה', challenge: 'קושי ביחסים ובגמישות' },
+  3: { lesson: 'לפתח ביטוי עצמי, שמחה, יצירתיות ומשחק', challenge: 'קושי להתבטא ולשמוח' },
+  4: { lesson: 'ללמוד משמעת, סדר ובניית יסודות יציבים', challenge: 'קושי ביצירת יציבות' },
+  5: { lesson: 'ללמוד חירות אמיתית, גמישות ופתיחות לשינוי', challenge: 'פחד משינוי וחדש' },
+  6: { lesson: 'ללמוד לתת ולקבל אהבה, לדאוג לעצמי כמו לאחרים', challenge: 'קושי ביחסי אחריות ואהבה' },
+  7: { lesson: 'ללמוד לסמוך – לעבור מניהול החיים דרך השכל בלבד, לפיתוח אינטואיציה ואמון. לגלות שלא הכל ניתן להוכחה, ושיש סדר גבוה יותר. השיעור הקבלי: למצוא את הקדושה בתוך היומיומי – כשמפסיקים לרחם על הבדידות ומתחילים ללמוד ולחקור פנימה, הבדידות הופכת מנטל לכוח.', challenge: 'קושי לסמוך – על אנשים, על התהליך, על היקום. צורך להוכיח ולהבין הכל באופן הגיוני' },
+  8: { lesson: 'ללמוד לגעת בשפע, לפתח כוח אישי ויחס בריא לכסף', challenge: 'קושי עם כסף וכוח' },
+  9: { lesson: 'ללמוד נתינה ללא ציפייה, לפתח חמלה ורוחב לב', challenge: 'קושי לסגור מעגלים' }
+};
+
+const KARMA_MEANINGS = {
+  13: { name: 'חוב 13 – העצלות', desc: 'בחיים קודמים נמנעת מלקחת אחריות ועבודה. השיעור: לבנות דרך עמל עקבי, סדר, ולהתמסר לתהליך ולא לתוצאה המיידית.' },
+  14: { name: 'חוב 14 – השחרור', desc: 'שימוש לרעה בחירות ובכוח בחיים קודמים. השיעור: ריסון עצמי, גמישות מבחירה, ולא מכורח. חירות אמיתית דרך משמעת.' },
+  16: { name: 'חוב 16 – גאוות האגו', desc: 'ב"אני" שהפר יחסים וניפץ לבבות. השיעור: להפיל את האגו מרצון, לפני שהחיים יעשו זאת. אהבה עצמית אמיתית.' },
+  19: { name: 'חוב 19 – עצמאות', desc: 'שימוש בכוח ובמשאבים לצורך עצמי בלבד. השיעור: ללמוד לקחת עזרה, לוותר על שליטה, להיות חלק מקהילה.' }
+};
+
+const MASTER_MEANINGS = {
+  11: { name: '11 – שליח האור', desc: 'הינך גשר בין עולמות. יש לך אינטואיציה חדה ויכולת לראות מה שאחרים לא רואים. הייעוד שלך: להאיר, להשמיע אמת, לשמש ערוץ לתובנות. האתגר: להאמין בעצמך ולא לכבות את האור מפחד.', shadow: 'חרדה, רגישות יתר, קושי לעמוד ביעוד' },
+  22: { name: '22 – הבונה הגדול', desc: 'יש לך חזון של שינוי ממשי בעולם. הכוח שלך הוא לקחת חלום ולהפוך אותו למציאות. האתגר: להאמין שמגיע לך לבנות גדול.', shadow: 'עומס, ביטול עצמי, תחושת בלתי אפשרי' },
+  33: { name: '33 – מורה הלב', desc: 'אהבה ללא תנאי, ריפוי ולימוד הם ייעודך. יש בך כוח הנחייה וחמלה נדירה. האתגר: לא לשאת כאב של אחרים במקומם.', shadow: 'קורבנות, ביטול עצמי מוחלט' }
+};
+
+const SOUL_WOUNDS = {
+  rejection: { name: 'פצע הדחייה', trigger: 'מספרים 1, 4 בעמדות מפתח', desc: 'תחושה עמוקה של "לא מספיק", פחד להיראות, נסיגה לפני שדוחים. הנשמה למדה שהיא לא ראויה.', heal: 'ללמוד שנוכחותך היא מתנה. לתת לעצמך רשות להיראות.' },
+  abandonment: { name: 'פצע הנטישה', trigger: 'מספרים 2, 6 בעמדות מפתח', desc: 'פחד עמוק מבדידות ועזיבה. יצירת תלות, רצון לרצות כדי שלא יעזבו.', heal: 'ללמוד שאתה/את שלם/ה לבד. להיות הבית של עצמך.' },
+  humiliation: { name: 'פצע ההשפלה', trigger: 'מספרים 3, 8 בעמדות מפתח', desc: 'בושה על מה שאתה/את – גוף, רגשות, רצונות. תחושה שהצרכים שלך הם עול על אחרים.', heal: 'לכבד את הצרכים שלך. הגוף שלך ורצונותייך קדושים.' },
+  betrayal: { name: 'פצע הבגידה', trigger: 'מספרים 5, 7 בעמדות מפתח', desc: 'קושי עמוק לתת אמון, ציפייה לאכזבה. שמירה על שליטה כהגנה.', heal: 'ללמוד שאמון מתחיל בעצמי. לשחרר שליטה בהדרגה.' },
+  injustice: { name: 'פצע אי-הצדק', trigger: 'מספרים 1, 8 בעמדות מפתח', desc: 'תחושה ש"זה לא הוגן", קשיחות כלפי עצמי, ביקורת עצמית קשה, פחד מטעויות.', heal: 'לאפשר שלמות אנושית. "מספיק טוב" הוא ניצחון.' }
+};
+
+const EGO_SUITS = {
+  goodGirl: {
+    name: 'הילד/ה הטוב/ה – המרצ/ה (ליז בורבו + קרוליין מיס)',
+    archetype: 'ארכיטיפ הזונה (קרוליין מיס) – מוכר/ת את הקול האמיתי לשמירת שלום',
+    desc: 'מסכים/ה, מסייע/ת, לא אומר/ת "לא". מחשיב/ה צרכי אחרים על פני עצמו/ה. נולד/ה מפחד הדחייה והנטישה.',
+    loop: 'לופ: עוזר/ת → מצטברת עייפות → כועס/ת בפנים → ממשיך/ה לעזור כי "אם לא אני, אז מי?" → בגידה עצמית.',
+    release: 'שחרור: לתרגל "לא" קטן פעם ביום. לשים לב מתי עוזר/ת מפחד ומתי מאהבה. הגבול הוא אקט אהבה עצמית.'
+  },
+  rescuer: {
+    name: 'המציל/ה (ליז בורבו + קרוליין מיס)',
+    archetype: 'ארכיטיפ המטפל/ת הפצוע/ה (קרוליין מיס)',
+    desc: 'עוזר/ת לכולם, מרגיש/ה אחריות לרגשות של אחרים. מקבל/ת ערך עצמי רק כשעוזר/ת.',
+    loop: 'לופ: מציל/ה → תחושת חשיבות → מותש/ת → מרגיש/ה לא מוערך/ת → מציל/ה שוב.',
+    release: 'שחרור: לזכור שלכל אחד יש את הכוח להציל את עצמו. עזרה אמיתית היא ללמד אותו לדוג – ולא לדוג במקומו.'
+  },
+  perfectionist: {
+    name: 'הפרפקציוניסט/ית (ליז בורבו + קרוליין מיס)',
+    archetype: 'ארכיטיפ השופט/ת (קרוליין מיס)',
+    desc: 'לעולם זה לא מספיק טוב. ביקורת עצמית אכזרית. מקפיא/ה את עצמו/ה לפני ניסיון.',
+    loop: 'לופ: מנסה → לא מושלם → ביקורת עצמית → נמנע/ת → וחוזר חלילה.',
+    release: 'שחרור: "גמור" עדיף על "מושלם". לחגוג התחלות, לא רק סיומים מושלמים.'
+  },
+  victim: {
+    name: 'הקורבן (ליז בורבו + קרוליין מיס)',
+    archetype: 'ארכיטיפ הקורבן (קרוליין מיס – ארכיטיפ הישרדות)',
+    desc: 'תחושה שהחיים קורים לו/ה, חוסר שליטה, האשמת אחרים. נולד/ה מחוסר אונים עמוק.',
+    loop: 'לופ: מרגיש/ה חסר/ת אונים → מאשים/ה → מחכה להצלה → מאוכזב/ת → מרגיש/ה חסר/ת אונים.',
+    release: 'שחרור: לשאול "מה אני יכול/ה לשנות עכשיו?" גם שינוי קטן שובר את הלופ.'
+  },
+  controller: {
+    name: 'השליט/ה – הבוס (ליז בורבו + קרוליין מיס)',
+    archetype: 'ארכיטיפ המלך/המלכה (קרוליין מיס)',
+    desc: 'שולט/ת כדי לא להרגיש חוסר אונים. "אם אני לא אעשה זאת, לא ייעשה נכון." פחד עמוק מהלא נודע.',
+    loop: 'לופ: שולט/ת → עייפות → כועס/ת שלא עוזרים → שולט/ת יותר → מתרחקים.',
+    release: 'שחרור: לתרגל האצלת סמכות ב-1% קטן. לשחרר בשביל עצמך, לא בשביל אחרים.'
+  },
+  invisible: {
+    name: 'הנעלם/ת – האדם השקוף (ליז בורבו + קרוליין מיס)',
+    archetype: 'ארכיטיפ הילד/ה הפצוע/ה (קרוליין מיס)',
+    desc: 'לא תופס/ת מקום, לא מביע/ה דעה, מפחד/ת להיראות. "אם לא ייראו אותי, לא יכאבו לי."',
+    loop: 'לופ: נמנע/ת מלהיות נראה/ית → לא מיושם/ת → מרגיש/ה לא חשוב/ה → נמנע/ת יותר.',
+    release: 'שחרור: לבחור מפגש קטן אחד לשבוע ולומר משהו שמרגיש "גדול מדי".'
+  },
+  escapist: {
+    name: 'הבורח/ת (ליז בורבו + קרוליין מיס)',
+    archetype: 'ארכיטיפ המדיטטור/ית (קרוליין מיס) – בורח/ת לרוח',
+    desc: 'מתחמק/ת מעימות, מרגשות כבדים, מאחריות. בורח/ת לעולמות חלופיים – מחשב, פנטזיה, עיסוקים.',
+    loop: 'לופ: לחץ → בריחה → לחץ מצטבר → בריחה גדולה יותר → משבר.',
+    release: 'שחרור: לשבת עם הרגש 5 דקות לפני הבריחה. "הרגש לא יהרוג אותי."'
+  },
+  philosopher: {
+    name: 'הפילוסוף/ית – המנותק/ת (ליז בורבו + קרוליין מיס)',
+    archetype: 'ארכיטיפ החכם/ה (קרוליין מיס)',
+    desc: 'בורח/ת לראש, מנתח/ת הכל, מתנתק/ת מגוף ורגש. "אם אבין את זה, לא ארגיש את זה."',
+    loop: 'לופ: רגש עולה → ניתוח אינסופי → תשישות → ניתוח שוב → ניתוק.',
+    release: 'שחרור: לשאול "מה אני מרגיש/ה בגוף עכשיו?" שלוש פעמים ביום. החזרה לגוף מחזירה לחיים.'
+  },
+  narcissist: {
+    name: 'הנרקיסיסט/ית הפצוע/ה (ליז בורבו + קרוליין מיס)',
+    archetype: 'ארכיטיפ המלוכה (קרוליין מיס) – גדלות כפיצוי',
+    desc: 'ביטוי גרנדיוזי שמסתיר פצע עמוק של ערך עצמי. "אם אני גדול/ה, אף אחד לא יראה שאני מפוחד/ת."',
+    loop: 'לופ: פגיעה בערך עצמי → ביטוי גרנדיוזי → ציפייה לאישור → אכזבה → פגיעה.',
+    release: 'שחרור: לשאול "מה אני מרגיש/ה כשאין לי קהל?" לשבת עם התשובה ברחמים.'
+  },
+  fighter: {
+    name: 'הלוחם/ת – הקשיח/ה (ליז בורבו + קרוליין מיס)',
+    archetype: 'ארכיטיפ הלוחם/ת (קרוליין מיס)',
+    desc: 'מגן/ה על עצמו/ה בתוקפנות. "עדיף שאתקוף לפני שיתקפו אותי." נולד/ה מפצע בגידה.',
+    loop: 'לופ: מרגיש/ה מאוים/ת → תוקף/ת → מרחיקים → מרגיש/ה מאוים/ת יותר → תוקף/ת.',
+    release: 'שחרור: לשאול "האם אני מגיב/ה למה שקורה עכשיו, או לטראומה ישנה?" ההפסקה הזו שוברת הכל.'
+  }
+};
+
+let selectedGender = 'נקבה';
+
+function setGender(g) {
+  selectedGender = g;
+  document.getElementById('genderF').classList.toggle('active', g === 'נקבה');
+  document.getElementById('genderM').classList.toggle('active', g === 'זכר');
+}
+
+// ============================================================
+// MAIN CALCULATE
+// ============================================================
+let globalData = {};
+
+function calculate() {
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const day = parseInt(document.getElementById('bDay').value);
+  const month = parseInt(document.getElementById('bMonth').value);
+  const year = parseInt(document.getElementById('bYear').value);
+
+  if (!firstName || !lastName || !day || !month || !year) {
+    alert('נא למלא את כל השדות');
+    return;
+  }
+
+  const fullName = firstName + ' ' + lastName;
+
+  // Calculate values
+  const firstRaw = nameValue(firstName);
+  const lastRaw = nameValue(lastName);
+  const fullRaw = nameValue(fullName);
+
+  const firstNum = reduce(firstRaw);
+  const lastNum = reduce(lastRaw);
+  const fullNum = reduce(fullRaw);
+
+  const dayRaw = day;
+  const dayNum = reduce(day);
+  const monthNum = reduce(month);
+  const yearDigits = String(year).split('').reduce((a,d) => a+parseInt(d), 0);
+  const yearNum = reduce(yearDigits);
+
+  // Life path – reduce each component first
+  const lpRaw = reduce(day, false) + reduce(month, false) + reduce(yearDigits, false);
+  const lifePath = reduce(lpRaw);
+
+  // Tikkun (year correction number)
+  const tikkunRaw = String(year).split('').reduce((a,d) => a+parseInt(d), 0);
+  const tikkun = reduce(tikkunRaw);
+
+  // All digits in the map
+  const allNumbers = [firstNum, lastNum, fullNum, dayNum, monthNum, yearNum, lifePath];
+  const rawNumbers = [firstRaw, lastRaw, fullRaw, dayRaw, month, yearDigits, lpRaw];
+
+  // Missing numbers (1-9 not appearing)
+  const allDigitsFlat = [];
+  for (const n of allNumbers) {
+    if (n <= 9) allDigitsFlat.push(n);
+    else { allDigitsFlat.push(n % 10); allDigitsFlat.push(Math.floor(n/10)); }
+  }
+  // Also add digits from name strings
+  const nameDigits = digitList(fullName);
+  const dateDigits = [];
+  String(day).split('').forEach(d => dateDigits.push(parseInt(d)));
+  String(month).split('').forEach(d => dateDigits.push(parseInt(d)));
+  String(year).split('').forEach(d => dateDigits.push(parseInt(d)));
+  const allPresent = new Set([...nameDigits, ...dateDigits].filter(n => n > 0));
+  const missing = [1,2,3,4,5,6,7,8,9].filter(n => !allPresent.has(n));
+
+  // Karma debts – יום הלידה בלבד (13, 14, 16, 19)
+  const karmaDebts = KARMA_NUMS.includes(day) ? [day] : [];
+
+  // Master numbers
+  const masterNums = allNumbers.filter(n => MASTER.includes(n));
+  const uniqueMasters = [...new Set(masterNums)];
+
+  // Dominant numbers (frequency)
+  const freq = {};
+  allNumbers.forEach(n => { const k = n<=9?n:reduce(n,false); freq[k]=(freq[k]||0)+1; });
+  const dominant = Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,3).map(e=>parseInt(e[0]));
+
+  globalData = { firstName, lastName, fullName, day, month, year,
+    firstNum, lastNum, fullNum, dayNum, monthNum, yearNum, lifePath, tikkun,
+    missing, karmaDebts, uniqueMasters, dominant, allNumbers, freq,
+    gender: selectedGender };
+
+  // Personal Year calculation
+  const currentYear = 2026;
+  const pyRaw = day + month + currentYear;
+  const personalYear = reduce(String(currentYear).split('').reduce((a,d)=>a+parseInt(d),0) + reduce(day,false) + reduce(month,false), false);
+  // Birthday month in 2026 determines cycle transition
+  const bdayPassed2026 = (month < 6) || (month === 6 && day <= 20);
+  const MONTHS = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+  const pyStart = `${MONTHS[month-1]} 2026`;
+  const pyEndMonth = `${MONTHS[month-1]} 2027`;
+  globalData.personalYear = personalYear;
+  globalData.pyStart = pyStart;
+  globalData.pyEndMonth = pyEndMonth;
+
+  renderNumbers();
+  renderMissing();
+  renderKarma();
+  renderMasters();
+  renderTones();
+  renderWounds();
+  renderEgo();
+  renderPersonalYear();
+
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderNumbers() {
+  const d = globalData;
+  const items = [
+    { label: 'שם פרטי', value: d.firstNum, name: NUM_NAMES[d.firstNum] },
+    { label: 'שם משפחה', value: d.lastNum, name: NUM_NAMES[d.lastNum] },
+    { label: 'שם מלא', value: d.fullNum, name: NUM_NAMES[d.fullNum] },
+    { label: 'יום לידה', value: d.dayNum, name: NUM_NAMES[d.dayNum] },
+    { label: 'חודש לידה', value: d.monthNum, name: NUM_NAMES[d.monthNum] },
+    { label: 'שנת לידה (תיקון)', value: d.tikkun, name: NUM_NAMES[d.tikkun] },
+    { label: 'שביל חיים', value: d.lifePath, name: NUM_NAMES[d.lifePath] },
+    { label: 'שנה אישית 2026', value: d.personalYear, name: NUM_NAMES[d.personalYear] }
+  ];
+
+  const grid = document.getElementById('numbers-grid');
+  grid.innerHTML = items.map(item => {
+    const isMaster = MASTER.includes(item.value);
+    return `<div class="num-card">
+      ${isMaster ? '<span class="master-badge">★ מאסטר</span>' : ''}
+      <div class="num-label">${item.label}</div>
+      <div class="num-value ${isMaster?'master':''}">${item.value}</div>
+      <div class="num-name">${item.name || ''}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderMissing() {
+  const { missing } = globalData;
+  const el = document.getElementById('missing-content');
+  if (missing.length === 0) {
+    el.innerHTML = '<p style="color:var(--text-dim)">כל המספרים 1–9 מופיעים במפה שלך. המפה מלאה!</p>';
+    return;
+  }
+  const tags = missing.map(n => `<span class="tag missing">${n}</span>`).join('');
+  const blocks = missing.map(n => {
+    const l = MISSING_LESSONS[n];
+    return `<div class="interp-block">
+      <h4>מספר ${n} חסר – ${l.challenge}</h4>
+      <p>🎯 <strong>שיעור הנשמה:</strong> ${l.lesson}</p>
+    </div>`;
+  }).join('');
+  el.innerHTML = `<div class="tag-list">${tags}</div><br>${blocks}`;
+}
+
+function renderKarma() {
+  const { karmaDebts } = globalData;
+  const sec = document.getElementById('karma-section');
+  if (karmaDebts.length === 0) { sec.style.display = 'none'; return; }
+  sec.style.display = 'block';
+  const el = document.getElementById('karma-content');
+  el.innerHTML = karmaDebts.map(k => {
+    const m = KARMA_MEANINGS[k];
+    if (!m) return '';
+    return `<div class="interp-block">
+      <h4>${m.name}</h4>
+      <p>${m.desc}</p>
+    </div>`;
+  }).join('');
+}
+
+function renderMasters() {
+  const { uniqueMasters } = globalData;
+  const sec = document.getElementById('master-section');
+  if (uniqueMasters.length === 0) { sec.style.display = 'none'; return; }
+  sec.style.display = 'block';
+  const el = document.getElementById('master-content');
+  el.innerHTML = uniqueMasters.map(m => {
+    const info = MASTER_MEANINGS[m];
+    if (!info) return '';
+    return `<div class="interp-block">
+      <h4>${info.name}</h4>
+      <p>${info.desc}</p>
+      <p style="margin-top:0.5rem;color:var(--rose)">⚠ צל: ${info.shadow}</p>
+    </div>`;
+  }).join('');
+}
+
+function renderTones() {
+  const { dominant } = globalData;
+  const el = document.getElementById('tones-content');
+  el.innerHTML = dominant.map(n => {
+    const ls = LIGHT_SHADOW[n];
+    if (!ls) return '';
+    return `<div class="interp-block">
+      <h4>מספר ${n} – ${NUM_NAMES[n]}</h4>
+      <div class="light-shadow">
+        <div class="light-box"><strong>☀ תדר אור</strong><br>${ls.light}</div>
+        <div class="shadow-box"><strong>🌑 תדר צל</strong><br>${ls.shadow}<br><br><em>גוף: ${ls.body}</em></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderWounds() {
+  const { allNumbers, lifePath, firstNum, fullNum } = globalData;
+  const el = document.getElementById('wounds-content');
+  const detected = [];
+
+  // Heuristic wound detection based on numbers
+  const nums = new Set(allNumbers);
+
+  if (nums.has(1) || nums.has(4) || lifePath === 1 || lifePath === 4) detected.push('rejection');
+  if (nums.has(2) || nums.has(6) || lifePath === 2 || lifePath === 6) detected.push('abandonment');
+  if (nums.has(3) || nums.has(8) || lifePath === 3 || lifePath === 8) detected.push('humiliation');
+  if (nums.has(5) || nums.has(7) || lifePath === 5 || lifePath === 7) detected.push('betrayal');
+  if (nums.has(9) || lifePath === 9 || fullNum === 9) detected.push('injustice');
+
+  // Always show at least 2
+  const unique = [...new Set(detected)].slice(0, 5);
+  if (unique.length < 2) { unique.push('rejection', 'abandonment'); }
+
+  el.innerHTML = [...new Set(unique)].map(w => {
+    const wd = SOUL_WOUNDS[w];
+    return `<div class="wound-card">
+      <h4>${wd.name}</h4>
+      <p>${wd.desc}</p>
+      <p style="margin-top:0.5rem;color:var(--teal)">✦ ריפוי: ${wd.heal}</p>
+    </div>`;
+  }).join('');
+}
+
+function renderEgo() {
+  const { lifePath, firstNum, fullNum, missing } = globalData;
+  const el = document.getElementById('ego-content');
+  const suits = [];
+
+  // Heuristic ego detection
+  if ([2,6,9].includes(lifePath) || [2,6].includes(firstNum)) suits.push('goodGirl');
+  if ([6,2].includes(lifePath) || missing.includes(2)) suits.push('rescuer');
+  if ([1,8,4].includes(lifePath)) suits.push('perfectionist');
+  if ([7,5].includes(lifePath) || missing.includes(1)) suits.push('philosopher');
+  if ([4,8].includes(lifePath)) suits.push('controller');
+  if ([2,9].includes(lifePath) || missing.includes(1)) suits.push('invisible');
+
+  const primary = suits.slice(0, 3);
+  if (primary.length === 0) primary.push('goodGirl', 'perfectionist');
+
+  el.innerHTML = [...new Set(primary)].map(key => {
+    const suit = EGO_SUITS[key];
+    return `<div class="ego-card">
+      <h4>🎭 ${suit.name}</h4>
+      <p><strong>ארכיטיפ:</strong> ${suit.archetype.replace(' (קרוליין מיס)', '')}</p>
+      <p>${suit.desc}</p>
+      <p>${suit.loop}</p>
+      <p class="release">✦ ${suit.release}</p>
+    </div>`;
+  }).join('');
+}
+
+
+function renderPersonalYear() {
+  const { personalYear, pyStart, pyEndMonth } = globalData;
+  const el = document.getElementById('personal-year-content');
+  const py = personalYear;
+
+  const PY_MEANINGS = {
+    1: { theme: 'שנת ראשית – שנת פתיחה ויוזמה', desc: 'זוהי שנה של התחלות חדשות, פריצת דרך ועצמאות. האנרגיה תומכת בהשקת פרויקטים חדשים, שינויי כיוון, ופיתוח הזהות האישית. אם תמיד רצית להתחיל משהו – עכשיו הזמן.' },
+    2: { theme: 'שנת שותפות – שנה של יחסים וסבלנות', desc: 'שנה שמזמינה שיתוף פעולה, עיבוד רגשי ובניית קשרים. הדברים מתקדמים לאט ובמכוון. אל תאיץ – הנטיעה העמוקה מתרחשת עכשיו מתחת לפני השטח.' },
+    3: { theme: 'שנת ביטוי – שנה של יצירה ושמחה', desc: 'שנה של שמחה, יצירתיות, ביטוי עצמי ותקשורת. הרחב/י את החוגים החברתיים, הבע/י את עצמך, הנח/י לשמחה לנהל.' },
+    4: { theme: 'שנת בניין – שנה של עבודה ויסודות', desc: 'שנה של עבודה ממוקדת ובניית יסודות. פחות הפתעות, יותר מסירות. כל מה שתבנה השנה יחזיק לשנים.' },
+    5: { theme: 'שנת שינוי – שנה של חירות ותנועה', desc: 'שנה של שינויים, הרפתקאות וגמישות. הכלכלה, הקשרים, המגורים – הכל עשוי לזוז. לך/כי עם הזרם.' },
+    6: { theme: 'שנת אחריות – שנה של בית ומשפחה', desc: 'שנה שמתמקדת בבית, משפחה, מערכות יחסים ואחריות. גם שנה מצוינת לריפוי ולאסתטיקה.' },
+    7: { theme: 'שנת פנימה – שנה של מחקר ורוחניות', desc: 'שנה של עמקות, מדיטציה, לימוד ורוחניות. פחות פעילות חיצונית, יותר בחינה פנימית. שנה מושלמת לתרפיה ולהכרת עצמך.' },
+    8: { theme: 'שנת כוח – שנה של שפע ומנהיגות', desc: 'שנה של כוח, הצלחה כלכלית ומנהיגות. המאמצים של השנים הקודמות עולים לפוטנציאל. קבל/י אחריות ועמד/י בכוח.' },
+    9: { theme: 'שנת סיום – שנה של שחרור ועיכול', desc: 'שנת סגירת מעגלים. שחרור מה שכבר לא משרת אותך – מערכות יחסים, עבודות, דפוסי חשיבה. כאב האבדן עשוי להיות נוכח, אך הוא סלילת הדרך ל-1 הבאה.' }
+  };
+
+  const m = PY_MEANINGS[py] || PY_MEANINGS[reduce(py,false)];
+  if (!m) { el.innerHTML = ''; return; }
+
+  el.innerHTML = `<div class="interp-block">
+    <h4>שנה אישית ${py} – ${m.theme}</h4>
+    <p style="margin-bottom:0.6rem;color:var(--gold);font-size:0.82rem">(מחודש ${pyStart} עד חודש ${pyEndMonth})</p>
+    <p>${m.desc}</p>
+  </div>`;
+}
+
+
+async function getAIAnalysis() {
+  const d = globalData;
+  if (!d.firstName) { alert('נא לחשב קודם את המפה'); return; }
+
+  const aiOut = document.getElementById('ai-output');
+  aiOut.style.cssText = 'margin-top:1.2rem';
+  aiOut.innerHTML = '<span class="pulse-dot"></span> הנשמה מנתחת...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;יקח 2-3 דק\'...';
+
+  const prompt = `את מומחית נומרולוגיה רוחנית בשיטות מיכל גרין, שוקי גבאי, פיתגורס, ליז בורבו וקרוליין מיס. כתבי ניתוח אישי מעמיק בעברית תקנית מדויקת, חמה ומחזקת. פני לפי המין: ${d.gender === 'נקבה' ? 'נקבה בלבד' : 'זכר בלבד'}.
+
+שגיאות נפוצות שיש להימנע מהן לחלוטין:
+- "תפנית" ולא "תפנה" | "הספיק" ולא "ספק" | "המשאלה" ולא "המשאל"
+- "משיכה אליהם" ולא "משוכת אליהם" | "הדברים שאת מרגישה משיכה אליהם" ולא "מהדברים שאני מרגישה משוכת אליהם"
+- "בונים" ולא "ברים" | "להעמיס" ולא "לעמוס" | "לדחוק" ולא "לאחוק" | "קרקע" ולא "קרחת"
+- "מאידך" אחרי "מחד" – לעולם לא "מחד... מחד"
+- בלוקים = חסימות, לא להשתמש במילה "בלוקים" – לכתוב "חסימות" או "עצירות"
+
+נתוני המפה:
+שם: ${d.fullName} | מין: ${d.gender} | שביל חיים: ${d.lifePath}
+שם פרטי: ${d.firstNum} | שם משפחה: ${d.lastNum} | שם מלא: ${d.fullNum}
+יום: ${d.dayNum} | חודש: ${d.monthNum} | שנת תיקון: ${d.tikkun}
+שנה אישית 2026: ${d.personalYear} (${d.pyStart} עד ${d.pyEndMonth})
+חסרים: ${d.missing.length > 0 ? d.missing.join(', ') : 'אין'} | קארמה: ${d.karmaDebts.length > 0 ? d.karmaDebts.join(', ') : 'אין'} | מאסטר: ${d.uniqueMasters.length > 0 ? d.uniqueMasters.join(', ') : 'אין'}
+דומיננטיים: ${d.dominant.join(', ')}
+
+כתבי ניתוח עם הפרקים: פתיחה אישית (משפט אחד בלבד, ואז מיד פנייה ישירה בשם – "${d.firstName} ${d.lastName} היקר/ה,") | מהות הנשמה | תדרי האור | שיעורי הנשמה | השנה האישית | מסר וברכה. ללא HTML. טקסט נקי עם רווחי שורה.`;
+
+  /* ============================================================
+     SYSTEM PROMPT – להעתיק ל-n8n (לא בשימוש כאן, Claude.ai חוסם)
+     ============================================================
+  const SYSTEM_PROMPT_FOR_N8N = `
+את מומחית נומרולוגיה רוחנית ומנחת התפתחות אישית.
+שפת האם שלך היא עברית תקנית מושלמת.
+
+כללי שפה:
+- עברית יומיומית ברורה – ללא מילים נדירות
+- "להעמיס" לא "לעמוס" | "לדחוק" לא "לאחוק" | "קרקע" לא "קרחת"
+- "מחד... מאידך" – לא "מחד... מחד"
+- פנייה לפי המין המצוין בלבד לאורך כל הניתוח
+- ללא HTML – טקסט נקי עם רווחי שורה
+
+כללי תוכן:
+- מספר חסר = קושי עם האנרגיה, לא הימנעות מרצון
+- חסר 7 = קשה לסמוך ולהקשיב לקול הפנימי – לא אוהב/ת בדידות
+- תדר 7: מעבר מבדידות מבודדת ללבד מקודש, מספק לאמונה
+- טון: חם, אמפתי, ישיר, מחזק
+  `;
+  ============================================================ */
+
+  try {
+    // זיהוי סביבה: בתוך Claude.ai פונים ישירות ל-API. באתר פומבי (GitHub) פונים ל-n8n.
+    const isClaudeChat = window.location.hostname === '' || window.location.protocol === 'blob:' || window.location.hostname.includes('claude');
+
+    let text;
+
+    if (isClaudeChat) {
+      // --- מצב צ'אט: קריאה ישירה ל-Claude ---
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-6",
+          max_tokens: 8096,
+          messages: [{ role: "user", content: prompt }]
+        })
+      });
+      if (!response.ok) {
+        const errData = await response.json();
+        aiOut.style.cssText = 'margin-top:1.2rem;color:var(--rose)';
+        aiOut.textContent = `שגיאה ${response.status}: ${errData?.error?.message || 'שגיאה לא ידועה'}`;
+        return;
+      }
+      const data = await response.json();
+      text = (data.content?.map(i => i.text || '').join('') || 'שגיאה בקבלת הניתוח').trim();
+    } else {
+      // --- מצב אתר פומבי: קריאה ל-n8n ---
+      const response = await fetch("https://numerology-ai.app.n8n.cloud/webhook/numerology", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: prompt })
+      });
+      if (!response.ok) {
+        aiOut.style.cssText = 'margin-top:1.2rem;color:var(--rose)';
+        aiOut.textContent = `שגיאה ${response.status} בחיבור לשרת. נא לנסות שוב.`;
+        return;
+      }
+      const data = await response.json();
+      text = (data.report || data.output || 'שגיאה בקבלת הניתוח').trim();
+    }
+
+    aiOut.style.cssText = 'margin-top:1.2rem;font-size:0.92rem;line-height:1.9;color:var(--text);white-space:pre-wrap';
+    aiOut.textContent = text;
+  } catch (err) {
+    aiOut.style.cssText = 'margin-top:1.2rem;color:var(--rose)';
+    aiOut.textContent = `שגיאה: ${err.message}`;
+  }
+}
+</script>
+</body>
+</html>
