@@ -335,22 +335,36 @@
     animation: pulse 1.2s ease-in-out infinite;
   }
   @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
     body { background: white !important; color: black !important; }
-    body::before { display: none; }
+    body::before { display: none !important; }
+    .num-card::before { display: none !important; }
     .form-card, .btn-calc, .btn-ai, .btn-print, header .mandala { display: none !important; }
     .container { max-width: 100%; padding: 0; }
     h1 { color: black !important; -webkit-text-fill-color: black !important; font-size: 1.6rem; }
     .subtitle { color: #333 !important; }
     .divider { color: #999; }
-    .num-card, .detail-section, .ai-section, .wound-card, .ego-card, .interp-block {
+    .num-card, .wound-card, .ego-card, .interp-block {
       background: white !important;
       border: 1px solid #ccc !important;
       box-shadow: none !important;
       backdrop-filter: none !important;
       break-inside: avoid;
     }
-    .num-card .num-value { color: black !important; }
-    .num-card .num-label, .num-card .num-name { color: #444 !important; }
+    .detail-section, .ai-section {
+      background: white !important;
+      border: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      break-inside: auto;
+      margin-bottom: 0.8rem !important;
+    }
+    .numbers-grid { break-inside: avoid; }
+    .num-card { padding: 0.7rem 0.5rem !important; }
+    .num-card .num-value { color: black !important; -webkit-text-fill-color: black !important; position: relative; z-index: 2; }
+    .num-card .num-label, .num-card .num-name { color: #444 !important; position: relative; z-index: 2; }
+    h3 { break-after: avoid; }
+    .interp-block { margin-bottom: 0.6rem !important; }
     .section-title, h2, h3, h4 { color: black !important; }
     .detail-section h3 { border-bottom-color: #ccc !important; }
     .interp-block { border-right-color: #999 !important; }
@@ -936,7 +950,7 @@ function renderMasters() {
     return `<div class="interp-block">
       <h4>${info.name}</h4>
       <p>${info.desc}</p>
-      <p style="margin-top:0.5rem;color:var(--rose)">⚠ צל: ${info.shadow}</p>
+      <p style="margin-top:0.5rem;color:var(--rose)">⚠ צל (חושך): ${info.shadow}</p>
     </div>`;
   }).join('');
 }
@@ -951,7 +965,7 @@ function renderTones() {
       <h4>מספר ${n} – ${NUM_NAMES[n]}</h4>
       <div class="light-shadow">
         <div class="light-box"><strong>☀ תדר אור</strong><br>${ls.light}</div>
-        <div class="shadow-box"><strong>🌑 תדר צל</strong><br>${ls.shadow}<br><br><em>גוף: ${ls.body}</em></div>
+        <div class="shadow-box"><strong>🌑 תדר צל (תדר חושך)</strong><br>${ls.shadow}<br><br><em>גוף: ${ls.body}</em></div>
       </div>
     </div>`;
   }).join('');
