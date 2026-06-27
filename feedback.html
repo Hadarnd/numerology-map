@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>משוב – מפת הנשמה</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Heebo:wght@300;400;500&display=swap');
+
+  :root {
+    --void: #0a0118;
+    --deep: #12022a;
+    --mid: #1a0533;
+    --rim: #2d2150;
+    --gold: #c9a84c;
+    --gold-light: #e8d08a;
+    --violet: #7c5cbf;
+    --violet-light: #a98de0;
+    --rose: #c06080;
+    --teal: #3abbb0;
+    --text: #e8e0f0;
+    --text-dim: #9b91b8;
+    --card: linear-gradient(145deg,#12022a,#0d1b3e);
+    --card-border: rgba(201,168,76,0.25);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: linear-gradient(160deg, #1a0533 0%, #0d1b3e 50%, #1a0533 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    font-family: 'Heebo', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(201,168,76,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 10%, rgba(160,130,220,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 80%, rgba(201,168,76,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 60%, rgba(160,130,220,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 40%, rgba(201,168,76,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 70%, rgba(160,130,220,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 90%, rgba(201,168,76,0.2) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 30%, rgba(201,168,76,0.15) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 640px; margin: 0 auto; padding: 2rem 1.5rem; position: relative; z-index: 1; }
+
+  header { text-align: center; padding: 2.5rem 0 1.5rem; }
+  header .spark { font-size: 1.6rem; color: var(--gold); }
+  h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    font-size: 2.1rem;
+    background: linear-gradient(135deg, var(--violet-light), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0.6rem 0 0.4rem;
+  }
+  .subtitle { color: var(--text-dim); font-size: 1rem; letter-spacing: 0.04em; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2rem 1.6rem;
+    margin-top: 1rem;
+  }
+
+  label { display: block; color: var(--gold-light); font-size: 0.98rem; margin: 1.3rem 0 0.5rem; font-weight: 400; }
+  label:first-of-type { margin-top: 0; }
+  .optional { color: var(--text-dim); font-size: 0.8rem; }
+
+  input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Heebo', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  input::placeholder, textarea::placeholder { color: var(--text-dim); opacity: 0.7; }
+  input:focus, textarea:focus { outline: none; border-color: var(--gold); }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+  /* Star rating */
+  .stars { display: flex; flex-direction: row-reverse; justify-content: center; gap: 0.4rem; margin: 0.6rem 0; }
+  .stars input { display: none; }
+  .stars label {
+    margin: 0; cursor: pointer; font-size: 2.6rem; line-height: 1;
+    color: rgba(201,168,76,0.25); transition: color 0.2s, transform 0.15s;
+  }
+  .stars label:hover, .stars label:hover ~ label,
+  .stars input:checked ~ label { color: var(--gold); }
+  .stars label:hover { transform: scale(1.15); }
+  .stars-hint { text-align: center; color: var(--text-dim); font-size: 0.85rem; margin-top: 0.2rem; min-height: 1.2em; }
+
+  .btn-submit {
+    display: block; width: 100%; margin-top: 1.8rem; padding: 1rem;
+    background: linear-gradient(135deg, rgba(124,92,191,0.5), rgba(201,168,76,0.35));
+    border: 1px solid var(--violet);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-submit:hover { background: linear-gradient(135deg, rgba(124,92,191,0.7), rgba(201,168,76,0.5)); }
+  .btn-submit:disabled { opacity: 0.6; cursor: wait; }
+
+  .msg { text-align: center; margin-top: 1.2rem; font-size: 1rem; line-height: 1.6; display: none; }
+  .msg.show { display: block; }
+  .msg.ok { color: var(--teal); }
+  .msg.err { color: var(--rose); }
+
+  .success-card { text-align: center; padding: 3rem 1.6rem; }
+  .success-card .big { font-size: 3rem; }
+  .success-card h2 {
+    font-family: 'Frank Ruhl Libre', serif; color: var(--gold-light);
+    font-size: 1.6rem; margin: 1rem 0 0.6rem;
+  }
+  .success-card p { color: var(--text-dim); font-size: 1.05rem; line-height: 1.7; }
+  .back-link {
+    display: inline-block; margin-top: 1.6rem; color: var(--gold);
+    text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(201,168,76,0.4);
+    padding-bottom: 2px;
+  }
+  .back-link:hover { color: var(--gold-light); }
+
+  footer {
+    text-align: center; padding: 2rem 1rem 3rem;
+    color: var(--text-dim); font-size: 0.78rem; line-height: 1.8; letter-spacing: 0.03em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="spark">✦</div>
+    <h1>נשמח לשמוע ממך</h1>
+    <p class="subtitle">המשוב שלך עוזר לנו להעמיק ולדייק את מפת הנשמה</p>
+  </header>
+
+  <div class="card" id="form-card">
+    <label>שם <span class="optional">(לא חובה)</span></label>
+    <input type="text" id="name" placeholder="איך לקרוא לך?">
+
+    <label>אימייל <span class="optional">(לא חובה – אם תרצי שנחזור אלייך)</span></label>
+    <input type="email" id="email" placeholder="name@example.com">
+
+    <label>עד כמה הפענוח יצא לך מדויק?</label>
+    <div class="stars">
+      <input type="radio" name="rating" id="s5" value="5"><label for="s5" title="מדויק מאוד">★</label>
+      <input type="radio" name="rating" id="s4" value="4"><label for="s4">★</label>
+      <input type="radio" name="rating" id="s3" value="3"><label for="s3">★</label>
+      <input type="radio" name="rating" id="s2" value="2"><label for="s2">★</label>
+      <input type="radio" name="rating" id="s1" value="1" title="בכלל לא"><label for="s1">★</label>
+    </div>
+    <div class="stars-hint" id="stars-hint"></div>
+
+    <label>האם היית משנה או משפר משהו?</label>
+    <textarea id="improve" placeholder="כל מחשבה או הצעה תתקבל באהבה..."></textarea>
+
+    <label>מילים נוספות / מה הרגשת?</label>
+    <textarea id="words" placeholder="חופשי לכתוב כאן..."></textarea>
+
+    <button class="btn-submit" id="submit-btn" onclick="sendFeedback()">✦ שליחת משוב ✦</button>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <div class="card success-card" id="success-card" style="display:none">
+    <div class="big">✦</div>
+    <h2>תודה מכל הלב</h2>
+    <p>המשוב שלך התקבל. כל מילה יקרה לי ומסייעת לעשות את העבודה הזו טוב יותר.</p>
+    <a class="back-link" href="numerology.html">← חזרה למפת הנשמה</a>
+  </div>
+
+  <footer>
+    © 2026 הדר נדב | מפת הנשמה הנומרולוגית<br>
+    כל הזכויות שמורות | אין לשכפל ללא רשות
+  </footer>
+</div>
+
+<script>
+  // ====== CONFIG: כתובת ה-webhook של n8n למשוב ======
+  // אחרי שניצור את ה-workflow השני ב-n8n, נחליף את הכתובת הזו
+  const FEEDBACK_WEBHOOK = 'https://numerology-ai.app.n8n.cloud/webhook/feedback';
+
+  const ratingHints = {
+    '1': 'בכלל לא מדויק',
+    '2': 'קצת מדויק',
+    '3': 'מדויק חלקית',
+    '4': 'מדויק מאוד',
+    '5': 'מדויק להפליא ✦'
+  };
+
+  document.querySelectorAll('.stars input').forEach(function(inp){
+    inp.addEventListener('change', function(){
+      document.getElementById('stars-hint').textContent = ratingHints[this.value] || '';
+    });
+  });
+
+  function getRating() {
+    const checked = document.querySelector('.stars input:checked');
+    return checked ? checked.value : '';
+  }
+
+  async function sendFeedback() {
+    const rating = getRating();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const improve = document.getElementById('improve').value.trim();
+    const words = document.getElementById('words').value.trim();
+    const msg = document.getElementById('msg');
+    const btn = document.getElementById('submit-btn');
+
+    // ולידציה רכה: לפחות דירוג או טקסט כלשהו
+    if (!rating && !improve && !words) {
+      msg.className = 'msg err show';
+      msg.textContent = 'אפשר לדרג בכוכבים או לכתוב כמה מילים לפני השליחה 🙂';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'שולח/ת...';
+    msg.className = 'msg show';
+    msg.style.color = 'var(--text-dim)';
+    msg.textContent = '';
+
+    const payload = {
+      rating: rating || 'לא דורג',
+      name: name || 'אנונימי/ת',
+      email: email || 'לא צוין',
+      improve: improve || '—',
+      words: words || '—',
+      date: new Date().toLocaleString('he-IL')
+    };
+
+    try {
+      const res = await fetch(FEEDBACK_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error('status ' + res.status);
+      // הצלחה – מציגים מסך תודה
+      document.getElementById('form-card').style.display = 'none';
+      document.getElementById('success-card').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (e) {
+      btn.disabled = false;
+      btn.textContent = '✦ שליחת משוב ✦';
+      msg.className = 'msg err show';
+      msg.textContent = 'אופס, השליחה לא הצליחה. אפשר לנסות שוב בעוד רגע.';
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מפת הנשמה — מדריך למשתמש</title>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;800&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#0b0f2c;}
+  ::selection{background:rgba(216,176,106,.32);color:#fff;}
+  @keyframes twk{0%,100%{opacity:.45}50%{opacity:.95}}
+  :root{--ac:#d8b06a;--ac2:#f0d9a4;}
+  .stage{
+    position:relative;min-height:100vh;width:100%;overflow:hidden;
+    font-family:'Heebo',sans-serif;color:#cdc8e2;
+    background:
+      radial-gradient(1300px 820px at 72% -8%, #2a1f54 0%, rgba(42,31,84,0) 56%),
+      radial-gradient(1100px 760px at 6% 112%, #3a163a 0%, rgba(58,22,58,0) 52%),
+      radial-gradient(900px 600px at 95% 60%, #2b1340 0%, rgba(43,19,64,0) 50%),
+      linear-gradient(168deg, #0b0f2c 0%, #121038 42%, #1a1138 72%, #221036 100%);
+  }
+  .stars{position:absolute;inset:0;pointer-events:none;animation:twk 7s ease-in-out infinite;
+    background-image:
+      radial-gradient(1.6px 1.6px at 12% 14%, rgba(255,255,255,.85), transparent),
+      radial-gradient(1.2px 1.2px at 28% 32%, rgba(216,196,255,.7), transparent),
+      radial-gradient(1.4px 1.4px at 47% 9%, rgba(255,255,255,.6), transparent),
+      radial-gradient(1px 1px at 63% 24%, rgba(255,255,255,.8), transparent),
+      radial-gradient(1.6px 1.6px at 82% 12%, rgba(236,212,154,.7), transparent),
+      radial-gradient(1.1px 1.1px at 91% 38%, rgba(255,255,255,.6), transparent),
+      radial-gradient(1.3px 1.3px at 8% 52%, rgba(255,255,255,.55), transparent),
+      radial-gradient(1px 1px at 35% 61%, rgba(216,196,255,.6), transparent),
+      radial-gradient(1.5px 1.5px at 55% 74%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1.2px 1.2px at 73% 67%, rgba(236,212,154,.6), transparent),
+      radial-gradient(1px 1px at 88% 82%, rgba(255,255,255,.55), transparent),
+      radial-gradient(1.4px 1.4px at 18% 88%, rgba(255,255,255,.5), transparent),
+      radial-gradient(1.1px 1.1px at 44% 92%, rgba(216,196,255,.5), transparent),
+      radial-gradient(1.3px 1.3px at 67% 95%, rgba(255,255,255,.45), transparent);}
+  .container{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:0 30px 100px;}
+
+  header.hero{text-align:center;padding:104px 0 26px;}
+  .eyebrow{font-size:13px;font-weight:500;letter-spacing:7px;color:var(--ac);opacity:.85;margin-bottom:30px;}
+  h1.title{margin:0;font-family:'Frank Ruhl Libre',serif;font-weight:800;font-size:clamp(40px,7vw,66px);line-height:1.12;
+    background:linear-gradient(118deg,var(--ac2) 8%,var(--ac) 92%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
+  h1.title .spark{-webkit-text-fill-color:var(--ac);color:var(--ac);font-size:.6em;vertical-align:middle;text-shadow:0 0 22px rgba(216,176,106,.6);}
+  h1.title .spark.r{margin-right:14px;} h1.title .spark.l{margin-left:14px;}
+  .subtitle{margin:24px 0 0;font-size:17px;font-weight:300;letter-spacing:3px;color:#9a92b8;}
+  .hr-glow{width:130px;height:2px;margin:40px auto 0;background:linear-gradient(90deg,transparent,var(--ac),transparent);box-shadow:0 0 16px rgba(216,176,106,.5);}
+
+  section{margin-top:64px;}
+  section:first-of-type{margin-top:54px;}
+  .sec-head{display:flex;align-items:baseline;gap:0;margin-bottom:22px;}
+  h2{margin:0;font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:clamp(24px,3.6vw,30px);
+    background:linear-gradient(120deg,var(--ac2),var(--ac));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
+  .panel{background:linear-gradient(162deg,rgba(30,26,58,.74),rgba(22,18,46,.6));border:1px solid rgba(150,130,200,.16);
+    border-radius:24px;padding:34px 40px;box-shadow:0 24px 60px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.045);}
+  .panel p{margin:0 0 14px;font-size:17px;line-height:2;color:#cdc8e2;}
+  .panel p:last-child{margin-bottom:0;}
+  h3{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-family:'Heebo',sans-serif;font-weight:600;font-size:20px;color:#ecd8a8;}
+  h3 .dot{color:var(--ac);font-size:15px;}
+  .note{background:rgba(216,176,106,.07);border-right:2px solid var(--ac);border-radius:9px;padding:14px 18px;font-size:15.5px;line-height:1.85;color:#bcb4d2;}
+  .note strong,.panel strong{color:#ecd8a8;font-weight:600;}
+  .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(150,130,200,.22),transparent);margin:28px 0;}
+
+  .master-row{display:flex;gap:18px;align-items:flex-start;background:rgba(216,176,106,.05);border:1px solid rgba(216,176,106,.16);border-radius:14px;padding:16px 20px;margin-bottom:14px;}
+  .master-num{flex:none;font-family:'Frank Ruhl Libre',serif;font-weight:800;font-size:30px;line-height:1;color:var(--ac);width:46px;text-align:center;}
+  .master-row p{margin:0;font-size:16px;line-height:1.8;}
+
+  .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;}
+  .light-card{background:linear-gradient(160deg,rgba(236,212,154,.12),rgba(216,176,106,.04));border:1px solid rgba(216,176,106,.24);border-radius:16px;padding:22px 24px;}
+  .shadow-card{background:linear-gradient(160deg,rgba(58,48,92,.42),rgba(28,22,52,.34));border:1px solid rgba(150,130,200,.2);border-radius:16px;padding:22px 24px;}
+  .card-h{font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:21px;margin-bottom:8px;}
+  .light-card .card-h{color:var(--ac2);} .shadow-card .card-h{color:#b6a9d6;}
+  .two-col p{margin:0;font-size:15.5px;line-height:1.85;color:#cfcae4;}
+
+  ul.wounds{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
+  ul.wounds li{display:flex;gap:13px;align-items:flex-start;font-size:16px;line-height:1.7;color:#cdc8e2;}
+  ul.wounds li .star{flex:none;color:var(--ac);margin-top:4px;font-size:12px;}
+
+  .notes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
+  .mini-card{background:linear-gradient(162deg,rgba(30,26,58,.74),rgba(22,18,46,.6));border:1px solid rgba(150,130,200,.16);border-radius:18px;padding:24px 26px;box-shadow:0 16px 40px rgba(0,0,0,.32);}
+  .mini-card h3{margin:0 0 10px;font-size:18px;}
+  .mini-card p{margin:0;font-size:15.5px;line-height:1.85;color:#c4bfdb;}
+
+  /* CTA */
+  .cta-block{margin-top:80px;text-align:center;}
+  .cta-btn{display:inline-flex;align-items:center;gap:14px;
+    background:linear-gradient(135deg,#5a2d8a,#3a1f6a);border:1px solid #9a6dca;color:#f0e6d8;
+    font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:20px;letter-spacing:1px;
+    padding:20px 48px;border-radius:16px;text-decoration:none;cursor:pointer;
+    box-shadow:0 18px 50px rgba(106,61,154,.4),inset 0 1px 0 rgba(255,255,255,.08);
+    transition:transform .2s,box-shadow .2s;}
+  .cta-btn:hover{transform:translateY(-3px);box-shadow:0 24px 60px rgba(106,61,154,.55),inset 0 1px 0 rgba(255,255,255,.12);}
+  .cta-btn .arrow{font-size:24px;color:var(--ac2);transition:transform .2s;}
+  .cta-btn:hover .arrow{transform:translateX(-6px);}
+  .cta-sub{margin-top:16px;font-size:14px;letter-spacing:2px;color:#8b83a8;}
+
+  /* mid-page jump */
+  .mid-jump{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px;margin-top:32px;}
+  .read-on{background:rgba(20,16,46,.5);border:1px solid rgba(216,176,106,.55);border-radius:14px;cursor:pointer;
+    color:var(--ac2);font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:16px;letter-spacing:1px;
+    padding:14px 30px;display:inline-flex;align-items:center;gap:10px;transition:all .2s;}
+  .read-on:hover{background:rgba(216,176,106,.1);transform:translateY(-2px);box-shadow:0 10px 28px rgba(216,176,106,.2);}
+  .read-on .dn{font-size:18px;transition:transform .25s;}
+  .read-on:hover .dn{transform:translateY(4px);}
+
+  footer{margin-top:70px;text-align:center;}
+  .hr-glow.sm{width:130px;margin:0 auto 22px;box-shadow:0 0 16px rgba(216,176,106,.4);}
+  .foot-spark{color:var(--ac);font-size:16px;margin-bottom:8px;}
+  .copyright{margin:0;font-size:13.5px;letter-spacing:1.5px;color:#8b83a8;}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="stars"></div>
+  <div class="container">
+
+    <header class="hero">
+      <div class="eyebrow">מ ד ר י ך &nbsp; ל מ ש ת מ ש</div>
+      <h1 class="title"><span class="spark r">✦</span>מפת הנשמה הנומרולוגית<span class="spark l">✦</span></h1>
+      <p class="subtitle">פענוח מפה תודעתית &nbsp;·&nbsp; נומרולוגיה קבלית ופיתגוראית</p>
+      <div class="hr-glow"></div>
+    </header>
+
+    <!-- welcome / how to use -->
+    <section style="margin-top:24px;">
+      <div class="sec-head"><h2>איך משתמשים במדריך זה?</h2></div>
+      <div class="panel">
+        <p>שלום :)&nbsp; ברוכים הבאים למשחק החיים של כדור הארץ!</p>
+        <p>אז אחרי שחתמת על מסמך שבו את/ה מתחייב/ת לעמוד בשיעורים שהחלטת לעבור, והכנת את תוכנית הלימודים האישית יחד עם מועצת הזקנים (החוזה הנשמתי) — הצפנת את כל המידע הזה לקוד מספרים. הקוד הזה הוא תאריך הלידה שלך :)</p>
+        <p>הקוד, תאריך הלידה — מכיל בתוכו את נקודות החוזק שלנו, ואת "תיקי הלימוד" — השיעורים שעלינו לפתור.</p>
+        <p>זוהי בעצם מפת דרכים מדויקת שתוכננה בחוכמה, כדי שכולנו נוכל להגיע ליעד שתכננו לעצמנו מראש. בתוך הקוד הזה מופיע כל המידע הדרוש כדי לעמוד בחוזה בהצלחה. זהו ארגז כלים ייחודי שבו טמונים המפתחות שיפתחו כל דלת חסומה, והפתרונות לכל אתגר, כאב ומשבר שיגיע.</p>
+        <div class="note">בשפת הנשמות אין באמת כאבים ואין עונשים. כאב ועונש הם תפיסות מעוותות של האגו, שנועדו להבין סיטואציות שקורות לנו בחיים הארציים.</div>
+        <p style="margin-top:14px;">יש מטרה אחת — לעבור בהצלחה את תוכנית הלימודים, להגיע ליעד תוך הגשמת המשימות שכתובות בחוזה הנשמה. כאשר יש יישור מלא עם האנרגיה של הקוד, יש זרימת חיים: אנרגיית הצ'י עוברת בזרימה מלאה, ויש שפע בכל תחומי החיים.</p>
+      </div>
+    </section>
+
+    <!-- map numbers -->
+    <section>
+      <div class="sec-head"><h2>מפת המספרים — הציוד שלך</h2></div>
+      <div class="panel">
+        <h3><span class="dot">✦</span> מספרי השם (פרטי / משפחה / מלא)</h3>
+        <p>השם שקיבלת בלידה אינו מקרי. בנומרולוגיה פיתגוראית, לכל אות ערך מספרי, וסכום האותיות של שמך מגלה את מהות הנשמה — את האנרגיה הפנימית שאתה/את מביא/ה לעולם. מספר שם הפרטי מגלה את האנרגיה האישית שלך; מספר שם המשפחה מגלה את מורשת השושלת שדרכה נחתת; ומספר השם המלא הוא התדר המשולב — מה שאנשים חשים בנוכחותך.</p>
+        <div class="note"><span style="color:var(--ac)">★</span> כאשר מופיעה תווית <strong>מאסטר</strong> ליד מספר השם, מדובר במספר 11, 22 או 33 — תדרים גבוהים במיוחד שאינם מצומצמים לספרה בודדת, ונושאים ייעוד ואחריות רחבים יותר.</div>
+
+        <div class="sep"></div>
+        <h3><span class="dot">✦</span> יום לידה</h3>
+        <p>מספר יום הלידה מגלה את הציוד הבסיסי שהבאת לגלגול — הכישרונות הטבעיים, הנטיות העמוקות, ואופן הביצוע שלך בעולם. אם נולדת ב-13, 14, 16 או 19 — יש לך גם חוב קארמתי (ראה/י סעיף נפרד).</p>
+
+        <div class="sep"></div>
+        <h3><span class="dot">✦</span> חודש לידה</h3>
+        <p>חודש הלידה מגלה את האנרגיה הסביבתית שבתוכה נחתת — הצבע הרגשי של המשפחה, הדינמיקה המשפחתית הראשונית, ותדר ה"קרקע" שממנו צמחת. הוא משפיע על האופן שבו אתה/את מתייחס/ת לקשרים, לגוף ולמושג "בית".</p>
+
+        <div class="sep"></div>
+        <h3><span class="dot">✦</span> שנת לידה — תיקון</h3>
+        <p>שנת הלידה (מחושבת לספרה בודדת) היא תדר התיקון — הנושא הקארמתי המרכזי שנשמתך הגיעה לטפל בו בגלגול הזה. זהו לא עונש, אלא הכיוון המרכזי של הצמיחה. המספר שמופיע כאן מסמן את התחום שבו השינוי המשמעותי ביותר שלך יתרחש.</p>
+
+        <div class="sep"></div>
+        <h3><span class="dot">✦</span> שביל חיים</h3>
+        <p>שביל החיים הוא המספר המרכזי במפה. הוא מחושב מסכום כל ספרות תאריך הלידה המלא, ומייצג את המסע הגדול של הנשמה בגלגול הזה — מה באת/ה ללמוד, לפתח ולתרום. שביל החיים הוא הכביש שאתה/את נוסע/ת עליו: לפעמים נסיעה על הכביש הזה תרגיש טבעית וזורמת, לפעמים יהיו עליו מכשולים — וכל המכשולים הם חלק מהלמידה.</p>
+
+        <div class="sep"></div>
+        <h3><span class="dot">✦</span> שנה אישית</h3>
+        <p>השנה האישית מחושבת מצירוף יום וחודש הלידה עם השנה הקלנדרית הנוכחית, ומגלה את תדר השנה הנוכחית בחייך. היקום פועל במחזורים של 9 שנים; בכל שנה יש תדר שונה — שנת התחלות, שנת שותפות, שנת בנייה, שנת שינוי, ועוד. הכרת תדר השנה האישית שלך מאפשרת לך לפעול בסנכרון עם הזרם, ולא נגדו.</p>
+        <div class="note"><strong>לתשומת לבך:</strong> השנה האישית מחושבת בטווח שבין יום הולדתך בשנה הנוכחית לבין יום הולדתך בשנה הבאה — לא בהכרח מינואר עד דצמבר.</div>
+      </div>
+    </section>
+
+    <!-- mid-page jump -->
+    <div class="mid-jump">
+      <a href="numerology.html" class="cta-btn"><span>✦ קדימה לפענוח המפה</span></a>
+      <button class="read-on" onclick="document.getElementById('missing-sec').scrollIntoView({behavior:'smooth'})">המשך לקרוא <span class="dn">↓</span></button>
+    </div>
+
+    <!-- 03 -->
+    <section id="missing-sec">
+      <div class="sec-head"><h2>מספרים חסרים — שיעורי הנשמה</h2></div>
+      <div class="panel">
+        <p>המספר החסר הוא ספרה (1–9) שאינה מופיעה כלל בשם המלא או בתאריך הלידה שלנו. היעדר מספר אינו חיסרון — אם תאריך הלידה הוא הקוד שהנשמה בחרה לעצמה, הרי שהמספר החסר הוא המפתח הנסתר שהיא השאירה לנו בדרך, ועלינו לגלות מהו השיעור הטמון בו.</p>
+        <p>מכיוון שמדובר בנקודה עיוורת, לרוב יהיה לנו קשה מאוד לזהות את החסר הזה בעצמנו. זו בדיוק הסיבה שהשיעור הזה יחזור וילווה אותנו לאורך החיים שוב ושוב, בסיטואציות שונות ומול אנשים שונים — עד שנעצור, נתבונן ונבין מהו האתגר האמיתי שקיים שם. ברגע שאנחנו מבינים ומפרקים את הקושי הספציפי הזה, חוקי המשחק משתנים, ודברים עצומים בחיינו מתחילים להשתנות.</p>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section>
+      <div class="sec-head"><h2>חוב קארמתי</h2></div>
+      <div class="panel">
+        <p>חוב קארמתי מופיע כאשר יום הלידה הוא 13, 14, 16 או 19. המספרים האלה — בנומרולוגיה פיתגוראית — מסמנים נושאים שנשמתך לא סיימה לעבד בגלגולים קודמים, והיא חוזרת אליהם בגלגול הזה כדי לסגור חשבון. חוב קארמתי אינו גזר דין — הוא הזמנה לעבודה ממוקדת. הוא נחווה לרוב כסיטואציה שחוזרת על עצמה במציאות, שבה שוב ושוב נתקלים באותה חומה, עד שלומדים לעבור דרכה.</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section>
+      <div class="sec-head"><h2>מספרי מאסטר</h2></div>
+      <div class="panel">
+        <p style="margin-bottom:22px;">מספרי מאסטר — 11, 22, 33 — הם תדרים גבוהים מהרגיל, שאינם מצומצמים לספרה בודדת. כל אחד מהם נושא ייעוד רחב ואחריות גבוהה:</p>
+        <div class="master-row"><span class="master-num">11</span><p><strong>שליח האור.</strong> גשר בין עולמות, אינטואיציה חדה, יכולת לראות מה שאחרים לא רואים.</p></div>
+        <div class="master-row"><span class="master-num">22</span><p><strong>בנאי הגדול.</strong> יכולת להפוך חזונות גדולים לממשות קונקרטית בעולם.</p></div>
+        <div class="master-row"><span class="master-num">33</span><p><strong>המורה האוניברסלי.</strong> תדר של חמלה, ריפוי ואהבה ללא תנאי.</p></div>
+        <div class="note" style="margin-top:22px;"><strong>אתגר מספרי המאסטר:</strong> הם דורשים מהנושא אותם להחזיק מתח גבוה בין עולם הרוח לעולם הגוף. רבים שנושאים מאסטר חווים בחלק מחייהם קושי, חרדה, או תחושת "יותר מדי" — עד שלומדים לתעל את האנרגיה הגבוהה הזו לייעוד.</div>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section>
+      <div class="sec-head"><h2>תדר אור וצל</h2></div>
+      <div class="panel">
+        <p style="margin-bottom:22px;">זהו אחד הפלטים המרכזיים במפה. עבור כל מספר דומיננטי במפה שלך — מספרים שחוזרים יותר מפעם אחת, או שמופיעים בנקודות מרכזיות — מוצגים שני צדדים:</p>
+        <div class="two-col">
+          <div class="light-card"><div class="card-h">☀ תדר אור</div><p>הביטוי הגבוה של המספר. מה קורה כשאתה/את חי/ה מתוך ריבונות, מודעות ובחירה.</p></div>
+          <div class="shadow-card"><div class="card-h">☾ תדר צל</div><p>הביטוי האוטומטי של האגו. מה קורה כשאתה/את פועל/ת על "פיילוט אוטומטי" מתוך פחד, הגנה, או הרגל לא מודע.</p></div>
+        </div>
+        <p style="margin:22px 0 0;">המפה כוללת גם ביטוי גופני של כל תדר צל — כי הגוף הוא המראה או המגבר שמראה לנו מה הנשמה חווה ברמה האנרגטית. כאשר אתה/את רואה/ה ביטוי גופני, אין לקרוא אותו כאבחנה רפואית — אלא כהזמנה לשאול: "באיזה תדר אני פועל/ת כרגע?"</p>
+        <div class="note" style="margin-top:20px;"><span style="color:var(--ac)">✦</span> הביטוי הגופני המצוין כאן אינו אבחנה רפואית ואינו מחליף ייעוץ או טיפול רפואי. מדובר במסגרת פרשנית-אנרגטית בלבד. בכל תסמין גופני יש לפנות לאיש מקצוע רפואי, לפי שיקולך האישי.</div>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section>
+      <div class="sec-head"><h2>פצעי הנשמה</h2></div>
+      <div class="panel">
+        <p style="margin-bottom:8px;">פצעי הנשמה הם תבניות רגשיות עמוקות שנוצרות בילדות המוקדמת — ולפי הנומרולוגיה הקבלית גם מגלגולים קודמים — ומעצבות את האופן שבו אנו מתייחסים לעצמנו ולאחרים. הפצעים המזוהים במפה נגזרים מהמספרים שלך על פי שיטת ליז בורבו.</p>
+        <h3 style="margin:22px 0 14px;font-size:18px;"><span class="dot" style="font-size:14px;">✦</span> חמשת הפצעים האפשריים</h3>
+        <ul class="wounds">
+          <li><span class="star">✦</span><span><strong>פצע הדחייה</strong> — תחושת "לא ראוי/ה", נסיגה מנוכחות.</span></li>
+          <li><span class="star">✦</span><span><strong>פצע הנטישה</strong> — פחד עמוק מבדידות ועזיבה.</span></li>
+          <li><span class="star">✦</span><span><strong>פצע ההשפלה</strong> — בושה, הצנעת הצרכים, ריצוי.</span></li>
+          <li><span class="star">✦</span><span><strong>פצע הבגידה</strong> — קושי לסמוך, שליטה כהגנה.</span></li>
+          <li><span class="star">✦</span><span><strong>פצע אי-הצדק</strong> — קשיחות עצמית, פרפקציוניזם, ביקורת.</span></li>
+        </ul>
+        <p style="margin:22px 0 0;font-size:16px;color:#b9b2cf;">כל פצע כולל גם כיוון ריפוי — לא כמשימה לביצוע מיידי, אלא כמצפן לעבודה פנימית.</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section>
+      <div class="sec-head"><h2>חליפת האגו</h2></div>
+      <div class="panel">
+        <p style="margin-bottom:8px;">חליפת האגו מזהה את ארכיטיפ האגו הדומיננטי שלך — האופן שבו הנשמה לבשה "תחפושת" כדי לשרוד בקמפוס כדור הארץ. הארכיטיפ מחושב על פי שיטת ליז בורבו ומשולב עם ארכיטיפי קרוליין מיס.</p>
+        <h3 style="margin:22px 0 14px;font-size:18px;"><span class="dot" style="font-size:14px;">✦</span> הארכיטיפ מגלה</h3>
+        <ul class="wounds">
+          <li><span class="star">✦</span><span><strong>את הלופ החוזר</strong> — הדפוס שאתה/את נתקע/ת בו שוב ושוב.</span></li>
+          <li><span class="star">✦</span><span><strong>את מנגנון ההגנה</strong> — מה האגו עושה כשהוא מרגיש מאוים.</span></li>
+          <li><span class="star">✦</span><span><strong>את שאלת השחרור</strong> — הכלי המעשי שמאפשר לצאת מהלופ.</span></li>
+        </ul>
+        <div class="note" style="margin-top:22px;"><strong>חשוב להבין:</strong> האגו אינו האויב. הוא נוצר כדי להגן. השחרור אינו השמדת האגו — אלא הכרה בו, כדי שלא הוא יהיה הנהג.</div>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section>
+      <div class="sec-head"><h2>ניתוח אישי — סוכן AI</h2></div>
+      <div class="panel">
+        <p>בסיום המפה מופיע ניתוח מורחב שנכתב על ידי בינה מלאכותית, המשלב את כל המספרים יחד לכדי פענוח אינטגרטיבי אישי. הניתוח עובר על מהות הנשמה, תדרי האור, שיעורי הנשמה, השנה האישית — ומסיים בברכה ומסר.</p>
+        <p>הניתוח נכתב בגוף ראשון כלפי המשתמש/ת ומיועד להיקרא בשקט, לאט, כמכתב מהנשמה. אין בו אבחנה, ואין בו פסיקה — יש בו הזמנה להתבוננות פנימית.</p>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section>
+      <div class="sec-head"><h2>הערות חשובות</h2></div>
+      <div class="notes-grid">
+        <div class="mini-card"><h3>על שמות</h3><p>המחשבון משתמש בשם לפי תעודת הזהות — שם הנעורים, לפני שינויים. שינוי שם (לאחר נישואין, בחירה אישית) יוצר שכבה נוספת של תדר הנלמדת על המשתמש/ת, אך אינו מבטל את תדר שם הלידה המקורי.</p></div>
+        <div class="mini-card"><h3>על מספרי מאסטר</h3><p>מספרי מאסטר (11, 22, 33) אינם מצומצמים לספרה בודדת. אם הסכום שלך הוא 11 — הוא נשאר 11, לא 2. זהו כלל יסוד בנומרולוגיה פיתגוראית.</p></div>
+        <div class="mini-card"><h3>על חוב קארמתי</h3><p>חוב קארמתי מופיע רק אם יום הלידה הוא בדיוק 13, 14, 16 או 19 — לא חודש, לא שנה, לא שביל חיים.</p></div>
+        <div class="mini-card"><h3>על הגוף</h3><p>הביטויים הגופניים המצוינים תחת תדר הצל אינם תחליף לייעוץ רפואי. הם מסגרת אנרגטית להבנה עצמית בלבד.</p></div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <a href="numerology.html" class="cta-btn"><span>✦ לפענוח המפה האישית שלך</span><span class="arrow">←</span></a>
+      <div class="cta-sub">המחשבון האישי מחכה לך</div>
+    </div>
+
+    <footer>
+      <div class="hr-glow sm"></div>
+      <div class="foot-spark">✦</div>
+      <p class="copyright">© 2026 הדר נדב &nbsp;·&nbsp; מפת הנשמה הנומרולוגית &nbsp;·&nbsp; כל הזכויות שמורות</p>
+    </footer>
+
+  </div>
+</div>
+</body>
+</html>
