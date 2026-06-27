@@ -342,8 +342,10 @@
     body::before { display: none !important; }
     .num-card::before { display: none !important; }
     .form-card, .btn-calc, .btn-ai, .action-buttons, .pdf-hint, .btn-feedback, header .mandala { display: none !important; }
-    .container { max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; box-sizing: border-box; }
-    .numbers-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 0.5rem !important; }
+    .container { max-width: 100% !important; width: 100% !important; padding: 0 6mm !important; margin: 0 !important; box-sizing: border-box; }
+    .numbers-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 0.4rem !important; }
+    .num-card .num-label { font-size: 0.62rem !important; white-space: normal !important; overflow: visible !important; line-height: 1.25 !important; }
+    .num-card .num-name { font-size: 0.66rem !important; white-space: normal !important; line-height: 1.25 !important; }
     h1 { color: black !important; -webkit-text-fill-color: black !important; font-size: 1.6rem; }
     .subtitle { color: #333 !important; }
     .divider { color: #999; }
@@ -839,7 +841,6 @@ function savePdf() {
   // Show the helper hint so the user knows to pick "Save as PDF"
   const hint = document.getElementById('pdf-hint');
   if (hint) hint.classList.add('show');
-  // Give the hint a moment to render, then open the print/save dialog
   setTimeout(function(){ window.print(); }, 400);
 }
 
@@ -1097,15 +1098,15 @@ function renderPersonalYear() {
   const py = personalYear;
 
   const PY_MEANINGS = {
-    1: { theme: 'שנת ראשית – שנת פתיחה ויוזמה', desc: 'זוהי שנה של התחלות חדשות, פריצת דרך ועצמאות. האנרגיה תומכת בהשקת פרויקטים חדשים, שינויי כיוון, ופיתוח הזהות האישית. אם תמיד רצית להתחיל משהו – עכשיו הזמן.' },
-    2: { theme: 'שנת שותפות – שנה של יחסים וסבלנות', desc: 'שנה שמזמינה שיתוף פעולה, עיבוד רגשי ובניית קשרים. הדברים מתקדמים לאט ובמכוון. אל תאיץ – הנטיעה העמוקה מתרחשת עכשיו מתחת לפני השטח.' },
-    3: { theme: 'שנת ביטוי – שנה של יצירה ושמחה', desc: 'שנה של שמחה, יצירתיות, ביטוי עצמי ותקשורת. הרחב/י את החוגים החברתיים, הבע/י את עצמך, הנח/י לשמחה לנהל.' },
-    4: { theme: 'שנת בניין – שנה של עבודה ויסודות', desc: 'שנה של עבודה ממוקדת ובניית יסודות. פחות הפתעות, יותר מסירות. כל מה שתבנה השנה יחזיק לשנים.' },
-    5: { theme: 'שנת שינוי – שנה של חירות ותנועה', desc: 'שנה של שינויים, הרפתקאות וגמישות. הכלכלה, הקשרים, המגורים – הכל עשוי לזוז. לך/כי עם הזרם.' },
+    1: { theme: 'שנת ראשית – שנת פתיחה ויוזמה', desc: 'זוהי שנה של התחלות חדשות, פריצת דרך ועצמאות. האנרגיה תומכת בהשקת פרויקטים חדשים, שינויי כיוון, ופיתוח הזהות האישית. אם תמיד היה רצון להתחיל משהו – עכשיו הזמן.' },
+    2: { theme: 'שנת שותפות – שנה של יחסים וסבלנות', desc: 'שנה שמזמינה שיתוף פעולה, עיבוד רגשי ובניית קשרים. הדברים מתקדמים לאט ובמכוון. זה הזמן לסבלנות – הנטיעה העמוקה מתרחשת עכשיו מתחת לפני השטח.' },
+    3: { theme: 'שנת ביטוי – שנה של יצירה ושמחה', desc: 'שנה של שמחה, יצירתיות, ביטוי עצמי ותקשורת. זה הזמן להרחיב את המעגלים החברתיים, לתת לעצמך ביטוי, ולהניח לשמחה לנהל.' },
+    4: { theme: 'שנת בניין – שנה של עבודה ויסודות', desc: 'שנה של עבודה ממוקדת ובניית יסודות. פחות הפתעות, יותר מסירות. כל מה שנבנה השנה יחזיק לשנים.' },
+    5: { theme: 'שנת שינוי – שנה של חירות ותנועה', desc: 'שנה של שינויים, הרפתקאות וגמישות. הכלכלה, הקשרים, המגורים – הכל עשוי לזוז. זה הזמן ללכת עם הזרם.' },
     6: { theme: 'שנת אחריות – שנה של בית ומשפחה', desc: 'שנה שמתמקדת בבית, משפחה, מערכות יחסים ואחריות. גם שנה מצוינת לריפוי ולאסתטיקה.' },
-    7: { theme: 'שנת פנימה – שנה של מחקר ורוחניות', desc: 'שנה של עמקות, מדיטציה, לימוד ורוחניות. פחות פעילות חיצונית, יותר בחינה פנימית. שנה מושלמת לתרפיה ולהכרת עצמך.' },
-    8: { theme: 'שנת כוח – שנה של שפע ומנהיגות', desc: 'שנה של כוח, הצלחה כלכלית ומנהיגות. המאמצים של השנים הקודמות עולים לפוטנציאל. קבל/י אחריות ועמד/י בכוח.' },
-    9: { theme: 'שנת סיום – שנה של שחרור ועיכול', desc: 'שנת סגירת מעגלים. שחרור מה שכבר לא משרת אותך – מערכות יחסים, עבודות, דפוסי חשיבה. כאב האבדן עשוי להיות נוכח, אך הוא סלילת הדרך ל-1 הבאה.' }
+    7: { theme: 'שנת פנימה – שנה של מחקר ורוחניות', desc: 'שנה של עומק, מדיטציה, לימוד ורוחניות. פחות פעילות חיצונית, יותר בחינה פנימית. שנה מושלמת לתרפיה ולהיכרות עם העצמי.' },
+    8: { theme: 'שנת כוח – שנה של שפע ומנהיגות', desc: 'שנה של כוח, הצלחה כלכלית ומנהיגות. המאמצים של השנים הקודמות עולים לפוטנציאל. זה הזמן לקבל אחריות ולעמוד בכוח.' },
+    9: { theme: 'שנת סיום – שנה של שחרור ועיכול', desc: 'שנת סגירת מעגלים. שחרור מה שכבר לא משרת – מערכות יחסים, עבודות, דפוסי חשיבה. כאב הפרידה עשוי להיות נוכח, אך הוא סלילת הדרך לשנת ה-1 הבאה.' }
   };
 
   const m = PY_MEANINGS[py] || PY_MEANINGS[reduce(py,false)];
@@ -1125,7 +1126,7 @@ async function getAIAnalysis() {
 
   const aiOut = document.getElementById('ai-output');
   aiOut.style.cssText = 'margin-top:1.2rem';
-  aiOut.innerHTML = '<span class="pulse-dot"></span> הנשמה מנתחת...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;יקח 2-3 דק\'...';
+  aiOut.innerHTML = '<span class="pulse-dot"></span> הנשמה מנתחת...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;יקח 3-4 דק\'...';
 
   const prompt = `את מומחית נומרולוגיה רוחנית בשיטות מיכל גרין, שוקי גבאי, פיתגורס, ליז בורבו וקרוליין מיס. כתבי ניתוח אישי מעמיק בעברית תקנית מדויקת, חמה ומחזקת. פני לפי המין: ${d.gender === 'נקבה' ? 'נקבה בלבד' : 'זכר בלבד'}.
 
