@@ -335,14 +335,14 @@
     animation: pulse 1.2s ease-in-out infinite;
   }
   @media print {
-    @page { margin: 12mm 10mm; }
+    @page { margin: 14mm 14mm; }
     * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-    html, body { width: 100% !important; }
+    html, body { width: 100% !important; margin: 0 !important; padding: 0 !important; }
     body { background: white !important; color: black !important; }
     body::before { display: none !important; }
     .num-card::before { display: none !important; }
     .form-card, .btn-calc, .btn-ai, .action-buttons, .pdf-hint, .btn-feedback, header .mandala { display: none !important; }
-    .container { max-width: 100% !important; width: 100% !important; padding: 0 6mm !important; margin: 0 !important; box-sizing: border-box; }
+    .container { max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 auto !important; box-sizing: border-box; }
     .numbers-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 0.4rem !important; }
     .num-card .num-label { font-size: 0.62rem !important; white-space: normal !important; overflow: visible !important; line-height: 1.25 !important; }
     .num-card .num-name { font-size: 0.66rem !important; white-space: normal !important; line-height: 1.25 !important; }
@@ -588,7 +588,7 @@
     </button>
   </div>
   <div id="pdf-hint" class="pdf-hint">
-    💡 תגללו למעלה בחלון המדפסות עד שמופיע <strong>Save as PDF</strong>, ואז לחצו על <strong>SAVE</strong> בריבוע הכחול.
+    💡 בחלון שייפתח תגללו למעלה בחלון המדפסות עד שמופיע <strong>Save as PDF</strong>, ואז לחצו על <strong>Save</strong> במלבן הכחול.
   </div>
 
   <a href="feedback.html" class="btn-feedback">✦ קיבלת פענוח? נשמח לשמוע מה הרגשת ←</a>
@@ -754,7 +754,7 @@ const SOUL_WOUNDS = {
 const EGO_SUITS = {
   goodGirl: {
     name: 'הילד/ה הטוב/ה – המרצ/ה (ליז בורבו + קרוליין מיס)',
-    archetype: 'ארכיטיפ הזונה (קרוליין מיס) – מוכר/ת את הקול האמיתי לשמירת שלום',
+    archetype: 'ארכיטיפ מכירת העצמי (קרוליין מיס) – מוכר/ת את הקול האמיתי לשמירת שלום',
     desc: 'מסכים/ה, מסייע/ת, לא אומר/ת "לא". מחשיב/ה צרכי אחרים על פני עצמו/ה. נולד/ה מפחד הדחייה והנטישה.',
     loop: 'לופ: עוזר/ת → מצטברת עייפות → כועס/ת בפנים → ממשיך/ה לעזור כי "אם לא אני, אז מי?" → בגידה עצמית.',
     release: 'שחרור: לתרגל "לא" קטן פעם ביום. לשים לב מתי עוזר/ת מפחד ומתי מאהבה. הגבול הוא אקט אהבה עצמית.'
