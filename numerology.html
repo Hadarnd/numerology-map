@@ -57,7 +57,7 @@
   .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; position: relative; z-index: 1; }
 
   /* Header */
-  header { text-align: center; padding: 3rem 0 2rem; }
+  header { text-align: center; padding: 1.2rem 0 2rem; }
   .mandala {
     font-size: 3rem;
     margin-bottom: 1rem;
@@ -342,7 +342,7 @@
     body { background: white !important; color: black !important; }
     body::before { display: none !important; }
     .num-card::before { display: none !important; }
-    .form-card, .btn-calc, .btn-ai, .action-buttons, .pdf-hint, .btn-feedback, header .mandala { display: none !important; }
+    .form-card, .btn-calc, .btn-ai, .action-buttons, .pdf-hint, .btn-feedback, .btn-guide-top-wrap, header .mandala { display: none !important; }
     .container { max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 auto !important; box-sizing: border-box; }
     .numbers-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 0.4rem !important; }
     .num-card .num-label { font-size: 0.62rem !important; white-space: normal !important; overflow: visible !important; line-height: 1.25 !important; }
@@ -445,6 +445,24 @@
   .pdf-hint strong { color: var(--gold-light); }
   .pdf-hint.show { display: block; }
 
+  .btn-guide-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto 1rem;
+    padding: 8px 20px;
+    background: rgba(124,92,191,0.1);
+    border: 1px solid rgba(124,92,191,0.35);
+    border-radius: 30px;
+    color: var(--violet-light);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+  }
+  .btn-guide-top:hover { background: rgba(124,92,191,0.2); border-color: var(--violet); color: var(--gold-light); }
+  .btn-guide-top-wrap { text-align: center; margin-top: 8px; }
+
   .btn-feedback {
     display: block;
     text-align: center;
@@ -485,6 +503,10 @@
 </head>
 <body>
 <div class="container">
+
+  <div class="btn-guide-top-wrap">
+    <a href="index.html" class="btn-guide-top">→ חזרה למדריך</a>
+  </div>
 
   <header>
     <span class="mandala">✦</span>
@@ -585,14 +607,15 @@
     </button>
     <button class="btn-action" onclick="savePdf()">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-      <span>שמירה כ-PDF</span>
+      <span id="pdf-btn-label">שמירה כ-PDF</span>
     </button>
   </div>
   <div id="pdf-hint" class="pdf-hint">
-    💡 בחלון שייפתח תגללו למעלה בחלון המדפסות עד שמופיע <strong>Save as PDF</strong>, ואז לחצו על <strong>Save</strong> במלבן הכחול.
+    💡 בחלון שיפתח תגללו למעלה בחלון המדפסות עד שמופיע <strong>Save as PDF</strong>, ואז לחצו על <strong>Save</strong> במלבן הכחול.
   </div>
 
   <a href="feedback.html" class="btn-feedback">✦ קיבלת פענוח? נשמח לשמוע מה הרגשת ←</a>
+  <a href="index.html" class="btn-feedback">✦ חזרה למדריך ←</a>
 
   <footer style="text-align:center;padding:2rem 1rem 3rem;color:var(--text-dim);font-size:0.78rem;line-height:1.8;letter-spacing:0.03em">
     © 2026 הדר נדב | מפת הנשמה הנומרולוגית<br>
@@ -838,11 +861,19 @@ function setGender(g) {
 // ============================================================
 let globalData = {};
 
+let pdfHintShown = false;
 function savePdf() {
-  // Show the helper hint so the user knows to pick "Save as PDF"
-  const hint = document.getElementById('pdf-hint');
-  if (hint) hint.classList.add('show');
-  setTimeout(function(){ window.print(); }, 400);
+  // First click: just show the hint so the user has time to read it
+  if (!pdfHintShown) {
+    const hint = document.getElementById('pdf-hint');
+    if (hint) hint.classList.add('show');
+    const label = document.getElementById('pdf-btn-label');
+    if (label) label.textContent = 'לחצו שוב לשמירה כ-PDF';
+    pdfHintShown = true;
+    return;
+  }
+  // Second click: open the print dialog
+  window.print();
 }
 
 function calculate() {
