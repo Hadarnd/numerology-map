@@ -157,9 +157,9 @@
 
   <div class="card" id="form-card">
     <label>שם <span class="optional">(לא חובה)</span></label>
-    <input type="text" id="name" placeholder="איך לקרוא לך?">
+    <input type="text" id="name" placeholder="איך קוראים לך?">
 
-    <label>אימייל <span class="optional">(לא חובה – אם תרצי שנחזור אלייך)</span></label>
+    <label>אימייל <span class="optional">(לא חובה – אם תרצה/תרצי שנחזור אליך/אלייך)</span></label>
     <input type="email" id="email" placeholder="name@example.com">
 
     <label>עד כמה הפענוח יצא לך מדויק?</label>
@@ -172,7 +172,7 @@
     </div>
     <div class="stars-hint" id="stars-hint"></div>
 
-    <label>האם היית משנה או משפר משהו?</label>
+    <label>האם היית משנה או משפר/ת משהו?</label>
     <textarea id="improve" placeholder="כל מחשבה או הצעה תתקבל באהבה..."></textarea>
 
     <label>מילים נוספות / מה הרגשת?</label>
@@ -196,9 +196,8 @@
 </div>
 
 <script>
-  // ====== CONFIG: כתובת ה-webhook של n8n למשוב ======
-  // אחרי שניצור את ה-workflow השני ב-n8n, נחליף את הכתובת הזו
-  const FEEDBACK_WEBHOOK = 'https://numerology-ai.app.n8n.cloud/webhook/feedback';
+  // ====== CONFIG: כתובת ה-Formspree שמעבירה את המשוב ישירות לאימייל שלך ======
+  const FEEDBACK_WEBHOOK = 'https://formspree.io/f/xeebkqvk';
 
   const ratingHints = {
     '1': 'בכלל לא מדויק',
@@ -253,7 +252,7 @@
     try {
       const res = await fetch(FEEDBACK_WEBHOOK, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(payload)
       });
       if (!res.ok) throw new Error('status ' + res.status);
