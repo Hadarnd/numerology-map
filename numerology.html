@@ -588,7 +588,7 @@
 
     <!-- Personal Year -->
     <div class="detail-section" id="personal-year-section">
-      <h3>🗓 שנה אישית 2026</h3>
+      <h3>🗓 השנה האישית שלך</h3>
       <div id="personal-year-content"></div>
     </div>
 
@@ -670,6 +670,7 @@ function digitList(str) {
 // INTERPRETATIONS
 // ============================================================
 const NUM_NAMES = {
+  0:'מספר הפוטנציאל – מעגלי ומחבר עולמות',
   1:'מספר האני – יוצר ומוביל', 2:'מספר השותפות – רגשי ומאזן',
   3:'מספר הביטוי – יצירתי ומשמח', 4:'מספר היסוד – בונה ומשמעת',
   5:'מספר החירות – חוקר ומשתנה', 6:'מספר האחריות – דואג ומחבר',
@@ -952,15 +953,23 @@ function calculate() {
     missing, karmaDebts, uniqueMasters, dominant, allNumbers, freq,
     gender: selectedGender };
 
-  // Personal Year calculation
-  const currentYear = 2026;
+  // Personal Year calculation - dynamic based on today's actual date
+  const today = new Date();
+  const todayYear = today.getFullYear();
+  const todayMonth = today.getMonth() + 1; // JS months are 0-indexed
+  const todayDate = today.getDate();
+  // Has this year's birthday (month/day) already passed relative to today?
+  const bdayPassedThisYear = (month < todayMonth) || (month === todayMonth && day <= todayDate);
+  // If birthday already passed this year, the active personal-year cycle is [todayYear] to [todayYear+1]
+  // If not yet passed, the active cycle started LAST year and runs to this year
+  const cycleStartYear = bdayPassedThisYear ? todayYear : todayYear - 1;
+  const cycleEndYear = cycleStartYear + 1;
+  const currentYear = cycleStartYear; // year used for the personal year digit-sum calculation
   const pyRaw = day + month + currentYear;
   const personalYear = reduce(String(currentYear).split('').reduce((a,d)=>a+parseInt(d),0) + reduce(day,false) + reduce(month,false), false);
-  // Birthday month in 2026 determines cycle transition
-  const bdayPassed2026 = (month < 6) || (month === 6 && day <= 20);
   const MONTHS = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
-  const pyStart = `${MONTHS[month-1]} 2026`;
-  const pyEndMonth = `${MONTHS[month-1]} 2027`;
+  const pyStart = `${MONTHS[month-1]} ${cycleStartYear}`;
+  const pyEndMonth = `${MONTHS[month-1]} ${cycleEndYear}`;
   globalData.personalYear = personalYear;
   globalData.pyStart = pyStart;
   globalData.pyEndMonth = pyEndMonth;
@@ -989,7 +998,7 @@ function renderNumbers() {
     { label: 'שנת לידה (תיקון)', value: d.tikkun, name: NUM_NAMES[d.tikkun] },
     { label: 'ספרה אחרונה (כלי מבצעי)', value: d.yearLastDigit, name: NUM_NAMES[d.yearLastDigit] || '' },
     { label: 'שביל חיים', value: d.lifePath, name: NUM_NAMES[d.lifePath] },
-    { label: 'שנה אישית 2026', value: d.personalYear, name: NUM_NAMES[d.personalYear] }
+    { label: 'שנה אישית נוכחית', value: d.personalYear, name: NUM_NAMES[d.personalYear] }
   ];
 
   const grid = document.getElementById('numbers-grid');
@@ -1177,7 +1186,7 @@ async function getAIAnalysis() {
 שם: ${d.fullName} | מין: ${d.gender} | שביל חיים: ${d.lifePath}
 שם פרטי: ${d.firstNum} | שם משפחה: ${d.lastNum} | שם מלא: ${d.fullNum}
 יום: ${d.dayNum} | חודש: ${d.monthNum} | שנת תיקון: ${d.tikkun} | ספרה אחרונה של שנת הלידה (כלי מבצעי): ${d.yearLastDigit}
-שנה אישית 2026: ${d.personalYear} (${d.pyStart} עד ${d.pyEndMonth})
+שנה אישית נוכחית: ${d.personalYear} (${d.pyStart} עד ${d.pyEndMonth})
 חסרים: ${d.missing.length > 0 ? d.missing.join(', ') : 'אין'} | קארמה: ${d.karmaDebts.length > 0 ? d.karmaDebts.join(', ') : 'אין'} | מאסטר: ${d.uniqueMasters.length > 0 ? d.uniqueMasters.join(', ') : 'אין'}
 דומיננטיים: ${d.dominant.join(', ')}
 
