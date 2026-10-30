@@ -4,110 +4,112 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>מפת הנשמה — מדריך למשתמש</title>
-<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;800&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;background:#0b0f2c;}
-  ::selection{background:rgba(216,176,106,.32);color:#fff;}
-  @keyframes twk{0%,100%{opacity:.45}50%{opacity:.95}}
-  :root{--ac:#d8b06a;--ac2:#f0d9a4;}
-  .stage{
-    position:relative;min-height:100vh;width:100%;overflow:hidden;
-    font-family:'Heebo',sans-serif;color:#cdc8e2;
-    background:
-      radial-gradient(1300px 820px at 72% -8%, #2a1f54 0%, rgba(42,31,84,0) 56%),
-      radial-gradient(1100px 760px at 6% 112%, #3a163a 0%, rgba(58,22,58,0) 52%),
-      radial-gradient(900px 600px at 95% 60%, #2b1340 0%, rgba(43,19,64,0) 50%),
-      linear-gradient(168deg, #0b0f2c 0%, #121038 42%, #1a1138 72%, #221036 100%);
+  :root{
+    --void:#050a10;--deep:#0d1620;--mid:#142230;--rim:#1e3446;
+    --gold:#d9b26e;--gold-light:#f5dca0;--violet:#3d6a8c;--violet-light:#5fa0c9;
+    --rose:#a8bcc9;--teal:#5fa0c9;--text:#f0ece0;--text-dim:#93a3b0;
+    --card:linear-gradient(145deg,#0d1620,#142230);--card-border:rgba(217,178,110,0.35);
+    --heading:#f5dca0;--label-gold:#d9b26e;
+    --ac:#d9b26e;--ac2:#f5dca0;
   }
-  .stars{position:absolute;inset:0;pointer-events:none;animation:twk 7s ease-in-out infinite;
+  html{background:#050a10;}
+  ::selection{background:rgba(217,178,110,.32);color:#fff;}
+  body{
+    margin:0;padding:0;min-height:100vh;overflow-x:hidden;
+    background-color:#050a10;
     background-image:
-      radial-gradient(1.6px 1.6px at 12% 14%, rgba(255,255,255,.85), transparent),
-      radial-gradient(1.2px 1.2px at 28% 32%, rgba(216,196,255,.7), transparent),
-      radial-gradient(1.4px 1.4px at 47% 9%, rgba(255,255,255,.6), transparent),
-      radial-gradient(1px 1px at 63% 24%, rgba(255,255,255,.8), transparent),
-      radial-gradient(1.6px 1.6px at 82% 12%, rgba(236,212,154,.7), transparent),
-      radial-gradient(1.1px 1.1px at 91% 38%, rgba(255,255,255,.6), transparent),
-      radial-gradient(1.3px 1.3px at 8% 52%, rgba(255,255,255,.55), transparent),
-      radial-gradient(1px 1px at 35% 61%, rgba(216,196,255,.6), transparent),
-      radial-gradient(1.5px 1.5px at 55% 74%, rgba(255,255,255,.5), transparent),
-      radial-gradient(1.2px 1.2px at 73% 67%, rgba(236,212,154,.6), transparent),
-      radial-gradient(1px 1px at 88% 82%, rgba(255,255,255,.55), transparent),
-      radial-gradient(1.4px 1.4px at 18% 88%, rgba(255,255,255,.5), transparent),
-      radial-gradient(1.1px 1.1px at 44% 92%, rgba(216,196,255,.5), transparent),
-      radial-gradient(1.3px 1.3px at 67% 95%, rgba(255,255,255,.45), transparent);}
+      radial-gradient(ellipse 140% 45% at 50% 145%, #d9a24f 0%, #b8823f 15%, #4a7d82 32%, #2d5258 48%, transparent 68%),
+      radial-gradient(ellipse 60% 22% at 72% 18%, rgba(180,150,90,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 90% 30% at 60% 25%, rgba(90,70,140,0.3) 0%, transparent 65%),
+      radial-gradient(ellipse 110% 38% at 68% 24%, rgba(75,160,175,0.4) 0%, transparent 65%),
+      radial-gradient(ellipse at 25% 10%, #16283a 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, #1a2f42 0%, transparent 45%),
+      linear-gradient(180deg, #050a10 0%, #060d16 35%, #0a121c 60%, #142226 85%, #24201a 100%);
+    background-size:100% 100%;background-repeat:no-repeat;
+    color:var(--text);font-family:'Heebo',sans-serif;font-weight:300;
+  }
+  body::before{
+    content:'';position:fixed;inset:-10% -10% -10% -10%;
+    background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22300%22%20height%3D%22300%22%3E%3Ccircle%20cx%3D%22191.8%22%20cy%3D%227.5%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.48%22/%3E%3Ccircle%20cx%3D%2230.7%22%20cy%3D%22222.2%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.65%22/%3E%3Ccircle%20cx%3D%228.9%22%20cy%3D%2265.6%22%20r%3D%221.5%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.74%22/%3E%3Ccircle%20cx%3D%22214.8%22%20cy%3D%22210.4%22%20r%3D%221.2%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.75%22/%3E%3Ccircle%20cx%3D%22242.8%22%20cy%3D%221.9%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.6%22/%3E%3Ccircle%20cx%3D%2246.6%22%20cy%3D%22287.2%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.63%22/%3E%3Ccircle%20cx%3D%22107.7%22%20cy%3D%22103.2%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.84%22/%3E%3Ccircle%20cx%3D%22160.9%22%20cy%3D%22291.9%22%20r%3D%221.2%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.58%22/%3E%3Ccircle%20cx%3D%22188.6%22%20cy%3D%22265.6%22%20r%3D%221.0%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.82%22/%3E%3Ccircle%20cx%3D%2213.7%22%20cy%3D%2268.4%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.91%22/%3E%3Ccircle%20cx%3D%22259.9%22%20cy%3D%22114.0%22%20r%3D%221.2%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.62%22/%3E%3Ccircle%20cx%3D%22111.1%22%20cy%3D%2262.9%22%20r%3D%221.0%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.81%22/%3E%3Ccircle%20cx%3D%2221.4%22%20cy%3D%22190.5%22%20r%3D%221.5%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.5%22/%3E%3Ccircle%20cx%3D%22113.8%22%20cy%3D%22296.9%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.59%22/%3E%3Ccircle%20cx%3D%22230.5%22%20cy%3D%2216.8%22%20r%3D%220.6%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.64%22/%3E%3Ccircle%20cx%3D%2219.9%22%20cy%3D%22273.9%22%20r%3D%221.5%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.59%22/%3E%3Ccircle%20cx%3D%22196.6%22%20cy%3D%22118.7%22%20r%3D%221.2%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.48%22/%3E%3Ccircle%20cx%3D%22223.5%22%20cy%3D%22161.7%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.75%22/%3E%3Ccircle%20cx%3D%22108.6%22%20cy%3D%22299.2%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.45%22/%3E%3Ccircle%20cx%3D%2214.1%22%20cy%3D%2232.9%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.65%22/%3E%3Ccircle%20cx%3D%2219.1%22%20cy%3D%22114.5%22%20r%3D%221.2%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.98%22/%3E%3Ccircle%20cx%3D%22258.2%22%20cy%3D%223.4%22%20r%3D%220.6%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.72%22/%3E%3Ccircle%20cx%3D%2280.0%22%20cy%3D%22192.3%22%20r%3D%220.6%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.49%22/%3E%3Ccircle%20cx%3D%221.0%22%20cy%3D%22216.6%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.86%22/%3E%3Ccircle%20cx%3D%22152.3%22%20cy%3D%2231.9%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.7%22/%3E%3Ccircle%20cx%3D%2259.7%22%20cy%3D%22112.2%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.87%22/%3E%3Ccircle%20cx%3D%22159.1%22%20cy%3D%220.2%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.47%22/%3E%3Ccircle%20cx%3D%22108.9%22%20cy%3D%22295.6%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.54%22/%3E%3Ccircle%20cx%3D%22170.2%22%20cy%3D%2223.6%22%20r%3D%221.2%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.99%22/%3E%3Ccircle%20cx%3D%22159.8%22%20cy%3D%2237.7%22%20r%3D%221.2%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.5%22/%3E%3Ccircle%20cx%3D%22158.3%22%20cy%3D%22182.0%22%20r%3D%220.8%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.85%22/%3E%3Ccircle%20cx%3D%22207.0%22%20cy%3D%22213.9%22%20r%3D%221.2%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.79%22/%3E%3Ccircle%20cx%3D%22131.4%22%20cy%3D%22155.3%22%20r%3D%220.6%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.44%22/%3E%3Ccircle%20cx%3D%226.3%22%20cy%3D%22166.2%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.44%22/%3E%3Ccircle%20cx%3D%22189.3%22%20cy%3D%2268.7%22%20r%3D%220.6%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.44%22/%3E%3C/svg%3E");
+    background-size:300px 300px;background-repeat:repeat;
+    animation:driftStars 90s linear infinite;pointer-events:none;z-index:0;
+  }
+  @keyframes driftStars{from{transform:translate(0,0);}to{transform:translate(-300px,-300px);}}
+  .stage{position:relative;min-height:100vh;width:100%;overflow:hidden;font-family:'Heebo',sans-serif;color:var(--text);background:none;}
+  .stars{display:none;}
   .container{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:0 30px 100px;}
 
   header.hero{text-align:center;padding:104px 0 26px;}
-  .eyebrow{font-size:13px;font-weight:500;letter-spacing:7px;color:var(--ac);opacity:.85;margin-bottom:30px;}
-  h1.title{margin:0;font-family:'Frank Ruhl Libre',serif;font-weight:800;font-size:clamp(40px,7vw,66px);line-height:1.12;
-    background:linear-gradient(118deg,var(--ac2) 8%,var(--ac) 92%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
-  h1.title .spark{-webkit-text-fill-color:var(--ac);color:var(--ac);font-size:.6em;vertical-align:middle;text-shadow:0 0 22px rgba(216,176,106,.6);}
+  .eyebrow{font-size:13px;font-weight:500;letter-spacing:7px;color:var(--label-gold);opacity:.9;margin-bottom:30px;}
+  h1.title{margin:0;font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:clamp(40px,7vw,66px);line-height:1.12;
+    background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-light));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    filter:drop-shadow(0 0 14px rgba(217,178,110,0.55)) drop-shadow(0 2px 6px rgba(0,0,0,0.6));}
+  h1.title .spark{-webkit-text-fill-color:var(--gold);color:var(--gold);font-size:.6em;vertical-align:middle;text-shadow:0 0 22px rgba(217,178,110,.6);}
   h1.title .spark.r{margin-right:14px;} h1.title .spark.l{margin-left:14px;}
-  .subtitle{margin:24px 0 0;font-size:17px;font-weight:300;letter-spacing:3px;color:#9a92b8;}
-  .hr-glow{width:130px;height:2px;margin:40px auto 0;background:linear-gradient(90deg,transparent,var(--ac),transparent);box-shadow:0 0 16px rgba(216,176,106,.5);}
+  .subtitle{margin:24px 0 0;font-size:17px;font-weight:300;letter-spacing:3px;color:var(--text-dim);}
+  .hr-glow{width:130px;height:2px;margin:40px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent);box-shadow:0 0 16px rgba(217,178,110,.5);}
 
   section{margin-top:64px;}
   section:first-of-type{margin-top:54px;}
   .sec-head{display:flex;align-items:baseline;gap:0;margin-bottom:22px;}
   h2{margin:0;font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:clamp(24px,3.6vw,30px);
-    background:linear-gradient(120deg,var(--ac2),var(--ac));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
-  .panel{background:linear-gradient(162deg,rgba(30,26,58,.74),rgba(22,18,46,.6));border:1px solid rgba(150,130,200,.16);
-    border-radius:24px;padding:34px 40px;box-shadow:0 24px 60px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.045);}
-  .panel p{margin:0 0 14px;font-size:17px;line-height:2;color:#cdc8e2;}
+    background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
+  .panel{background:var(--card);border:1px solid var(--card-border);border-radius:14px;padding:34px 40px;backdrop-filter:blur(10px);}
+  .panel p{margin:0 0 14px;font-size:17px;line-height:2;color:var(--text);}
   .panel p:last-child{margin-bottom:0;}
-  h3{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-family:'Heebo',sans-serif;font-weight:600;font-size:20px;color:#ecd8a8;}
-  h3 .dot{color:var(--ac);font-size:15px;}
-  .note{background:rgba(216,176,106,.07);border-right:2px solid var(--ac);border-radius:9px;padding:14px 18px;font-size:15.5px;line-height:1.85;color:#bcb4d2;}
-  .note strong,.panel strong{color:#ecd8a8;font-weight:600;}
-  .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(150,130,200,.22),transparent);margin:28px 0;}
+  h3{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:20px;color:var(--heading);}
+  h3 .dot{color:var(--gold);font-size:15px;}
+  .note{background:rgba(61,106,140,0.09);border-right:3px solid var(--gold);border-radius:10px;padding:14px 18px;font-size:15.5px;line-height:1.85;color:var(--text);}
+  .note strong,.panel strong{color:var(--gold-light);font-weight:600;}
+  .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(61,106,140,0.35),transparent);margin:28px 0;}
 
-  .master-row{display:flex;gap:18px;align-items:flex-start;background:rgba(216,176,106,.05);border:1px solid rgba(216,176,106,.16);border-radius:14px;padding:16px 20px;margin-bottom:14px;}
-  .master-num{flex:none;font-family:'Frank Ruhl Libre',serif;font-weight:800;font-size:30px;line-height:1;color:var(--ac);width:46px;text-align:center;}
+  .master-row{display:flex;gap:18px;align-items:flex-start;background:rgba(61,106,140,0.09);border:1px solid rgba(61,106,140,0.25);border-radius:10px;padding:16px 20px;margin-bottom:14px;}
+  .master-num{flex:none;font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:30px;line-height:1;color:var(--gold);width:46px;text-align:center;}
   .master-row p{margin:0;font-size:16px;line-height:1.8;}
 
   .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;}
-  .light-card{background:linear-gradient(160deg,rgba(236,212,154,.12),rgba(216,176,106,.04));border:1px solid rgba(216,176,106,.24);border-radius:16px;padding:22px 24px;}
-  .shadow-card{background:linear-gradient(160deg,rgba(58,48,92,.42),rgba(28,22,52,.34));border:1px solid rgba(150,130,200,.2);border-radius:16px;padding:22px 24px;}
+  .light-card{background:linear-gradient(160deg,rgba(245,220,160,.12),rgba(217,178,110,.04));border:1px solid rgba(217,178,110,.35);border-radius:10px;padding:22px 24px;}
+  .shadow-card{background:linear-gradient(160deg,rgba(61,106,140,.28),rgba(20,34,48,.4));border:1px solid rgba(61,106,140,.45);border-radius:10px;padding:22px 24px;}
   .card-h{font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:21px;margin-bottom:8px;}
-  .light-card .card-h{color:var(--ac2);} .shadow-card .card-h{color:#b6a9d6;}
-  .two-col p{margin:0;font-size:15.5px;line-height:1.85;color:#cfcae4;}
+  .light-card .card-h{color:var(--gold-light);} .shadow-card .card-h{color:var(--rose);}
+  .two-col p{margin:0;font-size:15.5px;line-height:1.85;color:var(--text);}
 
   ul.wounds{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
-  ul.wounds li{display:flex;gap:13px;align-items:flex-start;font-size:16px;line-height:1.7;color:#cdc8e2;}
-  ul.wounds li .star{flex:none;color:var(--ac);margin-top:4px;font-size:12px;}
+  ul.wounds li{display:flex;gap:13px;align-items:flex-start;font-size:16px;line-height:1.7;color:var(--text);}
+  ul.wounds li .star{flex:none;color:var(--gold);margin-top:4px;font-size:12px;}
 
   .notes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
-  .mini-card{background:linear-gradient(162deg,rgba(30,26,58,.74),rgba(22,18,46,.6));border:1px solid rgba(150,130,200,.16);border-radius:18px;padding:24px 26px;box-shadow:0 16px 40px rgba(0,0,0,.32);}
+  .mini-card{background:var(--card);border:1px solid var(--card-border);border-radius:14px;padding:24px 26px;}
   .mini-card h3{margin:0 0 10px;font-size:18px;}
-  .mini-card p{margin:0;font-size:15.5px;line-height:1.85;color:#c4bfdb;}
+  .mini-card p{margin:0;font-size:15.5px;line-height:1.85;color:var(--text);}
 
-  /* CTA */
   .cta-block{margin-top:80px;text-align:center;}
   .cta-btn{display:inline-flex;align-items:center;gap:14px;
-    background:linear-gradient(135deg,#5a2d8a,#3a1f6a);border:1px solid #9a6dca;color:#f0e6d8;
+    background:linear-gradient(135deg,#1e3446,#3d6a8c,#d9b26e);border:none;color:white;
     font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:20px;letter-spacing:1px;
-    padding:20px 48px;border-radius:16px;text-decoration:none;cursor:pointer;
-    box-shadow:0 18px 50px rgba(106,61,154,.4),inset 0 1px 0 rgba(255,255,255,.08);
-    transition:transform .2s,box-shadow .2s;}
-  .cta-btn:hover{transform:translateY(-3px);box-shadow:0 24px 60px rgba(106,61,154,.55),inset 0 1px 0 rgba(255,255,255,.12);}
-  .cta-btn .arrow{font-size:24px;color:var(--ac2);transition:transform .2s;}
+    padding:20px 48px;border-radius:18px;text-decoration:none;cursor:pointer;
+    box-shadow:0 18px 50px rgba(61,106,140,.4);transition:transform .2s,box-shadow .2s,opacity .3s;}
+  .cta-btn:hover{transform:translateY(-3px);box-shadow:0 24px 60px rgba(61,106,140,.55);}
+  .cta-btn .arrow{font-size:24px;color:var(--gold-light);transition:transform .2s;}
   .cta-btn:hover .arrow{transform:translateX(-6px);}
-  .cta-sub{margin-top:16px;font-size:14px;letter-spacing:2px;color:#8b83a8;}
+  .cta-sub{margin-top:16px;font-size:14px;letter-spacing:2px;color:var(--text-dim);}
 
-  /* mid-page jump */
-  .mid-jump{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px;margin-top:32px;}
-  .read-on{background:rgba(20,16,46,.5);border:1px solid rgba(216,176,106,.55);border-radius:14px;cursor:pointer;
-    color:var(--ac2);font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:16px;letter-spacing:1px;
+  .mid-jump{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px;margin-top:32px;position:relative;z-index:1;}
+  .read-on{background:rgba(13,22,32,.5);border:1px solid rgba(217,178,110,.55);border-radius:18px;cursor:pointer;
+    color:var(--gold-light);font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:16px;letter-spacing:1px;
     padding:14px 30px;display:inline-flex;align-items:center;gap:10px;transition:all .2s;}
-  .read-on:hover{background:rgba(216,176,106,.1);transform:translateY(-2px);box-shadow:0 10px 28px rgba(216,176,106,.2);}
+  .read-on:hover{background:rgba(217,178,110,.1);transform:translateY(-2px);box-shadow:0 10px 28px rgba(217,178,110,.2);}
   .read-on .dn{font-size:18px;transition:transform .25s;}
   .read-on:hover .dn{transform:translateY(4px);}
 
   footer{margin-top:70px;text-align:center;}
-  .hr-glow.sm{width:130px;margin:0 auto 22px;box-shadow:0 0 16px rgba(216,176,106,.4);}
-  .foot-spark{color:var(--ac);font-size:16px;margin-bottom:8px;}
-  .copyright{margin:0;font-size:13.5px;letter-spacing:1.5px;color:#8b83a8;}
+  .hr-glow.sm{width:130px;margin:0 auto 22px;box-shadow:0 0 16px rgba(217,178,110,.4);}
+  .foot-spark{color:var(--gold);font-size:16px;margin-bottom:8px;}
+  .copyright{margin:0;font-size:13.5px;letter-spacing:1.5px;color:var(--text-dim);}
+  @media (max-width:600px){.container{padding:0 16px 80px;} .panel{padding:24px 20px;} .master-row{padding:14px;} .cta-btn{padding:16px 28px;font-size:18px;}}
 </style>
 </head>
 <body>
@@ -127,7 +129,7 @@
       <div class="sec-head"><h2>איך קוראים את מפת הנשמה?</h2></div>
       <div class="panel">
         <p>שלום :)&nbsp; ברוכים הבאים למשחק החיים של כדור הארץ!</p>
-        <p>בתפיסה הרוחנית-נומרולוגית, לפני שנשמה נכנסת לגוף, היא חותמת על הסכם מול מועצת הזקנים, ובו היא מתחייבת לעמוד בשיעורים שבחרה לעצמה לצורך התפתחותה בגלגול הקרוב. השיעורים הללו נבחרו בקפידה, לאחר התייעצות עם מועצת הזקנים - שקובעת יחד עם הנשמה אילו שיעורים נכונים לה ביותר לעבור, לטובת התקדמותה בדרגות הנשמה.</p>
+        <p>בתפיסה הקבלית-נומרולוגית, לפני שנשמה נכנסת לגוף, היא חותמת על הסכם מול מועצת הזקנים, ובו היא מתחייבת לעמוד בשיעורים שבחרה לעצמה לצורך התפתחותה בגלגול הקרוב. השיעורים הללו נבחרו בקפידה, לאחר התייעצות עם מועצת הזקנים - שקובעת יחד עם הנשמה אילו שיעורים נכונים לה ביותר לעבור, לטובת התקדמותה בדרגות הנשמה.</p>
         <p>אחרי שחתמת על המסמך הזה, והכנת את תוכנית הלימודים האישית שלך יחד עם מועצת הזקנים - הצפנת את כל המידע הזה לקוד מספרים. הקוד הזה הוא תאריך לידה אישי.</p>
         <p>הקוד, תאריך הלידה — מכיל בתוכו את נקודות החוזק שלך, ואת "תיקי הלימוד" — השיעורים שעליך לפתור.</p>
         <p>זוהי בעצם מפת דרכים מדויקת שתוכננה בחוכמה, כדי שתוכל/י להגיע ליעד שתכננת לעצמך מראש. בתוך הקוד הזה מופיע כל המידע הדרוש כדי לעמוד בחוזה בהצלחה. זהו ארגז כלים ייחודי שבו טמונים המפתחות שיפתחו כל דלת חסומה, והפתרונות לכל אתגר, כאב ומשבר שיגיע.</p>
@@ -146,7 +148,7 @@
 
         <div class="sep"></div>
         <h3><span class="dot">✦</span> יום לידה</h3>
-        <p>מספר יום הלידה מגלה את הציוד הבסיסי שהבאת לגלגול — הכישרונות הטבעיים, הנטיות העמוקות, ואופן הביצוע שלך בעולם. אם נולדת ב-13, 14, 16 או 19 — יש לך גם חוב קארמתי (ראה/י סעיף נפרד).</p>
+        <p>מספר יום הלידה מגלה את הציוד הבסיסי שהבאת לגלגול — הכישרונות הטבעיים, הנטיות העמוקות, ואופן הביצוע שלך בעולם. אם נולדת ב-13, 14, 16 או 19 — יש לך גם מבחן קארמתי (ראה/י סעיף נפרד).</p>
 
         <div class="sep"></div>
         <h3><span class="dot">✦</span> חודש לידה</h3>
@@ -159,7 +161,7 @@
           <li><span class="star">✦</span><span><strong>הסכום המצומצם (התיקון)</strong> — התדר המחושב לספרה בודדת מייצג את המשימה הקארמתית המרכזית. זהו לא עונש, אלא ה"שיעור" שנשמתך בחרה לעבוד עליו בגלגול הזה. כאן יתרחש השינוי המשמעותי ביותר שלך.</span></li>
           <li><span class="star">✦</span><span><strong>הספרה האחרונה (הכלי המבצעי)</strong> — הספרה שחותמת את שנת הלידה היא "כלי העבודה" המיידי שלך. היא מצביעה על האנרגיה הזמינה לך ביומיום, והאופן הטקטי שבו את/ה ניגש/ת לממש את התיקון שלך.</span></li>
         </ul>
-        <div class="note"><strong>הסוד לאיזון:</strong> התיקון (המהות) והכלי (הטקטיקה) צריכים לעבוד יחד. לעיתים, הכלי הוא כה חזק, שאנו נוטים להישחק בו. המפתח הוא להשתמש בכלי כדי לשרת את התיקון, ולא לתת לו לשאוב אותנו.</div>
+        <div class="note"><strong>הסוד לאיזון:</strong> התיקון (המהות) והכלי (הטקטיקה) עובדים יחד. לעיתים, הכלי הוא כה חזק, שאנו נוטים להישחק בו. המפתח הוא להשתמש בכלי כדי לשרת את התיקון, ולא לתת לו לשאוב אותנו.</div>
 
         <div class="sep"></div>
         <h3><span class="dot">✦</span> שביל חיים</h3>
@@ -184,14 +186,16 @@
       <div class="panel">
         <p>המספר החסר הוא ספרה (1–9) שאינה מופיעה כלל בשם המלא או בתאריך הלידה שלך. היעדר מספר אינו חיסרון — אם תאריך הלידה הוא הקוד שהנשמה בחרה לעצמה, הרי שהמספר החסר הוא המפתח הנסתר שהיא השאירה לך בדרך, ועליך לגלות מהו השיעור הטמון בו.</p>
         <p>מכיוון שמדובר בנקודה עיוורת, לרוב יהיה לך קשה מאוד לזהות את החסר הזה בעצמך. זו בדיוק הסיבה שהשיעור הזה יחזור וילווה אותך לאורך החיים שוב ושוב, בסיטואציות שונות ומול אנשים שונים — עד שתעצר/י, תתבונן/י ותבין/י מהו האתגר האמיתי שקיים שם. ברגע שאתה/את מבין/ה ומפרק/ת את הקושי הספציפי הזה, חוקי המשחק משתנים, ודברים עצומים בחייך מתחילים להשתנות.</p>
+        <p>כשהמספר החסר הוא גם שביל החיים, אין כאן שני נושאים נפרדים: שביל החיים הוא ההזדמנות, והמספר החסר הוא השיעור שבתוכה. החיים מזמנים שוב ושוב מצבים שמפתחים צד אחד של המספר, והשיעור נמצא בצד השני שלו.</p>
       </div>
     </section>
 
     <!-- 04 -->
     <section>
-      <div class="sec-head"><h2>חוב קארמתי</h2></div>
+      <div class="sec-head"><h2>מבחן קארמתי</h2></div>
       <div class="panel">
-        <p>מופיע כאשר יום הלידה הוא 13, 14, 16 או 19. מספרים אלו מצביעים על נושאים שנשמתך טרם סיימה לעבד בגלגולים קודמים, והיא שבה אליהם בגלגול הנוכחי כדי להשלים את הלמידה. חשוב להבין: חוב קארמתי אינו גזר דין — הוא הזמנה לעבודה ממוקדת. הוא נחווה לרוב כסיטואציה שחוזרת על עצמה במציאות, סוג של "חומה" שבה נתקלים שוב ושוב, עד שלומדים לזהות את השיעור ולעבור דרכה.</p>
+        <p>מופיע כאשר יום הלידה הוא 13, 14, 16 או 19. לפי פלורנס קמפבל, אלה ארבעת "מספרי המבחן" (Testing Numbers): כל אחד נושא מסר של קארמה שהנשמה מגיעה להשלים, וקמפבל מדגישה שאין כאן עונש. בנומרולוגיה המודרנית נקרא המבחן הזה גם "חוב קארמתי".</p>
+        <p>מספרים אלו מצביעים על נושאים שנשמתך טרם סיימה לעבד בגלגולים קודמים, והיא שבה אליהם בגלגול הנוכחי כדי להשלים את הלמידה. המבחן אינו גזר דין — הוא הזמנה לעבודה ממוקדת. הוא נחווה לרוב כסיטואציה שחוזרת על עצמה במציאות, סוג של "חומה" שבה נתקלים שוב ושוב, עד שלומדים לזהות את השיעור ולעבור דרכה.</p>
       </div>
     </section>
 
@@ -226,6 +230,7 @@
       <div class="sec-head"><h2>פצעי הנשמה</h2></div>
       <div class="panel">
         <p style="margin-bottom:8px;">פצעי הנשמה הם תבניות רגשיות עמוקות שנוצרות בילדות המוקדמת — ולפי הנומרולוגיה הקבלית גם מגלגולים קודמים — ומעצבות את האופן שבו אתה/את מתייחס/ת לעצמך ולאחרים. הפצעים המזוהים במפה נגזרים מהמספרים שלך על פי שיטת ליז בורבו.</p>
+        <p style="margin-bottom:8px;">הפצע הוא הכאב עצמו, והמסיכה היא ההגנה שהאגו בונה סביבו כדי לא להרגיש אותו.</p>
         <h3 style="margin:22px 0 14px;font-size:18px;"><span class="dot" style="font-size:14px;">✦</span> חמשת הפצעים האפשריים</h3>
         <ul class="wounds">
           <li><span class="star">✦</span><span><strong>פצע הדחייה</strong> — תחושת "לא ראוי/ה", נסיגה מנוכחות.</span></li>
@@ -268,7 +273,7 @@
       <div class="notes-grid">
         <div class="mini-card"><h3>על שמות</h3><p>המחשבון משתמש בשם לפי תעודת הזהות — שם הנעורים, לפני שינויים. שינוי שם (לאחר נישואין, בחירה אישית) יוצר שכבה נוספת של תדר הנלמדת על המשתמש/ת, אך אינו מבטל את תדר שם הלידה המקורי.</p></div>
         <div class="mini-card"><h3>על מספרי מאסטר</h3><p>מספרי מאסטר (11, 22, 33) אינם מצומצמים לספרה בודדת. אם הסכום שלך הוא 11 — הוא נשאר 11, לא 2. זהו כלל יסוד המקובל בכמה שיטות נומרולוגיה, כולל בנומרולוגיה הקבלית.</p></div>
-        <div class="mini-card"><h3>על חוב קארמתי</h3><p>חוב קארמתי מופיע רק אם יום הלידה הוא בדיוק 13, 14, 16 או 19 — לא חודש, לא שנה, לא שביל חיים.</p></div>
+        <div class="mini-card"><h3>על מבחן קארמתי</h3><p>מבחן קארמתי מופיע רק אם יום הלידה הוא בדיוק 13, 14, 16 או 19 — לא חודש, לא שנה, לא שביל חיים.</p></div>
         <div class="mini-card"><h3>על הגוף</h3><p>הביטויים הגופניים המצוינים תחת תדר הצל אינם תחליף לייעוץ רפואי. הם מסגרת אנרגטית להבנה עצמית בלבד.</p></div>
       </div>
     </section>
@@ -277,7 +282,7 @@
     <section>
       <div class="sec-head"><h2>מי היא ליז בורבו?</h2></div>
       <div class="panel">
-        <p>ליז בורבו היא מחברת קנדית ומורה רוחנית, ממשיכת דרכו של הפסיכיאטר האמריקאי ג'ון פיירקוס (John Pierrakos), שחקר לראשונה את הקשר בין פצעים רגשיים לביטוי הגופני שלהם. לאחר אינספור תצפיות וניסיון מעשי, גיבשה מסגרת משלה שלפיה מחלות וכאבים גופניים משקפים פצע רגשי לא פתור. זיהתה חמישה פצעי נשמה מרכזיים: דחייה, נטישה, השפלה, בגידה ואי-צדק — ולכל אחד מסכת הגנה אישית. מייסדת בית הספר "מקשיבים לגוף שלך". משולבת במחשבון זה בעיקר כזיהוי <strong>פצעי הנשמה</strong> ובחלק של זיהוי <strong>חליפת האגו</strong>.</p>
+        <p>ליז בורבו היא מחברת קנדית ומורה רוחנית, ממשיכת דרכו של הפסיכיאטר האמריקאי ג'ון פיירקוס (John Pierrakos), שחקר לראשונה את הקשר בין פצעים רגשיים לביטוי הגופני שלהם. לאחר אינספור תצפיות וניסיון מעשי, גיבשה מסגרת משלה שלפיה מחלות וכאבים גופניים משקפים פצע רגשי לא פתור. זיהתה חמישה פצעי נשמה מרכזיים: דחייה, נטישה, השפלה, בגידה ואי-צדק — ולכל אחד מסיכת הגנה אישית. מייסדת בית הספר "מקשיבים לגוף שלך". משולבת במחשבון זה בעיקר כזיהוי <strong>פצעי הנשמה</strong> ובחלק של זיהוי <strong>חליפת האגו</strong>.</p>
       </div>
     </section>
 
@@ -286,6 +291,14 @@
       <div class="sec-head"><h2>מי היא קרוליין מיס?</h2></div>
       <div class="panel">
         <p>ד"ר קרוליין מיס היא מחברת אמריקאית ומרצה, בעלת תואר שני בתיאולוגיה ודוקטורט בפילוסופיה. מוכרת בעולם כחלוצה בתחום "הרפואה האנרגטית". מחברת הספרים "חוזים מקודשים" ו"אנטומיה של הנפש". פיתחה את ארבעת ארכיטיפי ההישרדות (הילד, הקורבן, המחבל, מכירת העצמי) ומיפתה עשרות ארכיטיפים נוספים - תפקידים תודעתיים שכל אדם נוטה ללבוש שוב ושוב - כולל חלוקה לתדרי אור וצל בכל ארכיטיפ, בהמשך ישיר לתיאוריית הארכיטיפים ועבודת ה"צל" של הפסיכיאטר השוויצרי קרל יונג. משולבת במחשבון זה בחלק של זיהוי <strong>חליפת האגו</strong>.</p>
+      </div>
+    </section>
+
+    <!-- Campbell -->
+    <section>
+      <div class="sec-head"><h2>מי היא פלורנס קמפבל?</h2></div>
+      <div class="panel">
+        <p>פלורנס קמפבל היא מחלוצות הנומרולוגיה הפיתגורית. ספרה "Your Days Are Numbered: A Manual of Numerology for Everybody" יצא לאור לראשונה ב-1931. היא מכנה את המספרים 13, 14, 16 ו-19 "מספרי מבחן", ואת המספרים החסרים בשם "שיעורי קארמה" (Karmic Lessons). משולבת במחשבון זה בחלק של <strong>המבחן הקארמתי</strong> ושל <strong>המספרים החסרים</strong>.</p>
       </div>
     </section>
 
@@ -301,7 +314,7 @@
           <li><span class="star">✦</span><span><strong>בחירה מחדש</strong> — ברגע הקטן, לשאול: "איך הייתי בוחר/ת לפעול פה מתוך תדר האור?" ולתרגל את הבחירה הזו, גם אם היא קטנה.</span></li>
         </ul>
         <p style="margin:22px 0 0;">הריפוי אינו אירוע חד-פעמי אלא תרגול מתמשך — כל פעם שאת/ה מזהה את הצל ובוחר/ת מחדש, מתחזק מעט יותר תדר האור, עד שהוא הופך לברירת המחדל הטבעית.</p>
-        <div class="note"><strong>חשוב לזכור:</strong> הצל אינו האויב, ולא צריך "לנצח" אותו. הוא חלק מהמסע. הריפוי מתרחש בהדרגה, בכל פעם שאת/ה בוחר/ת להביא מודעות למקום שהיה אוטומטי.</div>
+        <div class="note"><strong>חשוב לזכור:</strong> הצל אינו האויב, ואין מה "לנצח" אותו. הוא חלק מהמסע. הריפוי מתרחש בהדרגה, בכל פעם שאת/ה בוחר/ת להביא מודעות למקום שהיה אוטומטי.</div>
       </div>
     </section>
 
