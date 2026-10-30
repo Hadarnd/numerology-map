@@ -1,336 +1,518 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>מפת הנשמה — מדריך למשתמש</title>
-<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>בקשת מפה לילד / ילדה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&family=Heebo:wght@400;500;700&display=swap">
 <style>
-  *{box-sizing:border-box;}
-  :root{
-    --void:#050a10;--deep:#0d1620;--mid:#142230;--rim:#1e3446;
-    --gold:#d9b26e;--gold-light:#f5dca0;--violet:#3d6a8c;--violet-light:#5fa0c9;
-    --rose:#a8bcc9;--teal:#5fa0c9;--text:#f0ece0;--text-dim:#93a3b0;
-    --card:linear-gradient(145deg,#0d1620,#142230);--card-border:rgba(217,178,110,0.35);
-    --heading:#f5dca0;--label-gold:#d9b26e;
-    --ac:#d9b26e;--ac2:#f5dca0;
+/* Layout: one calm column, a form on paper; sections as soft panels, sky-lilac palette of the children's map */
+:root {
+  --bg: #F6F7FC;
+  --paper: #FFFFFF;
+  --ink: #26233A;
+  --muted: #6B6788;
+  --line: #DCDDEE;
+  --sky: #DDEBFA;
+  --lilac: #E9E2F7;
+  --accent: #6A55B8;
+  --accent-ink: #FFFFFF;
+  --sun: #FFF3CC;
+  --danger: #B3364A;
+  --font-display: "Frank Ruhl Libre", "David", Georgia, serif;
+  --font-body: "Heebo", "Arial Hebrew", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17162A; --paper: #201F36; --ink: #ECEAF7; --muted: #A6A2C4; --line: #36345A;
+    --sky: #1F2E45; --lilac: #2C2550; --accent: #A893F0; --accent-ink: #17162A; --sun: #3A3420; --danger: #F08A9C;
+    color-scheme: dark;
   }
-  html{background:#050a10;}
-  ::selection{background:rgba(217,178,110,.32);color:#fff;}
-  body{
-    margin:0;padding:0;min-height:100vh;overflow-x:hidden;
-    background-color:#050a10;
-    background-image:
-      radial-gradient(ellipse 140% 45% at 50% 145%, #d9a24f 0%, #b8823f 15%, #4a7d82 32%, #2d5258 48%, transparent 68%),
-      radial-gradient(ellipse 60% 22% at 72% 18%, rgba(180,150,90,0.35) 0%, transparent 70%),
-      radial-gradient(ellipse 90% 30% at 60% 25%, rgba(90,70,140,0.3) 0%, transparent 65%),
-      radial-gradient(ellipse 110% 38% at 68% 24%, rgba(75,160,175,0.4) 0%, transparent 65%),
-      radial-gradient(ellipse at 25% 10%, #16283a 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, #1a2f42 0%, transparent 45%),
-      linear-gradient(180deg, #050a10 0%, #060d16 35%, #0a121c 60%, #142226 85%, #24201a 100%);
-    background-size:100% 100%;background-repeat:no-repeat;
-    color:var(--text);font-family:'Heebo',sans-serif;font-weight:300;
-  }
-  body::before{
-    content:'';position:fixed;inset:-10% -10% -10% -10%;
-    background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22300%22%20height%3D%22300%22%3E%3Ccircle%20cx%3D%22191.8%22%20cy%3D%227.5%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.48%22/%3E%3Ccircle%20cx%3D%2230.7%22%20cy%3D%22222.2%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.65%22/%3E%3Ccircle%20cx%3D%228.9%22%20cy%3D%2265.6%22%20r%3D%221.5%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.74%22/%3E%3Ccircle%20cx%3D%22214.8%22%20cy%3D%22210.4%22%20r%3D%221.2%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.75%22/%3E%3Ccircle%20cx%3D%22242.8%22%20cy%3D%221.9%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.6%22/%3E%3Ccircle%20cx%3D%2246.6%22%20cy%3D%22287.2%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.63%22/%3E%3Ccircle%20cx%3D%22107.7%22%20cy%3D%22103.2%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.84%22/%3E%3Ccircle%20cx%3D%22160.9%22%20cy%3D%22291.9%22%20r%3D%221.2%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.58%22/%3E%3Ccircle%20cx%3D%22188.6%22%20cy%3D%22265.6%22%20r%3D%221.0%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.82%22/%3E%3Ccircle%20cx%3D%2213.7%22%20cy%3D%2268.4%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.91%22/%3E%3Ccircle%20cx%3D%22259.9%22%20cy%3D%22114.0%22%20r%3D%221.2%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.62%22/%3E%3Ccircle%20cx%3D%22111.1%22%20cy%3D%2262.9%22%20r%3D%221.0%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.81%22/%3E%3Ccircle%20cx%3D%2221.4%22%20cy%3D%22190.5%22%20r%3D%221.5%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.5%22/%3E%3Ccircle%20cx%3D%22113.8%22%20cy%3D%22296.9%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.59%22/%3E%3Ccircle%20cx%3D%22230.5%22%20cy%3D%2216.8%22%20r%3D%220.6%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.64%22/%3E%3Ccircle%20cx%3D%2219.9%22%20cy%3D%22273.9%22%20r%3D%221.5%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.59%22/%3E%3Ccircle%20cx%3D%22196.6%22%20cy%3D%22118.7%22%20r%3D%221.2%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.48%22/%3E%3Ccircle%20cx%3D%22223.5%22%20cy%3D%22161.7%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.75%22/%3E%3Ccircle%20cx%3D%22108.6%22%20cy%3D%22299.2%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.45%22/%3E%3Ccircle%20cx%3D%2214.1%22%20cy%3D%2232.9%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.65%22/%3E%3Ccircle%20cx%3D%2219.1%22%20cy%3D%22114.5%22%20r%3D%221.2%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.98%22/%3E%3Ccircle%20cx%3D%22258.2%22%20cy%3D%223.4%22%20r%3D%220.6%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.72%22/%3E%3Ccircle%20cx%3D%2280.0%22%20cy%3D%22192.3%22%20r%3D%220.6%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.49%22/%3E%3Ccircle%20cx%3D%221.0%22%20cy%3D%22216.6%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.86%22/%3E%3Ccircle%20cx%3D%22152.3%22%20cy%3D%2231.9%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.7%22/%3E%3Ccircle%20cx%3D%2259.7%22%20cy%3D%22112.2%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.87%22/%3E%3Ccircle%20cx%3D%22159.1%22%20cy%3D%220.2%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.47%22/%3E%3Ccircle%20cx%3D%22108.9%22%20cy%3D%22295.6%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.54%22/%3E%3Ccircle%20cx%3D%22170.2%22%20cy%3D%2223.6%22%20r%3D%221.2%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.99%22/%3E%3Ccircle%20cx%3D%22159.8%22%20cy%3D%2237.7%22%20r%3D%221.2%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.5%22/%3E%3Ccircle%20cx%3D%22158.3%22%20cy%3D%22182.0%22%20r%3D%220.8%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.85%22/%3E%3Ccircle%20cx%3D%22207.0%22%20cy%3D%22213.9%22%20r%3D%221.2%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.79%22/%3E%3Ccircle%20cx%3D%22131.4%22%20cy%3D%22155.3%22%20r%3D%220.6%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.44%22/%3E%3Ccircle%20cx%3D%226.3%22%20cy%3D%22166.2%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.44%22/%3E%3Ccircle%20cx%3D%22189.3%22%20cy%3D%2268.7%22%20r%3D%220.6%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.44%22/%3E%3C/svg%3E");
-    background-size:300px 300px;background-repeat:repeat;
-    animation:driftStars 90s linear infinite;pointer-events:none;z-index:0;
-  }
-  @keyframes driftStars{from{transform:translate(0,0);}to{transform:translate(-300px,-300px);}}
-  .stage{position:relative;min-height:100vh;width:100%;overflow:hidden;font-family:'Heebo',sans-serif;color:var(--text);background:none;}
-  .stars{display:none;}
-  .container{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:0 30px 100px;}
-
-  header.hero{text-align:center;padding:104px 0 26px;}
-  .eyebrow{font-size:13px;font-weight:500;letter-spacing:7px;color:var(--label-gold);opacity:.9;margin-bottom:30px;}
-  h1.title{margin:0;font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:clamp(40px,7vw,66px);line-height:1.12;
-    background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-light));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
-    filter:drop-shadow(0 0 14px rgba(217,178,110,0.55)) drop-shadow(0 2px 6px rgba(0,0,0,0.6));}
-  h1.title .spark{-webkit-text-fill-color:var(--gold);color:var(--gold);font-size:.6em;vertical-align:middle;text-shadow:0 0 22px rgba(217,178,110,.6);}
-  h1.title .spark.r{margin-right:14px;} h1.title .spark.l{margin-left:14px;}
-  .subtitle{margin:24px 0 0;font-size:17px;font-weight:300;letter-spacing:3px;color:var(--text-dim);}
-  .hr-glow{width:130px;height:2px;margin:40px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent);box-shadow:0 0 16px rgba(217,178,110,.5);}
-
-  section{margin-top:64px;}
-  section:first-of-type{margin-top:54px;}
-  .sec-head{display:flex;align-items:baseline;gap:0;margin-bottom:22px;}
-  h2{margin:0;font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:clamp(24px,3.6vw,30px);
-    background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;}
-  .panel{background:var(--card);border:1px solid var(--card-border);border-radius:14px;padding:34px 40px;backdrop-filter:blur(10px);}
-  .panel p{margin:0 0 14px;font-size:17px;line-height:2;color:var(--text);}
-  .panel p:last-child{margin-bottom:0;}
-  h3{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:20px;color:var(--heading);}
-  h3 .dot{color:var(--gold);font-size:15px;}
-  .note{background:rgba(61,106,140,0.09);border-right:3px solid var(--gold);border-radius:10px;padding:14px 18px;font-size:15.5px;line-height:1.85;color:var(--text);}
-  .note strong,.panel strong{color:var(--gold-light);font-weight:600;}
-  .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(61,106,140,0.35),transparent);margin:28px 0;}
-
-  .master-row{display:flex;gap:18px;align-items:flex-start;background:rgba(61,106,140,0.09);border:1px solid rgba(61,106,140,0.25);border-radius:10px;padding:16px 20px;margin-bottom:14px;}
-  .master-num{flex:none;font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:30px;line-height:1;color:var(--gold);width:46px;text-align:center;}
-  .master-row p{margin:0;font-size:16px;line-height:1.8;}
-
-  .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;}
-  .light-card{background:linear-gradient(160deg,rgba(245,220,160,.12),rgba(217,178,110,.04));border:1px solid rgba(217,178,110,.35);border-radius:10px;padding:22px 24px;}
-  .shadow-card{background:linear-gradient(160deg,rgba(61,106,140,.28),rgba(20,34,48,.4));border:1px solid rgba(61,106,140,.45);border-radius:10px;padding:22px 24px;}
-  .card-h{font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:21px;margin-bottom:8px;}
-  .light-card .card-h{color:var(--gold-light);} .shadow-card .card-h{color:var(--rose);}
-  .two-col p{margin:0;font-size:15.5px;line-height:1.85;color:var(--text);}
-
-  ul.wounds{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
-  ul.wounds li{display:flex;gap:13px;align-items:flex-start;font-size:16px;line-height:1.7;color:var(--text);}
-  ul.wounds li .star{flex:none;color:var(--gold);margin-top:4px;font-size:12px;}
-
-  .notes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;}
-  .mini-card{background:var(--card);border:1px solid var(--card-border);border-radius:14px;padding:24px 26px;}
-  .mini-card h3{margin:0 0 10px;font-size:18px;}
-  .mini-card p{margin:0;font-size:15.5px;line-height:1.85;color:var(--text);}
-
-  .cta-block{margin-top:80px;text-align:center;}
-  .cta-btn{display:inline-flex;align-items:center;gap:14px;
-    background:linear-gradient(135deg,#1e3446,#3d6a8c,#d9b26e);border:none;color:white;
-    font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:20px;letter-spacing:1px;
-    padding:20px 48px;border-radius:18px;text-decoration:none;cursor:pointer;
-    box-shadow:0 18px 50px rgba(61,106,140,.4);transition:transform .2s,box-shadow .2s,opacity .3s;}
-  .cta-btn:hover{transform:translateY(-3px);box-shadow:0 24px 60px rgba(61,106,140,.55);}
-  .cta-btn .arrow{font-size:24px;color:var(--gold-light);transition:transform .2s;}
-  .cta-btn:hover .arrow{transform:translateX(-6px);}
-  .cta-sub{margin-top:16px;font-size:14px;letter-spacing:2px;color:var(--text-dim);}
-
-  .mid-jump{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:18px;margin-top:32px;position:relative;z-index:1;}
-  .read-on{background:rgba(13,22,32,.5);border:1px solid rgba(217,178,110,.55);border-radius:18px;cursor:pointer;
-    color:var(--gold-light);font-family:'Frank Ruhl Libre',serif;font-weight:700;font-size:16px;letter-spacing:1px;
-    padding:14px 30px;display:inline-flex;align-items:center;gap:10px;transition:all .2s;}
-  .read-on:hover{background:rgba(217,178,110,.1);transform:translateY(-2px);box-shadow:0 10px 28px rgba(217,178,110,.2);}
-  .read-on .dn{font-size:18px;transition:transform .25s;}
-  .read-on:hover .dn{transform:translateY(4px);}
-
-  footer{margin-top:70px;text-align:center;}
-  .hr-glow.sm{width:130px;margin:0 auto 22px;box-shadow:0 0 16px rgba(217,178,110,.4);}
-  .foot-spark{color:var(--gold);font-size:16px;margin-bottom:8px;}
-  .copyright{margin:0;font-size:13.5px;letter-spacing:1.5px;color:var(--text-dim);}
-  @media (max-width:600px){.container{padding:0 16px 80px;} .panel{padding:24px 20px;} .master-row{padding:14px;} .cta-btn{padding:16px 28px;font-size:18px;}}
+}
+:root[data-theme="dark"] {
+  --bg: #17162A; --paper: #201F36; --ink: #ECEAF7; --muted: #A6A2C4; --line: #36345A;
+  --sky: #1F2E45; --lilac: #2C2550; --accent: #A893F0; --accent-ink: #17162A; --sun: #3A3420; --danger: #F08A9C;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+.wrap { max-width: 680px; margin: 0 auto; padding: 32px 16px 12px; display: flex; flex-direction: column; gap: 20px; min-height: 100vh; min-height: 100dvh; }
+header { display: flex; flex-direction: column; gap: 8px; padding: 28px 24px; border-radius: 18px; background: linear-gradient(135deg, var(--sky), var(--lilac)); }
+.eyebrow { font-size: 13px; letter-spacing: .04em; color: var(--muted); font-weight: 500; }
+h1 { margin: 0; font-family: var(--font-display); font-size: clamp(28px, 6vw, 38px); line-height: 1.15; text-wrap: balance; }
+header p { margin: 0; color: var(--ink); max-width: 56ch; }
+.demo { align-self: flex-start; margin-top: 6px; background: none; border: 1px dashed var(--accent); color: var(--accent); border-radius: 999px; padding: 6px 14px; font: inherit; font-size: 14px; cursor: pointer; }
+.demo:hover { background: var(--paper); }
+form { display: flex; flex-direction: column; gap: 18px; }
+fieldset { margin: 0; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); padding: 22px 20px 24px; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+legend { padding: 0 8px; font-family: var(--font-display); font-size: 21px; font-weight: 700; }
+.hint { margin: -8px 0 0; color: var(--muted); font-size: 14px; }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+label, .qlabel { font-weight: 500; }
+.opt { font-weight: 400; color: var(--muted); font-size: 14px; }
+.req { color: var(--danger); }
+input[type=text], textarea { width: 100%; font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+textarea { min-height: 88px; resize: vertical; overflow: hidden; }
+input:focus-visible, textarea:focus-visible, button:focus-visible, .choice input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+.ltr { direction: ltr; text-align: left; }
+.date { display: flex; gap: 8px; direction: ltr; }
+.date input { min-width: 0; width: 4.5em; text-align: center; font-variant-numeric: tabular-nums; }
+.date input.y { width: 6em; }
+.date .sep { align-self: center; color: var(--muted); font-size: 18px; }
+.gated { display: none !important; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } }
+.parent { border-top: 1px dashed var(--line); padding-top: 16px; display: flex; flex-direction: column; gap: 12px; }
+.parent h3 { margin: 0; font-size: 15px; color: var(--muted); font-weight: 500; }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.choice { position: relative; }
+.choice input { position: absolute; opacity: 0; }
+.choice span { display: inline-block; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; cursor: pointer; background: var(--bg); }
+.choice input:checked + span { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.teen { background: var(--sun); border-color: transparent; }
+.teen legend { background: var(--sun); border-radius: 8px; }
+.consent { display: flex; gap: 10px; align-items: flex-start; }
+.consent input { margin-top: 5px; width: 18px; height: 18px; accent-color: var(--accent); }
+.error { color: var(--danger); font-size: 14px; }
+.submit { align-self: flex-start; background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 12px; padding: 12px 26px; font: inherit; font-weight: 700; font-size: 17px; cursor: pointer; }
+[hidden] { display: none !important; }
+.done { border: 1px solid var(--line); border-radius: 16px; background: var(--paper); padding: 24px 20px; display: flex; flex-direction: column; gap: 14px; }
+.done h2 { margin: 0; font-family: var(--font-display); font-size: 26px; }
+.done pre { white-space: pre-wrap; font: inherit; font-size: 15px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin: 0; max-height: 360px; overflow: auto; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.ghost { background: none; border: 1px solid var(--line); color: var(--ink); border-radius: 12px; padding: 10px 18px; font: inherit; cursor: pointer; }
+.copied { color: var(--accent); font-size: 14px; align-self: center; }
+footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: auto; padding-top: 24px; }
+@media (prefers-reduced-motion: no-preference) { .done { animation: rise .3s ease-out; } @keyframes rise { from { transform: translateY(6px); opacity: .6; } to { transform: none; opacity: 1; } } }
 </style>
 </head>
 <body>
-<div class="stage">
-  <div class="stars"></div>
-  <div class="container">
+<div class="wrap" dir="rtl" lang="he">
+  <header>
+    <span class="eyebrow">מפת הנשמה הנומרולוגית · מפת הילד</span>
+    <h1>בקשת מפה לילד / ילדה</h1>
+    <p><strong>שלום,</strong><br>
+    השאלון שלפניך נועד לעזור לי להכיר את הילד או הילדה שלך, דרך העיניים שלך.
+    המפה מגלה את המתנות הטבעיות שהנשמה הביאה איתה לעולם, ואת הצרכים והאנרגיות שמניעים אותה.
+    התשובות שלך יעזרו לי לכוון את המפה למה שחשוב לכם.</p>
+    <p>אין כאן תשובות נכונות או לא נכונות. אפשר לכתוב במילים שלך, הכי מהלב.</p>
+    <p class="opt" style="margin:0">המילוי לוקח כ־<span dir="ltr">10–15</span> דקות. כל שאלה אופציונלית, חוץ מהפרטים שנדרשים לחישוב.</p>
+    
+  </header>
 
-    <header class="hero">
-      <div class="eyebrow">מ ד ר י ך &nbsp; ל מ ש ת מ ש</div>
-      <h1 class="title"><span class="spark r">✦</span> מפת הנשמה הנומרולוגית <span class="spark l">✦</span></h1>
-      <p class="subtitle">נומרולוגיה קבלית-פיתגוראית &nbsp;·&nbsp; פענוח מפה תודעתית</p>
-      <div class="hr-glow"></div>
-    </header>
-
-    <!-- welcome / how to use -->
-    <section style="margin-top:24px;">
-      <div class="sec-head"><h2>איך קוראים את מפת הנשמה?</h2></div>
-      <div class="panel">
-        <p>שלום :)&nbsp; ברוכים הבאים למשחק החיים של כדור הארץ!</p>
-        <p>בתפיסה הקבלית-נומרולוגית, לפני שנשמה נכנסת לגוף, היא חותמת על הסכם מול מועצת הזקנים, ובו היא מתחייבת לעמוד בשיעורים שבחרה לעצמה לצורך התפתחותה בגלגול הקרוב. השיעורים הללו נבחרו בקפידה, לאחר התייעצות עם מועצת הזקנים - שקובעת יחד עם הנשמה אילו שיעורים נכונים לה ביותר לעבור, לטובת התקדמותה בדרגות הנשמה.</p>
-        <p>אחרי שחתמת על המסמך הזה, והכנת את תוכנית הלימודים האישית שלך יחד עם מועצת הזקנים - הצפנת את כל המידע הזה לקוד מספרים. הקוד הזה הוא תאריך לידה אישי.</p>
-        <p>הקוד, תאריך הלידה — מכיל בתוכו את נקודות החוזק שלך, ואת "תיקי הלימוד" — השיעורים שעליך לפתור.</p>
-        <p>זוהי בעצם מפת דרכים מדויקת שתוכננה בחוכמה, כדי שתוכל/י להגיע ליעד שתכננת לעצמך מראש. בתוך הקוד הזה מופיע כל המידע הדרוש כדי לעמוד בחוזה בהצלחה. זהו ארגז כלים ייחודי שבו טמונים המפתחות שיפתחו כל דלת חסומה, והפתרונות לכל אתגר, כאב ומשבר שיגיע.</p>
-        <div class="note">בשפת הנשמות אין באמת כאבים ואין עונשים. כאב ועונש הם תפיסות מעוותות של האגו, שנועדו להבין סיטואציות שקורות לך בחיים הארציים.</div>
-        <p style="margin-top:14px;">יש מטרה אחת — לעבור בהצלחה את תוכנית הלימודים, להגיע ליעד תוך הגשמת המשימות שכתובות בחוזה הנשמה. כאשר יש יישור מלא עם האנרגיה של הקוד, יש זרימת חיים: אנרגיית הצ'י עוברת בזרימה מלאה, ויש שפע בכל תחומי החיים.</p>
+  <form id="mapForm" novalidate>
+    <fieldset>
+      <legend>הפרטים שלך</legend>
+      <div class="field">
+        <label for="fillerName">איך לקרוא לך? <span class="req">*</span></label>
+        <input type="text" id="fillerName" autocomplete="given-name">
       </div>
-    </section>
-
-    <!-- map numbers -->
-    <section>
-      <div class="sec-head"><h2>מפת המספרים — הציוד שלך</h2></div>
-      <div class="panel">
-        <h3><span class="dot">✦</span> מספרי השם (פרטי / משפחה / מלא)</h3>
-        <p>השם שקיבלת בלידה אינו מקרי. בנומרולוגיה הקבלית, לכל אות ערך מספרי, וסכום האותיות של שמך מגלה את מהות הנשמה — את האנרגיה הפנימית שאתה/את מביא/ה לעולם. מספר שם הפרטי מגלה את האנרגיה האישית שלך; מספר שם המשפחה מגלה את מורשת השושלת שדרכה נחתת; ומספר השם המלא הוא התדר המשולב — מה שאנשים חשים בנוכחותך.</p>
-        <div class="note"><span style="color:var(--ac)">★</span> כאשר מופיעה תווית <strong>מאסטר</strong> ליד מספר השם, מדובר במספר 11, 22 או 33 — תדרים גבוהים במיוחד שאינם מצומצמים לספרה בודדת, ונושאים ייעוד ואחריות רחבים יותר.</div>
-
-        <div class="sep"></div>
-        <h3><span class="dot">✦</span> יום לידה</h3>
-        <p>מספר יום הלידה מגלה את הציוד הבסיסי שהבאת לגלגול — הכישרונות הטבעיים, הנטיות העמוקות, ואופן הביצוע שלך בעולם. אם נולדת ב-13, 14, 16 או 19 — יש לך גם מבחן קארמתי (ראה/י סעיף נפרד).</p>
-
-        <div class="sep"></div>
-        <h3><span class="dot">✦</span> חודש לידה</h3>
-        <p>חודש הלידה מגלה את האנרגיה הסביבתית שבתוכה נחתת — הצבע הרגשי של המשפחה, הדינמיקה המשפחתית הראשונית, ותדר ה"קרקע" שממנו צמחת. הוא משפיע על האופן שבו אתה/את מתייחס/ת לקשרים, לגוף ולמושג "בית".</p>
-
-        <div class="sep"></div>
-        <h3><span class="dot">✦</span> שנת לידה — התיקון והכלי המבצעי</h3>
-        <p>שנת הלידה מורכבת משני רבדים משלימים:</p>
-        <ul class="wounds">
-          <li><span class="star">✦</span><span><strong>הסכום המצומצם (התיקון)</strong> — התדר המחושב לספרה בודדת מייצג את המשימה הקארמתית המרכזית. זהו לא עונש, אלא ה"שיעור" שנשמתך בחרה לעבוד עליו בגלגול הזה. כאן יתרחש השינוי המשמעותי ביותר שלך.</span></li>
-          <li><span class="star">✦</span><span><strong>הספרה האחרונה (הכלי המבצעי)</strong> — הספרה שחותמת את שנת הלידה היא "כלי העבודה" המיידי שלך. היא מצביעה על האנרגיה הזמינה לך ביומיום, והאופן הטקטי שבו את/ה ניגש/ת לממש את התיקון שלך.</span></li>
-        </ul>
-        <div class="note"><strong>הסוד לאיזון:</strong> התיקון (המהות) והכלי (הטקטיקה) עובדים יחד. לעיתים, הכלי הוא כה חזק, שאנו נוטים להישחק בו. המפתח הוא להשתמש בכלי כדי לשרת את התיקון, ולא לתת לו לשאוב אותנו.</div>
-
-        <div class="sep"></div>
-        <h3><span class="dot">✦</span> שביל חיים</h3>
-        <p>שביל החיים הוא המספר המרכזי במפה. הוא מחושב מסכום כל ספרות תאריך הלידה המלא, ומייצג את המסע הגדול של הנשמה בגלגול הזה — מה באת/ה ללמוד, לפתח ולתרום. שביל החיים הוא הכביש שאתה/את נוסע/ת עליו: לפעמים נסיעה על הכביש הזה תרגיש טבעית וזורמת, לפעמים יהיו עליו מכשולים — וכל המכשולים הם חלק מהלמידה.</p>
-
-        <div class="sep"></div>
-        <h3><span class="dot">✦</span> שנה אישית</h3>
-        <p>השנה האישית מחושבת מצירוף יום וחודש הלידה עם השנה הקלנדרית הנוכחית, ומגלה את תדר השנה הנוכחית בחייך. היקום פועל במחזורים של 9 שנים; בכל שנה יש תדר שונה — שנת התחלות, שנת שותפות, שנת בנייה, שנת שינוי, ועוד. הכרת תדר השנה האישית שלך מאפשרת לך לפעול בסנכרון עם הזרם, ולא נגדו.</p>
-        <div class="note"><strong>לתשומת לבך:</strong> השנה האישית מחושבת בטווח שבין יום הולדתך בשנה הנוכחית לבין יום הולדתך בשנה הבאה — לא בהכרח מינואר עד דצמבר.</div>
-      </div>
-    </section>
-
-    <!-- mid-page jump -->
-    <div class="mid-jump">
-      <button class="read-on" onclick="document.getElementById('missing-sec').scrollIntoView({behavior:'smooth'})">המשך לקרוא <span class="dn">↓</span></button>
-      <a href="numerology.html" class="cta-btn"><span>✦ קדימה לפענוח המפה ←</span></a>
-    </div>
-
-    <!-- 03 -->
-    <section id="missing-sec">
-      <div class="sec-head"><h2>מספרים חסרים — שיעורי הנשמה</h2></div>
-      <div class="panel">
-        <p>המספר החסר הוא ספרה (1–9) שאינה מופיעה כלל בשם המלא או בתאריך הלידה שלך. היעדר מספר אינו חיסרון — אם תאריך הלידה הוא הקוד שהנשמה בחרה לעצמה, הרי שהמספר החסר הוא המפתח הנסתר שהיא השאירה לך בדרך, ועליך לגלות מהו השיעור הטמון בו.</p>
-        <p>מכיוון שמדובר בנקודה עיוורת, לרוב יהיה לך קשה מאוד לזהות את החסר הזה בעצמך. זו בדיוק הסיבה שהשיעור הזה יחזור וילווה אותך לאורך החיים שוב ושוב, בסיטואציות שונות ומול אנשים שונים — עד שתעצר/י, תתבונן/י ותבין/י מהו האתגר האמיתי שקיים שם. ברגע שאתה/את מבין/ה ומפרק/ת את הקושי הספציפי הזה, חוקי המשחק משתנים, ודברים עצומים בחייך מתחילים להשתנות.</p>
-        <p>כשהמספר החסר הוא גם שביל החיים, אין כאן שני נושאים נפרדים: שביל החיים הוא ההזדמנות, והמספר החסר הוא השיעור שבתוכה. החיים מזמנים שוב ושוב מצבים שמפתחים צד אחד של המספר, והשיעור נמצא בצד השני שלו.</p>
-      </div>
-    </section>
-
-    <!-- 04 -->
-    <section>
-      <div class="sec-head"><h2>מבחן קארמתי</h2></div>
-      <div class="panel">
-        <p>מופיע כאשר יום הלידה הוא 13, 14, 16 או 19. לפי פלורנס קמפבל, אלה ארבעת "מספרי המבחן" (Testing Numbers): כל אחד נושא מסר של קארמה שהנשמה מגיעה להשלים, וקמפבל מדגישה שאין כאן עונש. בנומרולוגיה המודרנית נקרא המבחן הזה גם "חוב קארמתי".</p>
-        <p>מספרים אלו מצביעים על נושאים שנשמתך טרם סיימה לעבד בגלגולים קודמים, והיא שבה אליהם בגלגול הנוכחי כדי להשלים את הלמידה. המבחן אינו גזר דין — הוא הזמנה לעבודה ממוקדת. הוא נחווה לרוב כסיטואציה שחוזרת על עצמה במציאות, סוג של "חומה" שבה נתקלים שוב ושוב, עד שלומדים לזהות את השיעור ולעבור דרכה.</p>
-      </div>
-    </section>
-
-    <!-- 05 -->
-    <section>
-      <div class="sec-head"><h2>מספרי מאסטר</h2></div>
-      <div class="panel">
-        <p style="margin-bottom:22px;">מספרי מאסטר — 11, 22, 33 — הם תדרים גבוהים מהרגיל, שאינם מצומצמים לספרה בודדת. כל אחד מהם נושא ייעוד רחב ואחריות גבוהה:</p>
-        <div class="master-row"><span class="master-num">11</span><p><strong>שליח האור.</strong> גשר בין עולמות, אינטואיציה חדה, יכולת לראות מה שאחרים לא רואים.</p></div>
-        <div class="master-row"><span class="master-num">22</span><p><strong>הבנאי הגדול.</strong> היכולת להפוך חזון גדול להתממשות מעשית (בארץ ובעולם).</p></div>
-        <div class="master-row"><span class="master-num">33</span><p><strong>המורה האוניברסלי.</strong> תדר של חמלה, ריפוי ואהבה ללא תנאי.</p></div>
-        <div class="note" style="margin-top:22px;"><strong>אתגר מספרי המאסטר:</strong> הם דורשים מהנושא אותם להחזיק מתח גבוה בין עולם הרוח לעולם הגוף. רבים שנושאים מאסטר חווים בחלק מחייהם קושי, חרדה, או תחושת "יותר מדי" — עד שלומדים לתעל את האנרגיה הגבוהה הזו לייעוד.</div>
-      </div>
-    </section>
-
-    <!-- 06 -->
-    <section>
-      <div class="sec-head"><h2>תדר אור וצל</h2></div>
-      <div class="panel">
-        <p style="margin-bottom:22px;">זהו אחד הפלטים המרכזיים במפה. עבור כל מספר דומיננטי במפה שלך — מספרים שחוזרים יותר מפעם אחת, או שמופיעים בנקודות מרכזיות — מוצגים שני צדדים:</p>
-        <div class="two-col">
-          <div class="light-card"><div class="card-h">☀ תדר אור</div><p>הביטוי הגבוה של המספר. מה קורה כשאתה/את חי/ה מתוך ריבונות, מודעות ובחירה.</p></div>
-          <div class="shadow-card"><div class="card-h">☾ תדר צל</div><p>הביטוי האוטומטי של האגו. מה קורה כשאתה/את פועל/ת על "פיילוט אוטומטי" מתוך פחד, הגנה, או הרגל לא מודע.</p></div>
+      <div class="field">
+        <span class="qlabel">איך לפנות אליך?</span>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="gender" id="gM" value="זכר"><span>בלשון זכר</span></label>
+          <label class="choice"><input type="radio" name="gender" id="gF" value="נקבה"><span>בלשון נקבה</span></label>
         </div>
-        <p style="margin:22px 0 0;">המפה כוללת גם ביטוי גופני של כל תדר צל — כי הגוף הוא המראה או המגבר שמראה לך מה הנשמה חווה ברמה האנרגטית. כאשר אתה/את רואה/ה ביטוי גופני, אין לקרוא אותו כאבחנה רפואית — אלא כהזמנה לשאול: "באיזה תדר אני פועל/ת כרגע?"</p>
-        <div class="note" style="margin-top:20px;"><span style="color:var(--ac)">✦</span> הביטוי הגופני המצוין כאן אינו אבחנה רפואית ואינו מחליף ייעוץ או טיפול רפואי. מדובר במסגרת פרשנית-אנרגטית בלבד. בכל תסמין גופני יש לפנות לאיש מקצוע רפואי, לפי שיקולך האישי.</div>
       </div>
-    </section>
-
-    <!-- 07 -->
-    <section>
-      <div class="sec-head"><h2>פצעי הנשמה</h2></div>
-      <div class="panel">
-        <p style="margin-bottom:8px;">פצעי הנשמה הם תבניות רגשיות עמוקות שנוצרות בילדות המוקדמת — ולפי הנומרולוגיה הקבלית גם מגלגולים קודמים — ומעצבות את האופן שבו אתה/את מתייחס/ת לעצמך ולאחרים. הפצעים המזוהים במפה נגזרים מהמספרים שלך על פי שיטת ליז בורבו.</p>
-        <p style="margin-bottom:8px;">הפצע הוא הכאב עצמו, והמסיכה היא ההגנה שהאגו בונה סביבו כדי לא להרגיש אותו.</p>
-        <h3 style="margin:22px 0 14px;font-size:18px;"><span class="dot" style="font-size:14px;">✦</span> חמשת הפצעים האפשריים</h3>
-        <ul class="wounds">
-          <li><span class="star">✦</span><span><strong>פצע הדחייה</strong> — תחושת "לא ראוי/ה", נסיגה מנוכחות.</span></li>
-          <li><span class="star">✦</span><span><strong>פצע הנטישה</strong> — פחד עמוק מבדידות ועזיבה.</span></li>
-          <li><span class="star">✦</span><span><strong>פצע ההשפלה</strong> — בושה, הצנעת הצרכים, ריצוי.</span></li>
-          <li><span class="star">✦</span><span><strong>פצע הבגידה</strong> — קושי לסמוך, שליטה כהגנה.</span></li>
-          <li><span class="star">✦</span><span><strong>פצע אי-הצדק</strong> — קשיחות עצמית, פרפקציוניזם, ביקורת.</span></li>
-        </ul>
-        <p style="margin:22px 0 0;font-size:16px;color:#b9b2cf;">כל פצע כולל גם כיוון ריפוי — לא כמשימה לביצוע מיידי, אלא כמצפן לעבודה פנימית.</p>
+      <div class="field">
+        <span class="qlabel">המפה היא עבור <span class="req">*</span></span>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="childG" id="cgM" value="בן"><span>בן</span></label>
+          <label class="choice"><input type="radio" name="childG" id="cgF" value="בת"><span>בת</span></label>
+        </div>
       </div>
-    </section>
+    </fieldset>
 
-    <!-- 08 -->
-    <section>
-      <div class="sec-head"><h2>חליפת האגו</h2></div>
-      <div class="panel">
-        <p style="margin-bottom:8px;">"חליפת האגו" הוא המונח המשמש במחשבון כדי לתאר את הארכיטיפ הדומיננטי שהאגו שלך בנה כדי לשרוד בעולם הזה. חשוב/י על זה כמו תחפושת שהנשמה לובשת ברגע הכניסה לגוף — תחפושת שנבנתה מתוך הפצעים הרגשיים המוקדמים ביותר (פצעי ליז בורבו) ומתוך דפוסי הישרדות אוניברסליים (ארכיטיפי קרוליין מיס).</p>
-        <p style="margin-bottom:8px;">החליפה הזו איננה "מי שאת/ה באמת" — היא המנגנון שנוצר כדי להגן על הנשמה מכאב חוזר. לכל חליפת אגו יש שלושה רבדים שהמחשבון חושף:</p>
-        <ul class="wounds">
-          <li><span class="star">✦</span><span><strong>דפוס ההתנהגות החוזר</strong> — הדפוס שחוזר על עצמו שוב ושוב, גם כשהוא לא משרת אותך יותר.</span></li>
-          <li><span class="star">✦</span><span><strong>מנגנון ההגנה</strong> — מה בדיוק האגו עושה ברגע שהוא חש מאוים או פגיע.</span></li>
-          <li><span class="star">✦</span><span><strong>שאלת/כלי השחרור</strong> — הפעולה הקטנה שמאפשרת לצאת בהדרגה מהדפוס.</span></li>
-        </ul>
-        <div class="note" style="margin-top:22px;"><strong>נקודה חשובה:</strong> האגו אינו האויב. הוא נבנה מתוך אהבה עצמית ניסיונית — ניסיון (לא תמיד מוצלח) להגן על הנשמה מכאב. המטרה איננה "להילחם" בחליפת האגו, אלא להבין שהיא קיימת, לזהות מתי היא מנהלת אותך, ולזכור שהיא איננה האמת ואיננה הנשמה - אלא בסך הכול תחפושת שהנשמה בחרה ללבוש כדי שהיא תוכל להתקיים כאן, על פני כדור הארץ.</div>
+    <fieldset>
+      <legend>פרטים למפה</legend>
+      <div class="row2">
+        <div class="field">
+          <label for="childHe">שם מלא של הילד/ה בעברית <span class="req">*</span></label>
+          <input type="text" id="childHe" name="childHe" autocomplete="off">
+          <span class="opt">כפי שניתן ביום הלידה</span>
+        </div>
+        <div class="field">
+          <label for="childEn">שם מלא של הילד/ה באנגלית <span class="req">*</span></label>
+          <input type="text" id="childEn" name="childEn" class="ltr" autocomplete="off">
+          <span class="opt">כפי שרשום בדרכון, כולל שם קודם בסוגריים אם מופיע</span>
+        </div>
       </div>
-    </section>
-
-    <!-- 09 -->
-    <section>
-      <div class="sec-head"><h2>ניתוח אישי — סוכן AI</h2></div>
-      <div class="panel">
-        <p>בסיום המפה מופיע ניתוח מורחב שנכתב על ידי בינה מלאכותית, המשלב את כל המספרים יחד לכדי פענוח אינטגרטיבי אישי. הניתוח עובר על מהות הנשמה, תדרי האור, שיעורי הנשמה, השנה האישית — ומסיים בברכה ומסר.</p>
-        <p>הניתוח נכתב בגוף ראשון כלפי המשתמש/ת ומיועד להיקרא בשקט, לאט, כמכתב מהנשמה. אין בו אבחנה, ואין בו פסיקה — יש בו הזמנה להתבוננות פנימית.</p>
+      <div class="field">
+        <span class="qlabel" id="dobLabel">תאריך לידה של הילד/ה <span class="req">*</span></span>
+        <div class="date" role="group" aria-labelledby="dobLabel">
+          <input type="text" id="dobD" inputmode="numeric" maxlength="2" placeholder="יום" aria-label="יום"><span class="sep">/</span><input type="text" id="dobM" inputmode="numeric" maxlength="2" placeholder="חודש" aria-label="חודש"><span class="sep">/</span><input type="text" id="dobY" class="y" inputmode="numeric" maxlength="4" placeholder="שנה" aria-label="שנה">
+        </div>
       </div>
-    </section>
-
-    <!-- 10 -->
-    <section>
-      <div class="sec-head"><h2>הערות חשובות</h2></div>
-      <div class="notes-grid">
-        <div class="mini-card"><h3>על שמות</h3><p>המחשבון משתמש בשם לפי תעודת הזהות — שם הנעורים, לפני שינויים. שינוי שם (לאחר נישואין, בחירה אישית) יוצר שכבה נוספת של תדר הנלמדת על המשתמש/ת, אך אינו מבטל את תדר שם הלידה המקורי.</p></div>
-        <div class="mini-card"><h3>על מספרי מאסטר</h3><p>מספרי מאסטר (11, 22, 33) אינם מצומצמים לספרה בודדת. אם הסכום שלך הוא 11 — הוא נשאר 11, לא 2. זהו כלל יסוד המקובל בכמה שיטות נומרולוגיה, כולל בנומרולוגיה הקבלית.</p></div>
-        <div class="mini-card"><h3>על מבחן קארמתי</h3><p>מבחן קארמתי מופיע רק אם יום הלידה הוא בדיוק 13, 14, 16 או 19 — לא חודש, לא שנה, לא שביל חיים.</p></div>
-        <div class="mini-card"><h3>על הגוף</h3><p>הביטויים הגופניים המצוינים תחת תדר הצל אינם תחליף לייעוץ רפואי. הם מסגרת אנרגטית להבנה עצמית בלבד.</p></div>
+      <div class="field">
+        <span class="qlabel">האם הלידה הייתה אחרי השקיעה?</span>
+        <span class="opt">(היום העברי מתחיל בשקיעה)</span>
+        <div class="choices" role="radiogroup">
+          <label class="choice"><input type="radio" name="sunset" id="sunsetNo" value="לא"><span>לא</span></label>
+          <label class="choice"><input type="radio" name="sunset" id="sunsetYes" value="כן"><span>כן</span></label>
+          <label class="choice"><input type="radio" name="sunset" id="sunsetUnk" value="לא ידוע"><span>לא ידוע</span></label>
+        </div>
       </div>
-    </section>
-
-    <!-- 11 -->
-    <section>
-      <div class="sec-head"><h2>מי היא ליז בורבו?</h2></div>
-      <div class="panel">
-        <p>ליז בורבו היא מחברת קנדית ומורה רוחנית, ממשיכת דרכו של הפסיכיאטר האמריקאי ג'ון פיירקוס (John Pierrakos), שחקר לראשונה את הקשר בין פצעים רגשיים לביטוי הגופני שלהם. לאחר אינספור תצפיות וניסיון מעשי, גיבשה מסגרת משלה שלפיה מחלות וכאבים גופניים משקפים פצע רגשי לא פתור. זיהתה חמישה פצעי נשמה מרכזיים: דחייה, נטישה, השפלה, בגידה ואי-צדק — ולכל אחד מסיכת הגנה אישית. מייסדת בית הספר "מקשיבים לגוף שלך". משולבת במחשבון זה בעיקר כזיהוי <strong>פצעי הנשמה</strong> ובחלק של זיהוי <strong>חליפת האגו</strong>.</p>
+      <div class="parent">
+        <h3>הורה א <span style="font-weight:400">(<span class="g" data-m="הממלא את השאלון" data-f="הממלאת את השאלון">הממלא/ת את השאלון</span>)</span></h3>
+        <div class="row2">
+          <div class="field"><label for="p1Name">שם מלא בעברית <span class="req">*</span></label><input type="text" id="p1Name"><span class="opt">כפי שניתן ביום הלידה</span></div>
+          <div class="field"><label for="p1En">שם מלא באנגלית <span class="req">*</span></label><input type="text" id="p1En" class="ltr" autocomplete="off"><span class="opt">כפי שרשום בדרכון, כולל שם קודם בסוגריים אם מופיע</span></div>
+        </div>
+        <div class="field"><span class="qlabel" id="p1DobLabel">תאריך לידה <span class="req">*</span></span><div class="date" role="group" aria-labelledby="p1DobLabel"><input type="text" id="p1D" inputmode="numeric" maxlength="2" placeholder="יום" aria-label="יום"><span class="sep">/</span><input type="text" id="p1M" inputmode="numeric" maxlength="2" placeholder="חודש" aria-label="חודש"><span class="sep">/</span><input type="text" id="p1Y" class="y" inputmode="numeric" maxlength="4" placeholder="שנה" aria-label="שנה"></div></div>
       </div>
-    </section>
-
-    <!-- 12 -->
-    <section>
-      <div class="sec-head"><h2>מי היא קרוליין מיס?</h2></div>
-      <div class="panel">
-        <p>ד"ר קרוליין מיס היא מחברת אמריקאית ומרצה, בעלת תואר שני בתיאולוגיה ודוקטורט בפילוסופיה. מוכרת בעולם כחלוצה בתחום "הרפואה האנרגטית". מחברת הספרים "חוזים מקודשים" ו"אנטומיה של הנפש". פיתחה את ארבעת ארכיטיפי ההישרדות (הילד, הקורבן, המחבל, מכירת העצמי) ומיפתה עשרות ארכיטיפים נוספים - תפקידים תודעתיים שכל אדם נוטה ללבוש שוב ושוב - כולל חלוקה לתדרי אור וצל בכל ארכיטיפ, בהמשך ישיר לתיאוריית הארכיטיפים ועבודת ה"צל" של הפסיכיאטר השוויצרי קרל יונג. משולבת במחשבון זה בחלק של זיהוי <strong>חליפת האגו</strong>.</p>
+      <div class="parent">
+        <h3>הורה ב</h3>
+        <div class="row2">
+          <div class="field"><label for="p2Name">שם מלא בעברית</label><input type="text" id="p2Name"><span class="opt">כפי שניתן ביום הלידה</span></div>
+          <div class="field"><label for="p2En">שם מלא באנגלית</label><input type="text" id="p2En" class="ltr" autocomplete="off"><span class="opt">כפי שרשום בדרכון, כולל שם קודם בסוגריים אם מופיע</span></div>
+        </div>
+        <div class="field"><span class="qlabel" id="p2DobLabel">תאריך לידה</span><div class="date" role="group" aria-labelledby="p2DobLabel"><input type="text" id="p2D" inputmode="numeric" maxlength="2" placeholder="יום" aria-label="יום"><span class="sep">/</span><input type="text" id="p2M" inputmode="numeric" maxlength="2" placeholder="חודש" aria-label="חודש"><span class="sep">/</span><input type="text" id="p2Y" class="y" inputmode="numeric" maxlength="4" placeholder="שנה" aria-label="שנה"></div></div>
+        <p class="opt" style="margin:0">לא חובה אך מומלץ עבור שכבת מערכת היחסים בין הילד/ה להורים</p>
       </div>
-    </section>
+    </fieldset>
 
-    <!-- Campbell -->
-    <section>
-      <div class="sec-head"><h2>מי היא פלורנס קמפבל?</h2></div>
-      <div class="panel">
-        <p>פלורנס קמפבל היא מחלוצות הנומרולוגיה הפיתגורית. ספרה "Your Days Are Numbered: A Manual of Numerology for Everybody" יצא לאור לראשונה ב-1931. היא מכנה את המספרים 13, 14, 16 ו-19 "מספרי מבחן", ואת המספרים החסרים בשם "שיעורי קארמה" (Karmic Lessons). משולבת במחשבון זה בחלק של <strong>המבחן הקארמתי</strong> ושל <strong>המספרים החסרים</strong>.</p>
-      </div>
-    </section>
+    <fieldset>
+      <legend>לאן לכוון את המפה</legend>
+      <div class="field"><label for="q4">מה גרם לך לרצות מפה דווקא עכשיו?</label><textarea id="q4"></textarea></div>
+      <div class="field"><label for="qChange">האם היו לאחרונה שינויים משמעותיים בחייו/ה? <span class="opt">(מעבר מסגרת, אח/ות חדש/ה, פרידה, אובדן, מעבר דירה)</span></label><textarea id="qChange"></textarea></div>
+      <div class="field"><label for="q5">איזה מידע <strong>הכי</strong> חשוב לך לקבל מהמפה?</label><span class="hint">אם יש כמה דברים, <span class="g" data-m="כתוב" data-f="כתבי">כתוב/כתבי</span> את כולם.</span><textarea id="q5"></textarea></div>
+      <div class="field"><label for="qFear">ממה <span class="g" data-m="אתה הכי חושש" data-f="את הכי חוששת">את/ה הכי חושש/ת</span> לגבי העתיד שלו/שלה?</label><textarea id="qFear"></textarea></div>
+      <div class="field"><label for="q6">אילו תכונות <span class="g" data-m="אתה הכי אוהב" data-f="את הכי אוהבת">את/ה הכי אוהב/ת</span> בו/בה, והיית רוצה לשמר אותן?<span class="opt" style="display:block">(לדוגמא: רגישות, הומור, נדיבות, נחישות, סקרנות, או כל תיאור שעולה לך. הכתיבה חופשית.)</span></label><textarea id="q6"></textarea></div>
+      <div class="field"><label for="qJoy">מה משמח אותו/אותה באמת? במה הוא/היא מסוגל/ת להתמקד שעות?</label><textarea id="qJoy"></textarea></div>
+      <div class="field"><label for="q7">איפה הכי מאתגר לו/לה, או ביניכם? יש משהו שהיית רוצה להבין לעומק או לחדד לגביו/ה?</label><textarea id="q7"></textarea></div>
+      <div class="field"><label for="qNeed">מה לדעתך הדבר שהוא/היא הכי זקוק/ה לו ממך כהורה?</label><textarea id="qNeed"></textarea></div>
+      <div class="field"><label for="qTried">מה כבר ניסית עד היום, ומה עבד או לא עבד?</label><textarea id="qTried"></textarea></div>
+      <div class="field"><label for="qWish">מה היית רוצה שישתנה ביניכם בעקבות המפה?</label><textarea id="qWish"></textarea></div>
+      <div class="field"><label for="q9">האם יש נושא רגיש שחשוב לך שהמפה <strong>לא</strong> תתייחס אליו?</label><textarea id="q9"></textarea></div>
+    </fieldset>
 
-    <!-- 13 -->
-    <section>
-      <div class="sec-head"><h2>ריפוי לצל — מה זה אומר בפועל?</h2></div>
-      <div class="panel">
-        <p>"ריפוי הצל" אינו אומר להיפטר מהצל, לדכא אותו, או "לתקן" את עצמך. ריפוי אמיתי מתחיל דווקא ב<strong>הכרה</strong> — לראות בבירור, ובלי שיפוטיות, מתי התדר הזה פועל אצלך כצל: מתי אתה/את מגיב/ה אוטומטית, מתי הפחד הישן מנהיג, מתי אתה/את חוזר/ת לדפוס המוכר.</p>
-        <p>מרגע ההכרה, הריפוי הוא תהליך הדרגתי של:</p>
-        <ul class="wounds">
-          <li><span class="star">✦</span><span><strong>עצירה</strong> — הרגע שבו את/ה קולט/ת "אני כרגע פועל/ת מהצל", לפני שממשיכים אוטומטית.</span></li>
-          <li><span class="star">✦</span><span><strong>חמלה עצמית</strong> — הבנה שהצל נוצר כדי להגן, לא כדי לפגוע. אין כאן מקום לבושה.</span></li>
-          <li><span class="star">✦</span><span><strong>בחירה מחדש</strong> — ברגע הקטן, לשאול: "איך הייתי בוחר/ת לפעול פה מתוך תדר האור?" ולתרגל את הבחירה הזו, גם אם היא קטנה.</span></li>
-        </ul>
-        <p style="margin:22px 0 0;">הריפוי אינו אירוע חד-פעמי אלא תרגול מתמשך — כל פעם שאת/ה מזהה את הצל ובוחר/ת מחדש, מתחזק מעט יותר תדר האור, עד שהוא הופך לברירת המחדל הטבעית.</p>
-        <div class="note"><strong>חשוב לזכור:</strong> הצל אינו האויב, ואין מה "לנצח" אותו. הוא חלק מהמסע. הריפוי מתרחש בהדרגה, בכל פעם שאת/ה בוחר/ת להביא מודעות למקום שהיה אוטומטי.</div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <div class="cta-block">
-      <a href="numerology.html" class="cta-btn"><span>✦ לפענוח המפה האישית שלך</span><span class="arrow">←</span></a>
-      <div class="cta-sub">המחשבון האישי מחכה לך</div>
+    <div id="ageSet" hidden>
+    <fieldset class="teen band" data-min="0" data-max="2" hidden>
+      <legend>"אני קיים/ת ואני אהוב/ה" <span style="white-space:nowrap">(גילאים <span dir="ltr">0–3</span>)</span></legend>
+      <div class="field"><label for="a03a">איך הוא/היא מגיב/ה לפרידה ממך?<span class="opt" style="display:block">(מעון, בייביסיטר, שינה)</span></label><textarea id="a03a"></textarea></div>
+      <div class="field"><label for="a03b">מה הוא/היא מתעקש/ת לעשות לבד?</label><textarea id="a03b"></textarea></div>
+      <div class="field"><label for="a03c">מה עוזר לו/לה להירגע כשהוא/היא נסער/ת?</label><textarea id="a03c"></textarea></div>
+    </fieldset>
+    <fieldset class="teen band" data-min="3" data-max="5" hidden>
+      <legend>"אני יכול/ה לגלות" <span style="white-space:nowrap">(גילאים <span dir="ltr">3–6</span>)</span></legend>
+      <div class="field"><label for="a36">איך הוא/היא מגיב/ה כשאומרים לו/לה "לא"?</label><textarea id="a36"></textarea></div>
+      <div class="field"><label for="a36b">איזה תפקיד הוא/היא לוקח/ת במשחק?<span class="opt" style="display:block">(מוביל/ה, ממציא/ה, מצטרף/ת, משחק/ת לבד)</span></label><textarea id="a36b"></textarea></div>
+      <div class="field"><label for="a36c">איך הוא/היא מגיב/ה למצבים חדשים?<span class="opt" style="display:block">(גן חדש, אנשים חדשים, מקום חדש)</span></label><textarea id="a36c"></textarea></div>
+    </fieldset>
+    <fieldset class="teen band" data-min="6" data-max="8" hidden>
+      <legend>"אני מסוגל/ת" <span style="white-space:nowrap">(גילאים <span dir="ltr">6–9</span>)</span></legend>
+      <div class="field"><label for="a69">איך הוא/היא מגיב/ה כשמשהו לא מצליח לו/לה?</label><textarea id="a69"></textarea></div>
+      <div class="field"><label for="a69b">מה גורם לו/לה להרגיש גאווה בעצמו/ה?</label><textarea id="a69b"></textarea></div>
+      <div class="field"><label for="a69c">איך הוא/היא ניגש/ת למשימה חדשה?<span class="opt" style="display:block">(קופץ/ת פנימה, מהסס/ת, מחכה להסבר)</span></label><textarea id="a69c"></textarea></div>
+    </fieldset>
+    <fieldset class="teen band" data-min="9" data-max="11" hidden>
+      <legend>"מי אני בתוך הקבוצה" <span style="white-space:nowrap">(גילאים <span dir="ltr">9–12</span>)</span></legend>
+      <div class="field"><label for="a912">מה המקום שלו/שלה בחברה?<span class="opt" style="display:block">(חבר/ה קרוב/ה, קבוצה קבועה, או נע/ה בין קבוצות)</span></label><textarea id="a912"></textarea></div>
+      <div class="field"><label for="a912b">האם הוא/היא משווה את עצמו/ה לאחרים? באילו מצבים?</label><textarea id="a912b"></textarea></div>
+      <div class="field"><label for="a912c">מה הכי חשוב לו/לה שיחשבו עליו/ה?</label><textarea id="a912c"></textarea></div>
+    </fieldset>
+    <fieldset class="teen band" data-min="12" data-max="14" hidden>
+      <legend>"מי אני בלי ההורים" <span style="white-space:nowrap">(גילאים <span dir="ltr">12–15</span>)</span></legend>
+      <div class="field"><label for="a1215">באילו מצבים הוא/היא מתחיל/ה להתרחק ממך, ובאילו עדיין מחפש/ת קרבה?<span class="opt" style="display:block">(לדוגמא: שיחות, זמן משפחתי, חיבוקים, עזרה בלימודים, שיתוף בחוויות יומיומיות)</span></label><textarea id="a1215"></textarea></div>
+      <div class="field"><label for="a1215b">על מה אתם מתווכחים הכי הרבה?</label><textarea id="a1215b"></textarea></div>
+      <div class="field"><label for="a1215c">אילו החלטות הוא/היא רוצה לקבל לבד?<span class="opt" style="display:block">(לדוגמא: לבוש, זמן מסך, חברים, יציאות)</span></label><textarea id="a1215c"></textarea></div>
+    </fieldset>
+    <fieldset class="teen band" data-min="15" data-max="17" hidden>
+      <legend>"מי אני ומה אני בוחר/ת" <span style="white-space:nowrap">(גילאים <span dir="ltr">15–18</span>)</span></legend>
+      <div class="field"><label for="a1518">במה הוא/היא מגלה עניין או כישרון?</label><textarea id="a1518"></textarea></div>
+      <div class="field"><label for="a1518b">יש כרגע התלבטות שהוא/היא, או <span class="g" data-m="אתה" data-f="את">את/ה</span>, עסוקים בה?</label><textarea id="a1518b"></textarea></div>
+      <div class="field"><label for="a1518c">אילו החלטות הוא/היא רוצה לקבל לבד, ובאילו עדיין מתייעץ/ת איתך?</label><textarea id="a1518c"></textarea></div>
+    </fieldset>
+    <fieldset class="teen band" data-min="18" data-max="21" hidden>
+      <legend>"איך עוזבים בלי לנתק קשר" <span style="white-space:nowrap">(גילאים <span dir="ltr">18–21</span>)</span></legend>
+      <div class="field"><label for="a1821">מהן התוכניות לשנה הקרובה?<span class="opt" style="display:block">(צבא או שירות, מכינה, שנת שירות, לימודים, עבודה)</span></label><textarea id="a1821"></textarea></div>
+      <div class="field"><label for="a1821b">באילו מצבים הוא/היא עדיין פונה אליך, ובאילו מעדיף/ה להתמודד לבד?</label><textarea id="a1821b"></textarea></div>
+      <div class="field"><label for="a1821c">איך נשמר הקשר ביניכם כשהוא/היא מחוץ לבית?</label><textarea id="a1821c"></textarea></div>
+    </fieldset>
+    <fieldset class="teen band" data-min="22" data-max="25" hidden>
+      <legend>"מציאת הדרך" <span style="white-space:nowrap">(גילאים <span dir="ltr">22–25</span>)</span></legend>
+      <div class="field"><label for="a2225">במה הוא/היא עסוק/ה בתקופה הזו?<span class="opt" style="display:block">(לדוגמא: לימודים, עבודה, טיול, חיפוש דרך, זוגיות)</span></label><textarea id="a2225"></textarea></div>
+      <div class="field"><label for="a2225b">איפה הוא/היא מתלבט/ת או מרגיש/ה תקוע/ה?</label><textarea id="a2225b"></textarea></div>
+      <div class="field"><label for="a2225c">מה נותן לו/לה תחושת משמעות או סיפוק בתקופה הזו?</label><textarea id="a2225c"></textarea></div>
+    </fieldset>
     </div>
 
-    <footer>
-      <div class="hr-glow sm"></div>
-      <div class="foot-spark">✦</div>
-      <p class="copyright">© 2026 הדר נדב | מפת הנשמה הנומרולוגית<br>כל הזכויות שמורות</p>
-    </footer>
 
-  </div>
+    <fieldset>
+      <legend>לסיום</legend>
+      <div class="field"><label for="qMore">יש עוד משהו שחשוב לך לשתף אותי בו?<span class="opt" style="display:block">(כל דבר שעולה לך, גם אם לא נשאל כאן)</span></label><textarea id="qMore"></textarea></div>
+      <div class="field">
+        <span class="qlabel">הילד/ה יודע/ת שנעשית מפה?</span>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="knows" id="knowsWants" value="יודע/ת, ורוצה לשמוע מה יצא במפה"><span>יודע/ת, ורוצה לשמוע מה יצא במפה</span></label>
+          <label class="choice"><input type="radio" name="knows" id="knowsYes" value="יודע/ת"><span>יודע/ת</span></label>
+          <label class="choice"><input type="radio" name="knows" id="knowsNo" value="עוד לא יודע/ת"><span>עוד לא יודע/ת</span></label>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="consent">
+      <input type="checkbox" id="consent">
+      <label for="consent">אני <span class="g" data-m="ממלא" data-f="ממלאת">ממלא/ת</span> את הפרטים בהסכמה ובאחריותי. הצהרת סודיות: המידע נשמר אצלי, משמש להכנת המפה בלבד ואינו מועבר לאחרים. <span class="req">*</span></label>
+    </div>
+    <p class="opt" style="margin:0">מומלץ לעבור על התשובות לפני השליחה.</p>
+    <p class="error" id="err" hidden></p>
+    <button type="button" class="submit" id="sendBtn">שליחה</button>
+  </form>
+
+  <section class="done" id="done" hidden aria-live="polite">
+    <h2 id="hello"></h2>
+    <p style="margin:0">תודה על הכנות והפתיחות :)<br>
+    אעבור על התשובות שלך בעיון, ואצור איתך קשר בהקדם האפשרי כדי לוודא שהבנתי נכון מה חשוב לך ולתאם ציפיות.<br>
+    לאחר מכן אתחיל לבנות את המפה.</p>
+    <p style="margin:0">נשתמע בקרוב,<br>יום מקסים. 😇</p>
+    <div><button type="button" class="ghost" id="backBtn">נזכרת במשהו? חזרה לטופס</button></div>
+  </section>
+
+  <footer>©2026 הדר נדב | כל הזכויות שמורות</footer>
 </div>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const form = $('mapForm');
+
+  function age() {
+    const d = +$('dobD').value, m = +$('dobM').value, y = +$('dobY').value;
+    if (!d || !m || !y || y < 1900) return null;
+    const now = new Date();
+    let a = now.getFullYear() - y;
+    if (now.getMonth() + 1 < m || (now.getMonth() + 1 === m && now.getDate() < d)) a--;
+    return a;
+  }
+  function toggleTeen() {
+    const a = age();
+    let any = false;
+    document.querySelectorAll('#ageSet .band').forEach((b) => {
+      const on = a !== null && a >= +b.dataset.min && a <= +b.dataset.max;
+      b.hidden = !on; if (on) any = true;
+    });
+    $('ageSet').hidden = !any;
+  }
+  ['dobD', 'dobM', 'dobY'].forEach((id) => $(id).addEventListener('input', toggleTeen));
+
+  function applyGender() {
+    const v = (form.querySelector('input[name="gender"]:checked') || {}).value;
+    document.querySelectorAll('.g').forEach((s) => {
+      if (!s.dataset.n) s.dataset.n = s.textContent;
+      s.textContent = v === 'זכר' ? s.dataset.m : v === 'נקבה' ? s.dataset.f : s.dataset.n;
+    });
+  }
+  form.querySelectorAll('input[name="gender"]').forEach((r) => r.addEventListener('change', applyGender));
+
+  const SKIP = new Set(['יקר/ה','את/ה','שאת/ה','כתוב/כתבי','ממלא/ת','הממלא/ת','תוכל/י','אח/ות','חדש/ה','חבר/ה','קרוב/ה','אוהב/ת','חושש/ת']);
+  const FIN = { 'ץ': 'צ', 'ף': 'פ', 'ך': 'כ', 'ם': 'מ', 'ן': 'נ' };
+  function femOf(l, r) {
+    if (r === 'ה' || r === 'ת') {
+      if (l.endsWith('ו') && r === 'ה') return l.slice(0, -1) + 'ה';
+      const last = l.slice(-1);
+      return l.slice(0, -1) + (FIN[last] || last) + r;
+    }
+    if (l.endsWith('הוא') && r === 'היא') return l.slice(0, -3) + 'היא';
+    return r;
+  }
+  function gtext(s, g) {
+    if (!g) return s;
+    return s.replace(/([א-ת]+)\/([א-ת]+)/g, (m, l, r) => SKIP.has(m) ? m : (g === 'בן' ? l : femOf(l, r)));
+  }
+  const ORIG = new WeakMap();
+  function applyChild() {
+    const g = (form.querySelector('input[name="childG"]:checked') || {}).value || '';
+    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: (n) => n.parentElement.closest('script,style,.g,footer,#done') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+    });
+    let n;
+    while ((n = w.nextNode())) {
+      if (!ORIG.has(n)) { if (!n.nodeValue.includes('/')) continue; ORIG.set(n, n.nodeValue); }
+      n.nodeValue = gtext(ORIG.get(n), g);
+    }
+    form.querySelectorAll('input[type="radio"]').forEach((r) => {
+      if (r.name === 'gender' || r.name === 'childG') return;
+      if (r.dataset.ov === undefined) r.dataset.ov = r.value;
+      r.value = gtext(r.dataset.ov, g);
+    });
+  }
+  form.querySelectorAll('input[name="childG"]').forEach((r) => r.addEventListener('change', applyChild));
+  applyChild();
+
+  document.querySelectorAll('.date').forEach((g) => {
+    const ins = [...g.querySelectorAll('input')];
+    ins.forEach((el, k) => {
+      el.addEventListener('input', () => {
+        el.value = el.value.replace(/\D/g, '').slice(0, el.maxLength);
+        if (el.value.length === el.maxLength && ins[k + 1]) ins[k + 1].focus();
+      });
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !el.value && ins[k - 1]) ins[k - 1].focus();
+      });
+    });
+  });
+  const dateOf = (p) => { const d = val(p + 'D'), m = val(p + 'M'), y = val(p + 'Y'); return (d || m || y) ? [d, m, y].join('/') : ''; };
+
+  document.querySelectorAll('textarea').forEach((t) => {
+    const grow = () => { t.style.height = 'auto'; t.style.height = t.scrollHeight + 2 + 'px'; };
+    t.addEventListener('input', grow);
+  });
+
+  const radio = (name) => (form.querySelector('input[name="' + name + '"]:checked') || {}).value || '';
+  const val = (id) => $(id).value.trim();
+
+  function buildSummary() {
+    const lines = [];
+    const add = (q, a) => { if (a) lines.push(q + '\n' + a + '\n'); };
+    lines.push('בקשת מפה לילד\n');
+    add('ממלא/ת:', [val('fillerName'), radio('gender')].filter(Boolean).join(', '));
+    add('המפה עבור:', radio('childG'));
+    add('שם בעברית:', val('childHe'));
+    add('שם באנגלית:', val('childEn'));
+    add('תאריך לידה:', [val('dobD'), val('dobM'), val('dobY')].join('/'));
+    add('לידה אחרי השקיעה:', radio('sunset'));
+    add('הורה א:', [val('p1Name'), val('p1En'), dateOf('p1')].filter(Boolean).join(', '));
+    add('הורה ב:', [val('p2Name'), val('p2En'), dateOf('p2')].filter(Boolean).join(', '));
+    add('למה מפה עכשיו:', val('q4'));
+    add('שינויים לאחרונה:', val('qChange'));
+    add('איזה מידע הכי חשוב לקבל:', val('q5'));
+    add('החשש לגבי העתיד:', val('qFear'));
+    add('תכונות שאוהבים ורוצים לשמר:', val('q6'));
+    add('מה משמח אותו/אותה:', val('qJoy'));
+    add('איפה הכי קשה:', val('q7'));
+    add('במה הוא/היא הכי זקוק/ה להורה:', val('qNeed'));
+    add('מה כבר נוסה:', val('qTried'));
+    add('מה היה רוצה שישתנה:', val('qWish'));
+    add('נושא רגיש שלא להתייחס אליו:', val('q9'));
+    document.querySelectorAll('#ageSet .band:not([hidden]) textarea').forEach((t) => {
+      const l = t.labels[0].cloneNode(true); l.querySelectorAll('.opt').forEach((o) => o.remove());
+      add(l.textContent.trim(), t.value.trim());
+    });
+    add('עוד משהו לשתף:', val('qMore'));
+    add('הילד/ה יודע/ת על המפה:', radio('knows'));
+    return lines.join('\n');
+  }
+
+  const ENDPOINT = 'https://formspree.io/f/moejkwwj';
+  const submitBtn = $('sendBtn');
+  let sendCount = 0;
+  $('backBtn').addEventListener('click', () => {
+    $('done').hidden = true; form.hidden = false;
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  form.addEventListener('submit', (e) => e.preventDefault());
+  submitBtn.addEventListener('click', async () => {
+    const missing = [];
+    if (!val('fillerName')) missing.push('השם שלך');
+    if (!radio('childG')) missing.push('בן או בת');
+    if (!val('childHe')) missing.push('שם בעברית');
+    if (!val('childEn')) missing.push('שם באנגלית');
+    if (age() === null) missing.push('תאריך לידה מלא');
+    if (!val('p1Name')) missing.push('השם המלא שלך בעברית');
+    if (!val('p1En')) missing.push('השם המלא שלך באנגלית');
+    if (!(val('p1D') && val('p1M') && val('p1Y').length === 4)) missing.push('תאריך הלידה שלך');
+    if (!$('consent').checked) missing.push('אישור ההסכמה');
+    const err = $('err');
+    if (missing.length) {
+      err.textContent = 'כדי לשלוח, חסר: ' + missing.join(', ') + '.';
+      err.hidden = false;
+      return;
+    }
+    err.hidden = true;
+    const first = val('fillerName').split(/\s+/)[0];
+    const g = radio('gender');
+    const dear = g === 'זכר' ? 'היקר' : g === 'נקבה' ? 'היקרה' : 'היקר/ה';
+    $('hello').textContent = first + ' ' + dear + ',';
+    const message = gtext(buildSummary(), radio('childG'));
+    const payload = {
+      _subject: (demoOn ? 'דוגמא: ' : '') + (sendCount ? 'עדכון ' + (sendCount + 1) + ': ' : '') + 'בקשת מפה חדשה מ' + val('fillerName') + ' עבור ' + val('childHe'),
+      'שם הממלא/ת': val('fillerName'),
+      'תשובות': message
+    };
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'שולח...';
+    let sent = false;
+    const preview = false;
+    if (preview) { sent = true; } else try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 15000);
+      const res = await fetch(ENDPOINT, {
+        signal: ctrl.signal,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      clearTimeout(timer);
+      sent = res.ok;
+    } catch (_) { sent = false; }
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'שליחה';
+    if (!sent) {
+      err.textContent = 'השליחה לא הצליחה. כדאי לבדוק את החיבור לאינטרנט ולנסות שוב בעוד רגע.';
+      err.hidden = false;
+      return;
+    }
+    sendCount++;
+    form.hidden = true;
+    $('done').hidden = false;
+    $('done').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  let demoOn = false;
+  function clearForm() {
+    form.reset();
+    applyGender();
+    applyChild();
+    toggleTeen();
+    $('err').hidden = true;
+    $('done').hidden = true; form.hidden = false;
+  }
+  $('demoBtn') && $('demoBtn').addEventListener('click', () => {
+    if (demoOn) {
+      clearForm();
+      demoOn = false;
+      $('demoBtn').textContent = 'הצגת דוגמא מלאה';
+      return;
+    }
+    clearForm();
+    demoOn = true;
+    $('demoBtn').textContent = 'ביטול הדוגמא';
+    const set = (id, v) => { $(id).value = v; };
+    set('fillerName', 'מיכל');
+    $('gF').checked = true;
+    applyGender();
+    $('cgM').checked = true;
+    applyChild();
+    set('childHe', 'נועם דוגמא ישראלי');
+    set('childEn', 'Noam Dugma Israeli');
+    const y = new Date().getFullYear() - 17;
+    set('dobD', '14'); set('dobM', '03'); set('dobY', String(y));
+    $('sunsetNo').checked = true;
+    set('p1Name', 'מיכל ישראלי (דוגמא)'); set('p1En', 'Michal Israeli'); set('p1D', '02'); set('p1M', '09'); set('p1Y', '1978');
+    set('p2Name', 'אבי ישראלי (דוגמא)'); set('p2En', 'Avi Israeli'); set('p2D', '21'); set('p2M', '01'); set('p2Y', '1975');
+    set('q4', 'הוא מתגייס בעוד כמה חודשים, ואני רוצה להבין איך ללוות אותו בלי להחליט במקומו.');
+    set('q5', 'מה הוא צריך ממני עכשיו.\nלמה הוא מתגונן כשאני מציעה עזרה.');
+    set('q6', 'הוא יצירתי ויש לו חוש הומור. כשהוא בונה משהו, הוא שוכח מהזמן.');
+    set('qChange', 'עבר בית ספר לפני שנה.');
+    set('qFear', 'שיבחר דרך כי כולם הולכים בה, ולא כי היא מתאימה לו.');
+    set('qJoy', 'לבנות דברים, לפרק ולהרכיב. יכול לשבת על זה שעות.');
+    set('q7', 'כשאני מחליטה בשבילו, הוא נסגר ומתגונן.');
+    set('qNeed', 'שאסמוך עליו.');
+    set('qTried', 'ניסיתי לדבר איתו בערב, לפני השינה. לפעמים זה עובד. הטפות לא עובדות.');
+    set('qWish', 'שירגיש שאני לצידו, ולא מעליו.');
+    set('a1518', 'טכנולוגיה, בנייה ומשחקי חשיבה.');
+    set('a1518b', 'הגיוס בעוד חצי שנה: מכינה קודם או גיוס ישיר.');
+    set('a1518c', 'על המסלול בצבא הוא רוצה להחליט לבד. על לימודים וכסף עוד מתייעץ איתי.');
+    $('knowsWants').checked = true;
+    set('q9', '');
+    $('consent').checked = true;
+    toggleTeen();
+    $('fillerName').focus();
+  });
+})();
+</script>
 </body>
 </html>
