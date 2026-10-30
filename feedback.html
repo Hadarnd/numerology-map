@@ -330,19 +330,30 @@
       sections: sections.length ? sections.join(', ') : '—',
       quote_permission: quote || 'לא צוין',
       name: name || 'אנונימי/ת',
-      email: email || 'לא צוין',
       improve: improve || '—',
       words: words || '—',
       date: new Date().toLocaleString('he-IL')
     };
 
     try {
+      // שליחה כטופס רגיל (FormData) – הדרך היציבה ביותר מול Formspree, בלי בדיקת CORS מקדימה
+      const formData = new FormData();
+      Object.keys(payload).forEach(function(k){ formData.append(k, payload[k]); });
+      // אימייל נשלח רק אם הוזן (Formspree דוחה ערך שאינו כתובת אימייל תקינה)
+      if (email) { formData.append('email', email); }
       const res = await fetch(FEEDBACK_WEBHOOK, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload)
+        headers: { 'Accept': 'application/json' },
+        body: formData
       });
-      if (!res.ok) throw new Error('status ' + res.status);
+      if (!res.ok) {
+        let detail = '';
+        try {
+          const j = await res.json();
+          detail = (j.errors && j.errors.map(function(x){ return x.message; }).join(' | ')) || j.error || '';
+        } catch (_) {}
+        throw new Error('status ' + res.status + (detail ? ' – ' + detail : ''));
+      }
       // הצלחה – מציגים מסך תודה
       document.getElementById('form-card').style.display = 'none';
       document.getElementById('success-card').style.display = 'block';
@@ -350,8 +361,13 @@
     } catch (e) {
       btn.disabled = false;
       btn.textContent = '✦ שליחת משוב ✦';
+      console.error('Feedback send failed:', e);
       msg.className = 'msg err show';
       msg.textContent = 'אופס, השליחה לא הצליחה. אפשר לשלוח שוב בעוד רגע.';
+      const tech = document.createElement('div');
+      tech.style.cssText = 'font-size:0.72rem;opacity:0.7;margin-top:0.5rem;direction:ltr';
+      tech.textContent = String(e && e.message ? e.message : e);
+      msg.appendChild(tech);
     }
   }
 </script>
