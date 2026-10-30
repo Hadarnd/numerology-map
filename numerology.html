@@ -8,27 +8,38 @@
   @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Heebo:wght@300;400;500&display=swap');
 
   :root {
-    --void: #0a0118;
-    --deep: #12022a;
-    --mid: #1a0533;
-    --rim: #2d2150;
-    --gold: #c9a84c;
-    --gold-light: #e8d08a;
-    --violet: #7c5cbf;
-    --violet-light: #a98de0;
-    --rose: #c06080;
-    --teal: #3abbb0;
-    --text: #e8e0f0;
-    --text-dim: #9b91b8;
-    --card: linear-gradient(145deg,#12022a,#0d1b3e);
-    --card-border: rgba(201,168,76,0.25);
+    --void: #050a10;
+    --deep: #0d1620;
+    --mid: #142230;
+    --rim: #1e3446;
+    --gold: #d9b26e;
+    --gold-light: #f5dca0;
+    --violet: #3d6a8c;
+    --violet-light: #5fa0c9;
+    --rose: #a8bcc9;
+    --teal: #5fa0c9;
+    --text: #f0ece0;
+    --text-dim: #93a3b0;
+    --card: linear-gradient(145deg,#0d1620,#142230);
+    --card-border: rgba(217,178,110,0.35);
+    --heading: #f5dca0;
+    --label-gold: #d9b26e;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: linear-gradient(160deg, #1a0533 0%, #0d1b3e 50%, #1a0533 100%);
-    background-attachment: fixed;
+    background-color: #050a10;
+    background-image:
+      radial-gradient(ellipse 140% 45% at 50% 145%, #d9a24f 0%, #b8823f 15%, #4a7d82 32%, #2d5258 48%, transparent 68%),
+      radial-gradient(ellipse 60% 22% at 72% 18%, rgba(180,150,90,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 90% 30% at 60% 25%, rgba(90,70,140,0.3) 0%, transparent 65%),
+      radial-gradient(ellipse 110% 38% at 68% 24%, rgba(75,160,175,0.4) 0%, transparent 65%),
+      radial-gradient(ellipse at 25% 10%, #16283a 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, #1a2f42 0%, transparent 45%),
+      linear-gradient(180deg, #050a10 0%, #060d16 35%, #0a121c 60%, #142226 85%, #24201a 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
     color: var(--text);
     font-family: 'Heebo', sans-serif;
     font-weight: 300;
@@ -36,22 +47,21 @@
     overflow-x: hidden;
   }
 
-  /* Stars background */
+  /* Drifting animated starfield */
   body::before {
     content: '';
     position: fixed;
-    inset: 0;
-    background-image:
-      radial-gradient(1px 1px at 10% 20%, rgba(201,168,76,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 80% 10%, rgba(160,130,220,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 50% 80%, rgba(201,168,76,0.2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 30% 60%, rgba(160,130,220,0.2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 70% 40%, rgba(201,168,76,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 90% 70%, rgba(160,130,220,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 20% 90%, rgba(201,168,76,0.2) 0%, transparent 100%),
-      radial-gradient(2px 2px at 60% 30%, rgba(201,168,76,0.15) 0%, transparent 100%);
+    inset: -10% -10% -10% -10%;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22300%22%20height%3D%22300%22%3E%3Ccircle%20cx%3D%22191.8%22%20cy%3D%227.5%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.48%22/%3E%3Ccircle%20cx%3D%2230.7%22%20cy%3D%22222.2%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.65%22/%3E%3Ccircle%20cx%3D%228.9%22%20cy%3D%2265.6%22%20r%3D%221.5%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.74%22/%3E%3Ccircle%20cx%3D%22214.8%22%20cy%3D%22210.4%22%20r%3D%221.2%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.75%22/%3E%3Ccircle%20cx%3D%22242.8%22%20cy%3D%221.9%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.6%22/%3E%3Ccircle%20cx%3D%2246.6%22%20cy%3D%22287.2%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.63%22/%3E%3Ccircle%20cx%3D%22107.7%22%20cy%3D%22103.2%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.84%22/%3E%3Ccircle%20cx%3D%22160.9%22%20cy%3D%22291.9%22%20r%3D%221.2%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.58%22/%3E%3Ccircle%20cx%3D%22188.6%22%20cy%3D%22265.6%22%20r%3D%221.0%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.82%22/%3E%3Ccircle%20cx%3D%2213.7%22%20cy%3D%2268.4%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.91%22/%3E%3Ccircle%20cx%3D%22259.9%22%20cy%3D%22114.0%22%20r%3D%221.2%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.62%22/%3E%3Ccircle%20cx%3D%22111.1%22%20cy%3D%2262.9%22%20r%3D%221.0%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.81%22/%3E%3Ccircle%20cx%3D%2221.4%22%20cy%3D%22190.5%22%20r%3D%221.5%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.5%22/%3E%3Ccircle%20cx%3D%22113.8%22%20cy%3D%22296.9%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.59%22/%3E%3Ccircle%20cx%3D%22230.5%22%20cy%3D%2216.8%22%20r%3D%220.6%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.64%22/%3E%3Ccircle%20cx%3D%2219.9%22%20cy%3D%22273.9%22%20r%3D%221.5%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.59%22/%3E%3Ccircle%20cx%3D%22196.6%22%20cy%3D%22118.7%22%20r%3D%221.2%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.48%22/%3E%3Ccircle%20cx%3D%22223.5%22%20cy%3D%22161.7%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.75%22/%3E%3Ccircle%20cx%3D%22108.6%22%20cy%3D%22299.2%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.45%22/%3E%3Ccircle%20cx%3D%2214.1%22%20cy%3D%2232.9%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.65%22/%3E%3Ccircle%20cx%3D%2219.1%22%20cy%3D%22114.5%22%20r%3D%221.2%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.98%22/%3E%3Ccircle%20cx%3D%22258.2%22%20cy%3D%223.4%22%20r%3D%220.6%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.72%22/%3E%3Ccircle%20cx%3D%2280.0%22%20cy%3D%22192.3%22%20r%3D%220.6%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.49%22/%3E%3Ccircle%20cx%3D%221.0%22%20cy%3D%22216.6%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.86%22/%3E%3Ccircle%20cx%3D%22152.3%22%20cy%3D%2231.9%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.7%22/%3E%3Ccircle%20cx%3D%2259.7%22%20cy%3D%22112.2%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.87%22/%3E%3Ccircle%20cx%3D%22159.1%22%20cy%3D%220.2%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.47%22/%3E%3Ccircle%20cx%3D%22108.9%22%20cy%3D%22295.6%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.54%22/%3E%3Ccircle%20cx%3D%22170.2%22%20cy%3D%2223.6%22%20r%3D%221.2%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.99%22/%3E%3Ccircle%20cx%3D%22159.8%22%20cy%3D%2237.7%22%20r%3D%221.2%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.5%22/%3E%3Ccircle%20cx%3D%22158.3%22%20cy%3D%22182.0%22%20r%3D%220.8%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.85%22/%3E%3Ccircle%20cx%3D%22207.0%22%20cy%3D%22213.9%22%20r%3D%221.2%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.79%22/%3E%3Ccircle%20cx%3D%22131.4%22%20cy%3D%22155.3%22%20r%3D%220.6%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.44%22/%3E%3Ccircle%20cx%3D%226.3%22%20cy%3D%22166.2%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.44%22/%3E%3Ccircle%20cx%3D%22189.3%22%20cy%3D%2268.7%22%20r%3D%220.6%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.44%22/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+    background-repeat: repeat;
+    animation: driftStars 90s linear infinite;
     pointer-events: none;
     z-index: 0;
+  }
+  @keyframes driftStars {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-300px, -300px); }
   }
 
   .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; position: relative; z-index: 1; }
@@ -72,12 +82,13 @@
     font-family: 'Frank Ruhl Libre', serif;
     font-weight: 900;
     font-size: clamp(1.8rem, 5vw, 3rem);
-    background: linear-gradient(135deg, var(--gold), var(--violet-light), var(--gold-light));
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     line-height: 1.2;
     margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 14px rgba(217,178,110,0.55)) drop-shadow(0 2px 6px rgba(0,0,0,0.6));
   }
   .subtitle {
     color: var(--text-dim);
@@ -92,12 +103,14 @@
     gap: 1rem;
     margin: 2rem 0;
     color: var(--gold);
-    opacity: 0.5;
+    opacity: 1;
+    font-size: 1.3rem;
+    text-shadow: 0 1px 3px rgba(11,22,32,0.3);
   }
   .divider::before, .divider::after {
     content: '';
     flex: 1;
-    height: 1px;
+    height: 2px;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
   }
 
@@ -120,15 +133,15 @@
   label {
     display: block;
     font-size: 0.8rem;
-    color: var(--gold);
+    color: var(--label-gold);
     letter-spacing: 0.1em;
     margin-bottom: 0.4rem;
   }
   input {
     width: 100%;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(201,168,76,0.25);
-    border-radius: 8px;
+    background: rgba(61,106,140,0.11);
+    border: 1px solid rgba(61,106,140,0.3);
+    border-radius: 18px;
     padding: 0.75rem 1rem;
     color: var(--text);
     font-family: 'Heebo', sans-serif;
@@ -143,9 +156,9 @@
   .gender-btn {
     flex: 1;
     padding: 0.75rem 0.5rem;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(201,168,76,0.25);
-    border-radius: 8px;
+    background: rgba(61,106,140,0.11);
+    border: 1px solid rgba(61,106,140,0.3);
+    border-radius: 18px;
     color: var(--text-dim);
     font-family: 'Heebo', sans-serif;
     font-size: 0.95rem;
@@ -155,7 +168,7 @@
   .gender-btn.active {
     border-color: var(--gold);
     color: var(--gold);
-    background: rgba(201,168,76,0.1);
+    background: rgba(61,106,140,0.15);
   }
 
   .date-row { display: grid; grid-template-columns: 1fr 1fr 1.5fr; gap: 0.8rem; }
@@ -166,9 +179,9 @@
     width: 100%;
     margin-top: 1.5rem;
     padding: 1rem;
-    background: linear-gradient(135deg, var(--violet), var(--gold));
+    background: linear-gradient(135deg, #1e3446, #3d6a8c, #d9b26e);
     border: none;
-    border-radius: 10px;
+    border-radius: 18px;
     color: white;
     font-family: 'Frank Ruhl Libre', serif;
     font-size: 1.2rem;
@@ -186,7 +199,7 @@
   .section-title {
     font-family: 'Frank Ruhl Libre', serif;
     font-size: 1.4rem;
-    color: var(--gold-light);
+    color: var(--heading);
     margin-bottom: 1.2rem;
     display: flex;
     align-items: center;
@@ -213,7 +226,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(124,92,191,0.1), transparent);
+    background: linear-gradient(135deg, rgba(95,160,201,0.15), transparent);
     pointer-events: none;
   }
   .num-card .num-label { font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.4rem; letter-spacing: 0.05em; }
@@ -249,10 +262,10 @@
   .detail-section h3 {
     font-family: 'Frank Ruhl Libre', serif;
     font-size: 1.1rem;
-    color: var(--gold-light);
+    color: var(--heading);
     margin-bottom: 1rem;
     padding-bottom: 0.6rem;
-    border-bottom: 1px solid rgba(201,168,76,0.2);
+    border-bottom: 1px solid rgba(61,106,140,0.25);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -261,7 +274,7 @@
   .interp-block {
     margin-bottom: 1.2rem;
     padding: 1rem;
-    background: rgba(255,255,255,0.03);
+    background: rgba(61,106,140,0.09);
     border-radius: 10px;
     border-right: 3px solid var(--gold);
   }
@@ -282,27 +295,27 @@
     font-size: 0.84rem;
     line-height: 1.6;
   }
-  .light-box { background: rgba(58,187,176,0.08); border: 1px solid rgba(58,187,176,0.25); }
+  .light-box { background: rgba(95,160,201,0.13); border: 1px solid rgba(95,160,201,0.3); }
   .light-box strong { color: var(--teal); }
-  .shadow-box { background: rgba(192,96,128,0.08); border: 1px solid rgba(192,96,128,0.25); }
+  .shadow-box { background: rgba(61,106,140,0.13); border: 1px solid rgba(61,106,140,0.3); }
   .shadow-box strong { color: var(--rose); }
 
   .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
   .tag {
-    background: rgba(124,92,191,0.2);
-    border: 1px solid rgba(124,92,191,0.4);
+    background: rgba(95,160,201,0.25);
+    border: 1px solid rgba(95,160,201,0.45);
     border-radius: 20px;
     padding: 0.2rem 0.8rem;
     font-size: 0.78rem;
     color: var(--violet-light);
   }
-  .tag.missing { background: rgba(192,96,128,0.15); border-color: rgba(192,96,128,0.4); color: var(--rose); }
-  .tag.karma { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.4); color: var(--gold); }
+  .tag.missing { background: rgba(61,106,140,0.2); border-color: rgba(61,106,140,0.45); color: var(--rose); }
+  .tag.karma { background: rgba(61,106,140,0.15); border-color: rgba(61,106,140,0.45); color: var(--gold); }
 
   /* AI Section */
   .ai-section {
-    background: linear-gradient(135deg, rgba(124,92,191,0.1), rgba(201,168,76,0.05));
-    border: 1px solid rgba(124,92,191,0.4);
+    background: linear-gradient(135deg, rgba(95,160,201,0.15), rgba(61,106,140,0.1));
+    border: 1px solid rgba(95,160,201,0.45);
     border-radius: 16px;
     padding: 2rem;
     margin-bottom: 2rem;
@@ -394,9 +407,9 @@
   .btn-ai {
     width: 100%;
     padding: 0.9rem;
-    background: linear-gradient(135deg, rgba(124,92,191,0.4), rgba(201,168,76,0.3));
+    background: linear-gradient(135deg, rgba(95,160,201,0.45), rgba(61,106,140,0.35));
     border: 1px solid var(--violet);
-    border-radius: 10px;
+    border-radius: 18px;
     color: var(--text);
     font-family: 'Frank Ruhl Libre', serif;
     font-size: 1.1rem;
@@ -404,7 +417,7 @@
     transition: all 0.3s;
     margin-top: 1rem;
   }
-  .btn-ai:hover { background: linear-gradient(135deg, rgba(124,92,191,0.6), rgba(201,168,76,0.4)); }
+  .btn-ai:hover { background: linear-gradient(135deg, rgba(95,160,201,0.65), rgba(61,106,140,0.45)); }
 
   .payment-section {
     text-align: center;
@@ -414,14 +427,17 @@
     display: inline-block;
     width: 100%;
     box-sizing: border-box;
-    padding: 1rem;
+    padding: 1rem 0.5rem;
     background: linear-gradient(135deg, var(--gold), var(--gold-light));
     border: 1px solid var(--gold);
-    border-radius: 10px;
+    border-radius: 18px;
     color: var(--void);
     font-family: 'Frank Ruhl Libre', serif;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-size: clamp(0.9rem, 5vw, 1.3rem);
+    white-space: nowrap;
+    text-align: center;
     text-decoration: none;
     cursor: pointer;
     transition: all 0.3s;
@@ -446,31 +462,33 @@
     justify-content: center;
     gap: 0.5rem;
     padding: 0.9rem;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(201,168,76,0.35);
-    border-radius: 10px;
-    color: var(--gold);
+    background: linear-gradient(135deg, #f0d090 0%, #d9b26e 25%, #a8843f 50%, #d9b26e 75%, #f0d090 100%);
+    border: 1.5px solid #f5dca0;
+    border-radius: 18px;
+    color: #2a1a05;
+    font-weight: 700;
     font-family: 'Frank Ruhl Libre', serif;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.35);
     cursor: pointer;
     transition: all 0.3s;
   }
-  .btn-action:hover { background: rgba(201,168,76,0.12); border-color: var(--gold); }
+  .btn-action:hover { background: linear-gradient(135deg, #f5dca0 0%, #e0be80 25%, #b8944a 50%, #e0be80 75%, #f5dca0 100%); border-color: #f5dca0; }
   .btn-action svg { flex-shrink: 0; }
   @media (max-width: 500px) { .action-buttons { flex-direction: column; } }
   .pdf-hint {
     display: none;
     margin: 0.3rem 0 1.5rem;
     padding: 0.85rem 1.1rem;
-    background: rgba(124,92,191,0.12);
-    border: 1px solid rgba(124,92,191,0.4);
+    background: rgba(95,160,201,0.17);
+    border: 1px solid rgba(95,160,201,0.45);
     border-radius: 10px;
     color: var(--text);
     font-size: 0.9rem;
     line-height: 1.6;
     text-align: center;
   }
-  .pdf-hint strong { color: var(--gold-light); }
+  .pdf-hint strong { color: var(--heading); }
   .pdf-hint.show { display: block; }
 
   .btn-guide-top {
@@ -479,16 +497,16 @@
     gap: 8px;
     margin: 0 auto 1rem;
     padding: 8px 20px;
-    background: rgba(124,92,191,0.1);
-    border: 1px solid rgba(124,92,191,0.35);
-    border-radius: 30px;
-    color: var(--violet-light);
+    background: linear-gradient(135deg, #142230, #3d6a8c);
+    border: 1.5px solid #5fa0c9;
+    border-radius: 18px;
+    color: #eafaff;
     text-decoration: none;
     font-size: 0.85rem;
     letter-spacing: 0.5px;
     transition: all 0.3s;
   }
-  .btn-guide-top:hover { background: rgba(124,92,191,0.2); border-color: var(--violet); color: var(--gold-light); }
+  .btn-guide-top:hover { background: linear-gradient(135deg, #1e3446, #5fa0c9); border-color: #5fa0c9; color: #ffffff; }
   .btn-guide-top-wrap { text-align: center; margin-top: 8px; }
 
   .btn-feedback {
@@ -496,22 +514,22 @@
     text-align: center;
     margin: 1.5rem 0 0.5rem;
     padding: 0.9rem 1rem;
-    background: rgba(124,92,191,0.1);
-    border: 1px solid rgba(124,92,191,0.35);
-    border-radius: 10px;
-    color: var(--violet-light);
+    background: linear-gradient(135deg, #142230, #3d6a8c);
+    border: 1.5px solid #5fa0c9;
+    border-radius: 18px;
+    color: #eafaff;
     text-decoration: none;
     font-family: 'Frank Ruhl Libre', serif;
     font-size: 1rem;
     transition: all 0.3s;
   }
-  .btn-feedback:hover { background: rgba(124,92,191,0.2); border-color: var(--violet); color: var(--gold-light); }
+  .btn-feedback:hover { background: linear-gradient(135deg, #1e3446, #5fa0c9); border-color: #5fa0c9; color: #ffffff; }
 
   .wound-card {
     padding: 1rem;
     border-radius: 10px;
-    border: 1px solid rgba(201,168,76,0.2);
-    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(61,106,140,0.25);
+    background: rgba(61,106,140,0.08);
     margin-bottom: 0.8rem;
   }
   .wound-card h4 { color: var(--gold); font-size: 0.9rem; margin-bottom: 0.4rem; }
@@ -521,7 +539,7 @@
     padding: 1rem;
     border-radius: 10px;
     border-right: 3px solid var(--violet);
-    background: rgba(124,92,191,0.05);
+    background: rgba(95,160,201,0.1);
     margin-bottom: 0.8rem;
   }
   .ego-card h4 { color: var(--violet-light); font-size: 0.9rem; margin-bottom: 0.5rem; }
@@ -586,7 +604,7 @@
 
     <!-- Karma Debts -->
     <div class="detail-section" id="karma-section" style="display:none">
-      <h3>⟳ חוב קארמתי</h3>
+      <h3>⟳ מבחן קארמתי</h3>
       <div id="karma-content"></div>
     </div>
 
@@ -605,6 +623,7 @@
     <!-- Soul Wounds -->
     <div class="detail-section" id="wounds-section">
       <h3>🜁 פצעי הנשמה</h3>
+      <p style="font-size:0.82rem;color:var(--text-dim);margin-bottom:0.8rem;line-height:1.6">המבחן הקארמתי מתאר את השיעור שהנשמה בחרה. הפצע הוא הכאב שחוותה בדרך אליו, והמסיכה היא ההגנה שנבנתה סביבו. המבחן מסביר למה הדפוס כאן, והמסיכה מראה איך הוא מתנהג ביומיום. מי שחווה את המבחן כעונש ולא כהזדמנות למידה נשאר במעגל.</p>
       <div id="wounds-content"></div>
     </div>
 
@@ -623,7 +642,7 @@
     <!-- Payment -->
     <div class="payment-section">
       <a href="PASTE_GREEN_INVOICE_PAYMENT_LINK_HERE" target="_blank" class="btn-payment">
-        🔮 לרכישת הפענוח האישי — לחץ/י כאן 🔮
+        🔮 לרכישת הפענוח האישי לחץ/י כאן 🔮
       </a>
     </div>
 
@@ -779,22 +798,22 @@ const LIGHT_SHADOW = {
 };
 
 const MISSING_LESSONS = {
-  1: { lesson: 'ללמוד להיות ראשון, לומר "אני" ללא אשמה, לפתח ביטחון עצמי ויוזמה', challenge: 'קושי לקחת מקום ולהוביל' },
-  2: { lesson: 'ללמוד שיתוף פעולה, לפתח רגישות רגשית ויכולת קבלה', challenge: 'קושי ביחסים ובגמישות' },
-  3: { lesson: 'לפתח ביטוי עצמי, שמחה, יצירתיות ומשחק', challenge: 'קושי להתבטא ולשמוח' },
-  4: { lesson: 'ללמוד משמעת, סדר ובניית יסודות יציבים', challenge: 'קושי ביצירת יציבות' },
-  5: { lesson: 'ללמוד חירות אמיתית, גמישות ופתיחות לשינוי', challenge: 'פחד משינוי וחידוש' },
-  6: { lesson: 'ללמוד לתת ולקבל אהבה, לדאוג לעצמי כמו לאחרים', challenge: 'קושי ביחסי אחריות ואהבה' },
-  7: { lesson: 'ללמוד לסמוך – לעבור מניהול החיים דרך השכל בלבד, לפיתוח אינטואיציה ואמון. לגלות שלא הכל ניתן להוכחה, ושיש סדר גבוה יותר. השיעור הקבלי: למצוא את הקדושה בתוך היומיומי – כשמפסיקים לרחם על הבדידות ומתחילים ללמוד ולחקור פנימה, הבדידות הופכת מנטל לכוח.', challenge: 'קושי לסמוך – על אנשים, על התהליך, על היקום. צורך להוכיח ולהבין הכל באופן הגיוני' },
-  8: { lesson: 'ללמוד לגעת בשפע, לפתח כוח אישי ויחס בריא לכסף', challenge: 'קושי עם כסף וכוח' },
-  9: { lesson: 'ללמוד נתינה ללא ציפייה, לפתח חמלה ורוחב לב', challenge: 'קושי לסגור מעגלים' }
+  1: { lesson: 'ללמוד לעמוד על שלי. לעבור מהליכה אחרי אחרים, ומהמתנה לאישור, לסמוך על הקול הפנימי וליזום. לגלות שאפשר לומר "אני" בלי אשמה, ושהמקום שלי לא לוקח מקום מאף אחד.', challenge: 'לקחת מקום ולהוביל' },
+  2: { lesson: 'ללמוד את כוח ה"ביחד". לעבור מ"אני מסתדר לבד" להקשבה, לשיתוף פעולה ולקבלה של אחרים כמו שהם. לגלות שרגישות היא לא חולשה, ושקשר קרוב לא מאיים על העצמאות.', challenge: 'גמישות ושיתוף ביחסים' },
+  3: { lesson: 'לפתח ביטוי עצמי. לעבור משמירת הכול בפנים לשיתוף במילים, ביצירה ובמשחק, בקצב שמרגיש בטוח. לגלות שהקול שלי שווה להישמע, ושלא חייבים להיות מושלמים כדי להופיע.', challenge: 'ביטוי במילים ומול אחרים' },
+  4: { lesson: 'ללמוד לבנות יסודות. לעבור מפיזור ומהתחלות שלא נגמרות לשגרה, להתמדה ולהשלמה. לגלות שמשמעת יכולה להיות מקום בטוח ולא כלא, ושמה שנבנה לאט עומד לאורך זמן.', challenge: 'יציבות וסדר' },
+  5: { lesson: 'ללמוד חירות אמיתית. לעבור מהיאחזות במוכר לגמישות, לסקרנות ולפתיחות לחוויות חדשות. לגלות שאפשר לצאת אל החדש ועדיין להישאר מחובר לשורשים.', challenge: 'פתיחות לשינוי ולחדש' },
+  6: { lesson: 'ללמוד לתת ולקבל אהבה. לעבור מהימנעות מאחריות, או מנתינה מתוך חובה, לנתינה מתוך בחירה. לגלות שדאגה לעצמי היא חלק מהאהבה לאחרים, ולא סותרת אותה.', challenge: 'אחריות ואהבה' },
+  7: { lesson: 'ללמוד לסמוך. לעבור מניהול החיים דרך השכל בלבד לאינטואיציה ואמון. לגלות שלא הכול ניתן להוכחה, ושיש סדר גבוה יותר. השיעור הקבלי: למצוא את הקדושה בתוך היומיומי. כשמפסיקים לרחם על הבדידות ומתחילים לחקור פנימה, הבדידות הופכת מנטל לכוח.', challenge: 'אמון וביטחון' },
+  8: { lesson: 'ללמוד לגעת בשפע. לעבור מרתיעה מכסף ומכוח, או מפחד מהם, לניהול בריא של משאבים, זמן וכוח אישי. לגלות שכוח יכול לשרת, ושמותר לי להצליח.', challenge: 'כסף וכוח' },
+  9: { lesson: 'ללמוד לסגור מעגלים ולשחרר. לעבור מנתינה למעגל הקרוב בלבד לחמלה ולרוחב לב כלפי העולם. לגלות שסיום הוא גם התחלה, ושאפשר להיפרד בלי לאבד את מה שהיה.', challenge: 'סגירת מעגלים ונתינה רחבה' }
 };
 
 const KARMA_MEANINGS = {
-  13: { name: 'חוב 13 – העצלות', desc: 'בחיים קודמים נמנעת מלקחת אחריות ועבודה. השיעור: לבנות דרך עמל עקבי, סדר, ולהתמסר לתהליך ולא לתוצאה המיידית.' },
-  14: { name: 'חוב 14 – השחרור', desc: 'שימוש לרעה בחירות ובכוח בחיים קודמים. השיעור: ריסון עצמי, גמישות מבחירה, ולא מכורח. חירות אמיתית דרך משמעת.' },
-  16: { name: 'חוב 16 – גאוות האגו', desc: 'ה"אני" שהפר יחסים וניפץ לבבות. קשור באופן קלאסי לזהות ותפיסת עצמי. השיעור: להפיל את האגו מרצון, לפני שהחיים יעשו זאת. נדרשת אהבה עצמית אמיתית.' },
-  19: { name: 'חוב 19 – עצמאות', desc: 'שימוש בכוח ובמשאבים לצורך עצמי בלבד. השיעור: ללמוד לקחת עזרה, לוותר על שליטה, להיות חלק מקהילה.' }
+  13: { name: 'מבחן 13 – ניסיונות ומבחני מיומנות', desc: 'בחיים קודמים נבחרה הקלילות על חשבון העבודה. האזהרה: חזרה לעצלות ולשליליות. השיעור: לעבור מקלילות ושטחיות לבנייה יציבה, ולהתמסר לעבודה בעולם החומרי.' },
+  14: { name: 'מבחן 14 – שכחת הלקח', desc: 'בחיים קודמים הנאות חושיות היו במרכז. בחיים האלה קל לשכוח את הלקח שחוויה מלמדת, ולכן אותם מצבים חוזרים והתוצאות מגיעות לאט. זה לא פגם ולא אשמה: הלקח פשוט עוד לא נקלט. השיעור: להחזיק ואז לשחרר, לפתוח את הלב לשינוי, ולבחור בחופש מתוך מודעות.' },
+  16: { name: 'מבחן 16 – המגדל הנופל', desc: 'קארמה של אהבה אסורה מחיים קודמים, ומבחן האמונה והאופטימיות של 7. מה שנבנה על האגו מתפרק, וזה לא עונש ולא אשמה: זו הזדמנות לבנות מחדש על יסוד יציב. השיעור: להקריב את האגו (1) על צלב האהבה (6), ולהישען על האמונה והרוח, המקום היחיד שנשאר יציב גם כשהכול רועד.' },
+  19: { name: 'מבחן 19 – מידה כנגד מידה', desc: 'כוח שנעשה בו שימוש לרעה בחיים קודמים, ומשהו שנלקח בלי שהוחזר. זה לא עונש: זה מבחן של מידה כנגד מידה. מי שנוטל אחריות ומחזיר מוקדם, בזמן, בכסף ובעשייה אישית, יוצא מהמעגל החוזר של אותם מצבים. מי שדוחה, פוגש אותם שוב. זה מספר של סיבולת: כמה אפשר לשאת בלי לוותר. אחרי שהחשבון נסגר, השמש זורחת מחדש.' }
 };
 
 const MASTER_MEANINGS = {
@@ -804,11 +823,11 @@ const MASTER_MEANINGS = {
 };
 
 const SOUL_WOUNDS = {
-  rejection: { name: 'פצע הדחייה', trigger: 'מספרים 1, 4 בעמדות מפתח', desc: 'תחושה עמוקה של "לא מספיק", פחד להיראות, נסיגה לפני שדוחים. הנשמה למדה שהיא לא ראויה.', heal: 'ללמוד שנוכחותך היא מתנה. לתת לעצמך רשות להיראות.' },
-  abandonment: { name: 'פצע הנטישה', trigger: 'מספרים 2, 6 בעמדות מפתח', desc: 'פחד עמוק מבדידות ועזיבה. יצירת תלות, רצון לרצות כדי שלא יעזבו.', heal: 'ללמוד שאתה/את שלם/ה לבד. להיות הבית של עצמך.' },
-  humiliation: { name: 'פצע ההשפלה', trigger: 'מספרים 3, 8 בעמדות מפתח', desc: 'בושה על מי שאתה/את – גוף, רגשות, רצונות. תחושה שהצרכים שלך הם עול על אחרים.', heal: 'לכבד את הצרכים שלך. הגוף שלך ורצונותייך קדושים.' },
-  betrayal: { name: 'פצע הבגידה', trigger: 'מספרים 5, 7 בעמדות מפתח', desc: 'קושי עמוק לתת אמון, ציפייה לאכזבה. שמירה על שליטה כהגנה.', heal: 'ללמוד שאמון מתחיל בעצמי. לשחרר שליטה בהדרגה.' },
-  injustice: { name: 'פצע אי-הצדק', trigger: 'מספרים 1, 8 בעמדות מפתח', desc: 'תחושה ש"זה לא הוגן", קשיחות כלפי עצמי, ביקורת עצמית קשה, פחד מטעויות.', heal: 'מותר לטעות וזה בסדר גמור. הלא מושלם הוא המושלם. הניצחון שלי הוא לדעת שגם כשזה לא מושלם - זה שלם.' }
+  rejection: { name: 'פצע הדחייה', trigger: 'מבחן 14', desc: 'הפחד המרכזי: פאניקה, להיות לא רצויה — תחושה עמוקה ש"אין לי זכות להתקיים". נסיגה לעולם פנימי, קושי לתפוס מקום בשיחה או בחדר, ולעתים פרפקציוניזם כדי לא להידחות.', heal: 'לוקחת מקום בלי להתנצל. נוכחת בגוף וברגע, ונשארת גם כשלא נוח.' },
+  abandonment: { name: 'פצע הנטישה', trigger: 'מבחן 14 (כהתמכרות) או 19 (כקוטב ההפוך לשליטה)', desc: 'הפחד המרכזי: בדידות — לא רק להיות לבד פיזית, אלא התחושה שאין מי שיחזיק ויתמוך. חיפוש מתמיד אחר תשומת לב ואישור, קושי להחליט לבד, ונטייה לחוות את עצמה כקורבן.', heal: 'טוב לה גם לבד. סומכת על שיקול הדעת שלה ומבקשת עזרה מתוך בחירה, לא מתוך פחד.' },
+  humiliation: { name: 'פצע ההשפלה', trigger: 'מבחן 16 (וכמלכודת אפשרית בכל מבחן)', desc: 'הפחד המרכזי: חופש — בושה סביב הגוף, האוכל וההנאה. שמה את הצרכים של כולם לפני שלה, ומרגישה אשמה כשהיא נהנית או מרשה לעצמה לנוח.', heal: 'מרשה לעצמה הנאה ומכבדת את צרכיה. יודעת לומר לא בלי אשמה, ולקבל ולא רק לתת.' },
+  betrayal: { name: 'פצע הבגידה', trigger: 'מבחן 19', desc: 'הפחד המרכזי: פירוד והתכחשות — פחד שמי שהיא סומכת עליו יעזוב או לא יעמוד במילה שלו. צורך לשלוט במצבים ולדעת הכול מראש, קושי לסמוך ולהאציל.', heal: 'מאצילה ומשחררת את התוצאה. יכולה לסמוך על אחרים גם כשזה לא לגמרי בשליטתה.' },
+  injustice: { name: 'פצע אי-הצדק', trigger: 'מבחן 13', desc: 'הפחד המרכזי: קרירות — פרפקציוניזם ודרישות גבוהות מעצמה, קושי לנוח או ליהנות בלי "להרוויח" את זה, שליטה ברגשות ורגישות חדה לכל מה שלא הוגן.', heal: 'מרשה לעצמה טעויות ורגש. מקבלת שהחיים לא תמיד הוגנים, בלי לאבד את הערכים שלה.' }
 };
 
 const EGO_SUITS = {
@@ -974,7 +993,7 @@ function calculate() {
   // Karma debts – יום הלידה בלבד (13, 14, 16, 19)
   const karmaDebts = KARMA_NUMS.includes(day) ? [day] : [];
 
-  // חוב קארמה נוסף: הסכום המשולב של יום+חודש+שנה מצומצמים בנפרד (השלב שלפני הצמצום הסופי לשביל החיים) –
+  // מבחן קארמה נוסף: הסכום המשולב של יום+חודש+שנה מצומצמים בנפרד (השלב שלפני הצמצום הסופי לשביל החיים) –
   // תופס חובות שנעלמים כשמצמצמים ישירות לתוצאה הסופית
   if (KARMA_NUMS.includes(lpRaw) && !karmaDebts.includes(lpRaw)) karmaDebts.push(lpRaw);
 
@@ -1120,18 +1139,25 @@ function renderTones() {
 }
 
 function renderWounds() {
-  const { allNumbers, lifePath, firstNum, fullNum } = globalData;
+  const { allNumbers, lifePath, firstNum, fullNum, karmaDebts } = globalData;
   const el = document.getElementById('wounds-content');
   const detected = [];
 
-  // Heuristic wound detection based on numbers
-  const nums = new Set(allNumbers);
+  // Debt-based wound detection (primary — per the karmic-debt / soul-wound mapping)
+  if (karmaDebts.includes(14)) { detected.push('rejection'); detected.push('abandonment'); }
+  if (karmaDebts.includes(16)) { detected.push('humiliation'); }
+  if (karmaDebts.includes(19)) { detected.push('betrayal'); detected.push('abandonment'); }
+  if (karmaDebts.includes(13)) { detected.push('injustice'); }
 
-  if (nums.has(1) || nums.has(4) || lifePath === 1 || lifePath === 4) detected.push('rejection');
-  if (nums.has(2) || nums.has(6) || lifePath === 2 || lifePath === 6) detected.push('abandonment');
-  if (nums.has(3) || nums.has(8) || lifePath === 3 || lifePath === 8) detected.push('humiliation');
-  if (nums.has(5) || nums.has(7) || lifePath === 5 || lifePath === 7) detected.push('betrayal');
-  if (nums.has(9) || lifePath === 9 || fullNum === 9) detected.push('injustice');
+  // Fallback heuristic — only used when no karmic debt is present at all
+  if (detected.length === 0) {
+    const nums = new Set(allNumbers);
+    if (nums.has(1) || nums.has(4) || lifePath === 1 || lifePath === 4) detected.push('rejection');
+    if (nums.has(2) || nums.has(6) || lifePath === 2 || lifePath === 6) detected.push('abandonment');
+    if (nums.has(3) || nums.has(8) || lifePath === 3 || lifePath === 8) detected.push('humiliation');
+    if (nums.has(5) || nums.has(7) || lifePath === 5 || lifePath === 7) detected.push('betrayal');
+    if (nums.has(9) || lifePath === 9 || fullNum === 9) detected.push('injustice');
+  }
 
   // Always show at least 2
   const unique = [...new Set(detected)].slice(0, 5);
@@ -1220,10 +1246,18 @@ async function getAIAnalysis() {
 - "בונים" ולא "ברים" | "להעמיס" ולא "לעמוס" | "לדחוק" ולא "לאחוק" | "קרקע" ולא "קרחת"
 - "מסקרן" ולא "מקרץ" – למשל: "משהו מתחת לפני השטח תמיד מסקרן, מבקש לחפור, לשאול שוב"
 - "נשמה עתיקה" ולא "נשמת קדמאיות"
-- לגבי מספר 4 ובנייה מסודרת: "רואה מראש מה ייקרוס אם לא בונים נכון מהתחלה" – לא "יודעת מה עולה הבניין"
+- לגבי מספר 4 ובנייה מסודרת: "רואה מראש מה יקרוס אם לא בונים נכון מהתחלה" – לא "יודעת מה עולה הבניין"
 - "חכמה שחרגה מעבר לגלגול חיים בודד" ולא "חכמה שחרגה מחיים אחדים"
 - "מפורטת בהמשך" / "תתואר בפרק הבא" – לא "תוארת" (אינה מילה תקנית)
 - "מתי לזוז ומתי להתבסס" – לא "מתי לזוז ומתי לשרוש" (אינה מילה תקנית)
+- "הפחד שאם לא תהיי חזקה מספיק, תישארי לבד ויעזבו אותך" – לא "הפחד שאם לא תהיי חזקה, לא תישארי לבד — תעזבו אותך" (ניסוח סותר את עצמו)
+- "יש נטייה להקשיח את עצמך ולסגת פנימה" – לא "להתנוקש" (אינה מילה תקנית)
+- "קוראת/קורא אנשים" (מזהה מצבי רוח/כוונות של אחרים) – לא "קוראת/קורא חדרים", בהקשר של תפיסה חושית סביב מספר 2 דומיננטי
+- "ערוץ" ולא "ערוצה" (אינה מילה תקנית)
+- "מייצרים" ולא "מצרים" (שגיאת אוטוקורקט נפוצה)
+- לגבי מספר 7: "שמח/ה להיות לבד" – לא "שמח/ה לבד" (משפט תלוי, חסר את הפועל "להיות")
+- אין לחזור על אותו משפט פעמיים בניסוחים שונים ("את גם אכפת לה. את גם אישה שאכפת לה.") – לבחור ניסוח אחד שלם ולהימנע מכפילות
+- אין להשאיר פסיק תלוי בסוף משפט או בתוך סוגריים (למשל "החודש שלך, 6,)")
 - "מאידך" אחרי "מחד" – לעולם לא "מחד... מחד"
 - בלוקים = חסימות, לא להשתמש במילה "בלוקים" – לכתוב "חסימות" או "עצירות"
 - אין להשתמש במילה "שנתיים" בהקשר לשיעורי נשמה או מספרים – אין למונח זה משמעות נומרולוגית
@@ -1233,12 +1267,19 @@ async function getAIAnalysis() {
 - לוודא שכל משפט שלם תחבירית – פעלים הדורשים מושא (כמו "לבטא", "להביע") חייבים להשלים אותו במפורש, לא להשאיר משפט תלוי
 - לגבי מספר מאסטר 11: "ה-11 שלך לא מבקש שתשבי/שתשב בצל, את/ה כאן כדי להאיר" (לא "לאיר")
 - "אווירה" ולא "חדרים" – למשל: "נוכחות שקטה שמשנה אווירה", לא "משנה חדרים"
-- לגבי חוב קארמה 16: יש לכלול גם את הזווית של זהות ותפיסת עצמי — הקשר ל"נפילת המגדל" (כמו בטארוט): קריסה פתאומית של תמונה עצמית שנבנתה על יסודות לא יציבים, לרוב אגו שנשען יותר מדי על איך אחרים תופסים אותך ולא על מי שאת/ה באמת. לרוב יש דפוס חוזר של בניית ביטחון עצמי/מעמד ואז איבודו, עד שהלקח נלמד
-- לגבי חוב קארמה 14: יש לכלול גם שני מאפיינים אלה — (1) שינויים פתאומיים ובלתי צפויים בתחומים שנראו יציבים (עבודה, מגורים, קשרים), כאילו החיים מלמדים להסתגל ולזרום עם שינוי במקום להיאחז בשליטה נוקשה; (2) נטייה לפיתויים חוזרים באותם תחומים שבהם הייתה חריגה בעבר (אוכל, כסף, חושניות), כמבחן שחוזר שוב ושוב
-- לגבי חוב קארמה 13: יש לכלול גם שלושה מאפיינים אלה — (1) תחושה שדברים "לא זורמים" בקלות, צורך מוגבר במשמעת עצמית, עבודה קשה וסבלנות גם במטלות שנראות פשוטות; (2) נטייה לדחיינות שמתגמלת דווקא בהפסד — ככל שדוחים, זה מסתבך יותר; (3) תחושת "מזל רע" חוזר בתחומים של עבודה/פרויקטים, עד שהלקח נלמד
-- לגבי חוב קארמה 19: יש לכלול גם שני מאפיינים אלה — (1) בדידות חוזרת גם כשמוקפים באנשים, וקושי אמיתי לבקש עזרה או לקבל תמיכה, כאילו מנגנון פנימי דוחף לעשות הכול לבד גם כשזה מתיש או לא הכרחי; (2) דפוס של הישענות-יתר על אחרים דווקא שדוחים אותו החוצה (כי לא מבקשים/לא משתפים), עד שנלמד האיזון בין עצמאות לתלות הדדית בריאה
+- כשמספר חסר הוא גם שביל החיים: אין כאן שני נושאים נפרדים. שביל החיים הוא ההזדמנות, והמספר החסר הוא השיעור שבתוכה. החיים מזמנים שוב ושוב מצבים שמפתחים צד אחד של המספר, והשיעור נמצא בצד השני שלו. לכתוב על כך בפסקה אחת, ולא להציג את שניהם כנושאים נפרדים
+- לגבי הדינמיקה של "מתי לזוז ומתי להתבסס" (מספר 5, ורלוונטי גם לשנה אישית 7): יש להבחין בין שני סוגי תנועה — (1) מה ששווה להמשיך לשאת: הסקרנות והגמישות, החופש הפנימי כשהוא מגיע מבחירה מודעת, התנועה כדרך למידה דרך חוויה; (2) מה שהגיע הזמן לשחרר: הבריחה האוטומטית ברגע שמשהו מאתגר, הפחד מהתחייבות עמוקה, התבנית של "לברוח כדי לא להרגיש". ההבחנה המרכזית: תנועה מתוך בחירה מול תנועה מתוך פחד
+- לגבי מבחן 16: יש לכלול גם את הזווית של זהות ותפיסת עצמי — הקשר ל"נפילת המגדל" (כמו בטארוט): קריסה פתאומית של תמונה עצמית שנבנתה על יסודות לא יציבים, לרוב אגו שנשען יותר מדי על איך אחרים תופסים אותך ולא על מי שאת/ה באמת. לרוב יש דפוס חוזר של בניית ביטחון עצמי/מעמד ואז איבודו, עד שהלקח נלמד | לפי פלורנס קמפבל: זה מבחן האמונה והאופטימיות של 7; "מקדש הרוח" הוא המקום הבטוח היחיד, ורק כוח הרוח מונע מהמגדל ליפול; הדרך היא הקרבת האגו (1) על צלב האהבה (6); קארמה של אהבה אסורה מחיים קודמים. על שביל החיים: לעלות כדי ליפול, לאהוב כדי לאבד, להחזיק כדי לשחרר
+- לגבי מבחן 16, ניסוח: לא לנסח את המבחן כעונש או כאשמה, גם לא את חלק האהבה האסורה. נפילת המגדל היא התפרקות של מה שנבנה על יסוד לא יציב, והיא הזדמנות לבנות מחדש. את משפט קמפבל על המגדל והרוח יש לנסח כך: האמונה והרוח הן המקום שנשאר יציב גם כשהכול רועד, ולא כ"רק כוח הרוח מונע מהמגדל ליפול"
+- לגבי מבחן 14: יש לכלול גם שני מאפיינים אלה — (1) שינויים פתאומיים ובלתי צפויים בתחומים שנראו יציבים (עבודה, מגורים, קשרים), כאילו החיים מלמדים להסתגל ולזרום עם שינוי במקום להיאחז בשליטה נוקשה; (2) נטייה לפיתויים חוזרים באותם תחומים שבהם הייתה חריגה בעבר (אוכל, כסף, חושניות), כמבחן שחוזר שוב ושוב | לפי פלורנס קמפבל: מספר של מאדים; שקיעה קודמת בהנאות חושיות והיאחזות בתחושות גופניות; קושי לזכור וללמוד מניסיון (שכחת הלקח), ולכן אותם דפוסים חוזרים והתוצאות מתעכבות. על שביל החיים: ללמוד להחזיק ואז לשחרר, ללמוד את חוק השינוי ולהשתמש בחופש נכון
+- לגבי מבחן 14, ניסוח: לא לנסח את המבחן כפגם, כחולשה או כאשמה. "שכחת הלקח" היא תיאור של דפוס ולא של אופי. את הנטייה לפיתויים חוזרים (אוכל, כסף, חושניות) לתאר כהזדמנות לבחירה מודעת. לכתוב "הנאות חושיות" ולא "תענוגות הגוף"
+- לגבי מבחן 13: יש לכלול גם שלושה מאפיינים אלה — (1) תחושה שדברים "לא זורמים" בקלות, צורך מוגבר במשמעת עצמית, עבודה קשה וסבלנות גם במטלות שנראות פשוטות; (2) נטייה לדחיינות שמתגמלת דווקא בהפסד — ככל שדוחים, זה מסתבך יותר; (3) תחושת "מזל רע" חוזר בתחומים של עבודה/פרויקטים, עד שהלקח נלמד | לפי פלורנס קמפבל: האזהרה היא חזרה לעצלות ולשליליות; הדרך היא לעבור מקלילות ושטחיות לבנייה יציבה, והסיסמה היא עבודה בעולם החומרי (כותרתה אצלה: ניסיונות ומבחני מיומנות). היא מציינת שהמספר לא תמיד נכלל ברשימת מספרי המבחן
+- לגבי מבחן 13, ניסוח: לא לנסח את המבחן כפגם, כעצלות כתכונת אופי או כאשמה. הקלילות היא בחירה שנעשתה בעבר, והמבחן הוא לבנות עכשיו בהדרגה ובסבלנות. את "שליליות" לתאר כנטייה לוותר מוקדם, ולא כאישיות שלילית
+- לגבי מבחן 19: יש לכלול גם שני מאפיינים אלה — (1) בדידות חוזרת גם כשמוקפים באנשים, וקושי אמיתי לבקש עזרה או לקבל תמיכה, כאילו מנגנון פנימי דוחף לעשות הכול לבד גם כשזה מתיש או לא הכרחי; (2) דפוס של הישענות-יתר על אחרים דווקא שדוחים אותו החוצה (כי לא מבקשים/לא משתפים), עד שנלמד האיזון בין עצמאות לתלות הדדית בריאה | לפי פלורנס קמפבל: מספר של שבתאי, "גובה המיסים" – מידה כנגד מידה; כוח שנעשה בו שימוש לרעה ומשהו שנלקח מהיקום בלי שנעשה תשלום עליו. מי שמשלם במהירות יוצא ממעגל ההכרח, ומי שמסרב, החוב נצבר; זה מספר של סיבולת. על שביל החיים: לקצור את מה שנזרע, להתמודד עם נטלי העבר, ולשלם בזמן, בכסף ובעצמי. הכותרת שלה: השמש העולה של עידן חדש
+- לגבי מבחן 19, ניסוח: לא לנסח את המבחן כעונש או כאשמה. במקום "לשלם" לכתוב "להחזיר" ולהסביר מה בפועל (בזמן, בכסף ובעשייה אישית). את "מעגל ההכרח" לתאר כ"מעגל חוזר של אותם מצבים" ולא כמונח עתיק ללא הסבר
+- שיוך מבחני קארמה לפצעי הנשמה (שיטת ליז בורבו) — יש להשתמש אך ורק במיפוי הזה, לא בשיוך כללי אחר: מבחן 14 → פצע הדחייה (בורח), וגם פצע הנטישה כביטוי של התמכרות; מבחן 16 → פצע ההשפלה (מזוכיסט), והמזוכיזם עלול להופיע כמלכודת אפשרית בכל מבחן כשהוא נחווה כעונש ולא כהזדמנות למידה; מבחן 19 → פצע הבגידה (שולט), וגם פצע הנטישה כביטוי של הקוטב ההפוך לשליטה; מבחן 13 → פצע אי-הצדק (נוקשה). ההבחנה החשובה: המבחן מסביר למה הדפוס קיים, הפצע/המסיכה מתאר איך הוא מתנהג ביומיום
 - בהתייחסות למספרים 11, 22 או 33 יש להשתמש אך ורק בביטוי "מספר מאסטר" (או "מספרי מאסטר" ברבים) – אסור בהחלט "מאסטר נאמבר", "מאסטר נומר" או כל וריאציה מעורבת אנגלית-עברית
-- לאחר כתיבת המפה במלואה, יש לעבור שוב על הטקסט כולו ולבדוק שגיאות מילים בעברית (מילים לא קיימות, ניסוחים שבורים, משפטים תלויים) לפני מסירתו כתשובה סופית
+- תהליך העבודה הוא דו-שלבי ומחייב: **שלב 1** — כתיבת המפה המלאה. **שלב 2** — עריכה לשונית נפרדת ומלאה על הטקסט שנכתב: קריאה מחדש של כל המפה מתחילתה ועד סופה, איתור ותיקון שגיאות כתיב, מילים לא תקניות, ניסוחים שבורים, משפטים תלויים, כפילויות וסימני פיסוק שגויים (כולל כל הכללים שלעיל). רק לאחר השלמת שלב העריכה יש למסור את הטקסט הערוך כתשובה הסופית — לעולם לא לוותר על שלב העריכה גם אם המפה נראית תקינה במבט ראשון
 
 נתוני המפה:
 שם: ${d.fullName} | מין: ${d.gender} | שביל חיים: ${d.lifePath}
@@ -1246,6 +1287,7 @@ async function getAIAnalysis() {
 יום: ${d.dayNum} | חודש: ${d.monthNum} | שנת תיקון: ${d.tikkun} | ספרה אחרונה של שנת הלידה (כלי מבצעי): ${d.yearLastDigit}
 שנה אישית נוכחית: ${d.personalYear} (${d.pyStart} עד ${d.pyEndMonth})
 חסרים: ${d.missing.length > 0 ? d.missing.join(', ') : 'אין'} | קארמה: ${d.karmaDebts.length > 0 ? d.karmaDebts.join(', ') : 'אין'} | מאסטר: ${d.uniqueMasters.length > 0 ? d.uniqueMasters.join(', ') : 'אין'}
+חסר = שביל החיים: ${d.missing.includes(d.lifePath) ? 'כן (מספר ' + d.lifePath + ')' : 'לא'}
 דומיננטיים: ${d.dominant.join(', ')}
 
 כתבי ניתוח הכולל את כל ששת הפרקים הבאים במלואם, ללא דילוג על אף אחד מהם – במיוחד הפרק האחרון:
@@ -1270,26 +1312,41 @@ async function getAIAnalysis() {
 - "להעמיס" לא "לעמוס" | "לדחוק" לא "לאחוק" | "קרקע" לא "קרחת"
 - "מסקרן" לא "מקרץ" – למשל: "משהו מתחת לפני השטח תמיד מסקרן, מבקש לחפור, לשאול שוב"
 - "נשמה עתיקה" ולא "נשמת קדמאיות"
-- לגבי מספר 4 ובנייה מסודרת: "רואה מראש מה ייקרוס אם לא בונים נכון מהתחלה" – לא "יודעת מה עולה הבניין"
+- לגבי מספר 4 ובנייה מסודרת: "רואה מראש מה יקרוס אם לא בונים נכון מהתחלה" – לא "יודעת מה עולה הבניין"
 - "חכמה שחרגה מעבר לגלגול חיים בודד" ולא "חכמה שחרגה מחיים אחדים"
 - "מפורטת בהמשך" / "תתואר בפרק הבא" – לא "תוארת" (אינה מילה תקנית)
 - "מתי לזוז ומתי להתבסס" – לא "מתי לזוז ומתי לשרוש" (אינה מילה תקנית)
+- "הפחד שאם לא תהיי חזקה מספיק, תישארי לבד ויעזבו אותך" – לא "הפחד שאם לא תהיי חזקה, לא תישארי לבד — תעזבו אותך" (ניסוח סותר את עצמו)
+- "יש נטייה להקשיח את עצמך ולסגת פנימה" – לא "להתנוקש" (אינה מילה תקנית)
+- "קוראת/קורא אנשים" (מזהה מצבי רוח/כוונות של אחרים) – לא "קוראת/קורא חדרים", בהקשר של תפיסה חושית סביב מספר 2 דומיננטי
+- "ערוץ" ולא "ערוצה" (אינה מילה תקנית)
+- "מייצרים" ולא "מצרים" (שגיאת אוטוקורקט נפוצה)
+- לגבי מספר 7: "שמח/ה להיות לבד" – לא "שמח/ה לבד" (משפט תלוי, חסר את הפועל "להיות")
+- אין לחזור על אותו משפט פעמיים בניסוחים שונים ("את גם אכפת לה. את גם אישה שאכפת לה.") – לבחור ניסוח אחד שלם ולהימנע מכפילות
+- אין להשאיר פסיק תלוי בסוף משפט או בתוך סוגריים (למשל "החודש שלך, 6,)")
 - "מחד... מאידך" – לא "מחד... מחד"
 - פנייה לפי המין המצוין בלבד לאורך כל הניתוח
 - ללא HTML – טקסט נקי עם רווחי שורה
 
 כללי תוכן:
-- מספר חסר = קושי עם האנרגיה, לא הימנעות מרצון
+- מספר חסר = תחום שהנשמה לא התנסתה בו, ולכן נבנה עכשיו מההתחלה. לא הימנעות מרצון
 - חסר 7 = קשה לסמוך ולהקשיב לקול הפנימי – לא אוהב/ת בדידות
 - תדר 7: מעבר מבדידות מבודדת ללבד מקודש, מספק לאמונה
 - מספרים 11/22/33: יש לכנות אותם אך ורק "מספר מאסטר" (או "מספרי מאסטר" ברבים) – אסור "מאסטר נאמבר", "מאסטר נומר" או כל וריאציה מעורבת אנגלית-עברית
 - לגבי מספר מאסטר 11: "ה-11 שלך לא מבקש שתשבי/שתשב בצל, את/ה כאן כדי להאיר" (לא "לאיר")
 - "אווירה" ולא "חדרים" – למשל: "נוכחות שקטה שמשנה אווירה", לא "משנה חדרים"
-- לגבי חוב קארמה 16: יש לכלול גם את הזווית של זהות ותפיסת עצמי — הקשר ל"נפילת המגדל" (כמו בטארוט): קריסה פתאומית של תמונה עצמית שנבנתה על יסודות לא יציבים, לרוב אגו שנשען יותר מדי על איך אחרים תופסים אותך ולא על מי שאת/ה באמת. לרוב יש דפוס חוזר של בניית ביטחון עצמי/מעמד ואז איבודו, עד שהלקח נלמד
-- לגבי חוב קארמה 14: יש לכלול גם שני מאפיינים אלה — (1) שינויים פתאומיים ובלתי צפויים בתחומים שנראו יציבים (עבודה, מגורים, קשרים), כאילו החיים מלמדים להסתגל ולזרום עם שינוי במקום להיאחז בשליטה נוקשה; (2) נטייה לפיתויים חוזרים באותם תחומים שבהם הייתה חריגה בעבר (אוכל, כסף, חושניות), כמבחן שחוזר שוב ושוב
-- לגבי חוב קארמה 13: יש לכלול גם שלושה מאפיינים אלה — (1) תחושה שדברים "לא זורמים" בקלות, צורך מוגבר במשמעת עצמית, עבודה קשה וסבלנות גם במטלות שנראות פשוטות; (2) נטייה לדחיינות שמתגמלת דווקא בהפסד — ככל שדוחים, זה מסתבך יותר; (3) תחושת "מזל רע" חוזר בתחומים של עבודה/פרויקטים, עד שהלקח נלמד
-- לגבי חוב קארמה 19: יש לכלול גם שני מאפיינים אלה — (1) בדידות חוזרת גם כשמוקפים באנשים, וקושי אמיתי לבקש עזרה או לקבל תמיכה, כאילו מנגנון פנימי דוחף לעשות הכול לבד גם כשזה מתיש או לא הכרחי; (2) דפוס של הישענות-יתר על אחרים דווקא שדוחים אותו החוצה (כי לא מבקשים/לא משתפים), עד שנלמד האיזון בין עצמאות לתלות הדדית בריאה
-- לאחר כתיבת המפה במלואה, יש לעבור שוב על הטקסט כולו ולבדוק שגיאות מילים בעברית (מילים לא קיימות, ניסוחים שבורים, משפטים תלויים) לפני מסירתו כתשובה סופית
+- כשמספר חסר הוא גם שביל החיים: אין כאן שני נושאים נפרדים. שביל החיים הוא ההזדמנות, והמספר החסר הוא השיעור שבתוכה. החיים מזמנים שוב ושוב מצבים שמפתחים צד אחד של המספר, והשיעור נמצא בצד השני שלו. לכתוב על כך בפסקה אחת, ולא להציג את שניהם כנושאים נפרדים
+- לגבי הדינמיקה של "מתי לזוז ומתי להתבסס" (מספר 5, ורלוונטי גם לשנה אישית 7): יש להבחין בין שני סוגי תנועה — (1) מה ששווה להמשיך לשאת: הסקרנות והגמישות, החופש הפנימי כשהוא מגיע מבחירה מודעת, התנועה כדרך למידה דרך חוויה; (2) מה שהגיע הזמן לשחרר: הבריחה האוטומטית ברגע שמשהו מאתגר, הפחד מהתחייבות עמוקה, התבנית של "לברוח כדי לא להרגיש". ההבחנה המרכזית: תנועה מתוך בחירה מול תנועה מתוך פחד
+- לגבי מבחן 16: יש לכלול גם את הזווית של זהות ותפיסת עצמי — הקשר ל"נפילת המגדל" (כמו בטארוט): קריסה פתאומית של תמונה עצמית שנבנתה על יסודות לא יציבים, לרוב אגו שנשען יותר מדי על איך אחרים תופסים אותך ולא על מי שאת/ה באמת. לרוב יש דפוס חוזר של בניית ביטחון עצמי/מעמד ואז איבודו, עד שהלקח נלמד | לפי פלורנס קמפבל: זה מבחן האמונה והאופטימיות של 7; "מקדש הרוח" הוא המקום הבטוח היחיד, ורק כוח הרוח מונע מהמגדל ליפול; הדרך היא הקרבת האגו (1) על צלב האהבה (6); קארמה של אהבה אסורה מחיים קודמים. על שביל החיים: לעלות כדי ליפול, לאהוב כדי לאבד, להחזיק כדי לשחרר
+- לגבי מבחן 16, ניסוח: לא לנסח את המבחן כעונש או כאשמה, גם לא את חלק האהבה האסורה. נפילת המגדל היא התפרקות של מה שנבנה על יסוד לא יציב, והיא הזדמנות לבנות מחדש. את משפט קמפבל על המגדל והרוח יש לנסח כך: האמונה והרוח הן המקום שנשאר יציב גם כשהכול רועד, ולא כ"רק כוח הרוח מונע מהמגדל ליפול"
+- לגבי מבחן 14: יש לכלול גם שני מאפיינים אלה — (1) שינויים פתאומיים ובלתי צפויים בתחומים שנראו יציבים (עבודה, מגורים, קשרים), כאילו החיים מלמדים להסתגל ולזרום עם שינוי במקום להיאחז בשליטה נוקשה; (2) נטייה לפיתויים חוזרים באותם תחומים שבהם הייתה חריגה בעבר (אוכל, כסף, חושניות), כמבחן שחוזר שוב ושוב | לפי פלורנס קמפבל: מספר של מאדים; שקיעה קודמת בהנאות חושיות והיאחזות בתחושות גופניות; קושי לזכור וללמוד מניסיון (שכחת הלקח), ולכן אותם דפוסים חוזרים והתוצאות מתעכבות. על שביל החיים: ללמוד להחזיק ואז לשחרר, ללמוד את חוק השינוי ולהשתמש בחופש נכון
+- לגבי מבחן 14, ניסוח: לא לנסח את המבחן כפגם, כחולשה או כאשמה. "שכחת הלקח" היא תיאור של דפוס ולא של אופי. את הנטייה לפיתויים חוזרים (אוכל, כסף, חושניות) לתאר כהזדמנות לבחירה מודעת. לכתוב "הנאות חושיות" ולא "תענוגות הגוף"
+- לגבי מבחן 13: יש לכלול גם שלושה מאפיינים אלה — (1) תחושה שדברים "לא זורמים" בקלות, צורך מוגבר במשמעת עצמית, עבודה קשה וסבלנות גם במטלות שנראות פשוטות; (2) נטייה לדחיינות שמתגמלת דווקא בהפסד — ככל שדוחים, זה מסתבך יותר; (3) תחושת "מזל רע" חוזר בתחומים של עבודה/פרויקטים, עד שהלקח נלמד | לפי פלורנס קמפבל: האזהרה היא חזרה לעצלות ולשליליות; הדרך היא לעבור מקלילות ושטחיות לבנייה יציבה, והסיסמה היא עבודה בעולם החומרי (כותרתה אצלה: ניסיונות ומבחני מיומנות). היא מציינת שהמספר לא תמיד נכלל ברשימת מספרי המבחן
+- לגבי מבחן 13, ניסוח: לא לנסח את המבחן כפגם, כעצלות כתכונת אופי או כאשמה. הקלילות היא בחירה שנעשתה בעבר, והמבחן הוא לבנות עכשיו בהדרגה ובסבלנות. את "שליליות" לתאר כנטייה לוותר מוקדם, ולא כאישיות שלילית
+- לגבי מבחן 19: יש לכלול גם שני מאפיינים אלה — (1) בדידות חוזרת גם כשמוקפים באנשים, וקושי אמיתי לבקש עזרה או לקבל תמיכה, כאילו מנגנון פנימי דוחף לעשות הכול לבד גם כשזה מתיש או לא הכרחי; (2) דפוס של הישענות-יתר על אחרים דווקא שדוחים אותו החוצה (כי לא מבקשים/לא משתפים), עד שנלמד האיזון בין עצמאות לתלות הדדית בריאה | לפי פלורנס קמפבל: מספר של שבתאי, "גובה המיסים" – מידה כנגד מידה; כוח שנעשה בו שימוש לרעה ומשהו שנלקח מהיקום בלי שנעשה תשלום עליו. מי שמשלם במהירות יוצא ממעגל ההכרח, ומי שמסרב, החוב נצבר; זה מספר של סיבולת. על שביל החיים: לקצור את מה שנזרע, להתמודד עם נטלי העבר, ולשלם בזמן, בכסף ובעצמי. הכותרת שלה: השמש העולה של עידן חדש
+- לגבי מבחן 19, ניסוח: לא לנסח את המבחן כעונש או כאשמה. במקום "לשלם" לכתוב "להחזיר" ולהסביר מה בפועל (בזמן, בכסף ובעשייה אישית). את "מעגל ההכרח" לתאר כ"מעגל חוזר של אותם מצבים" ולא כמונח עתיק ללא הסבר
+- שיוך מבחני קארמה לפצעי הנשמה (שיטת ליז בורבו) — יש להשתמש אך ורק במיפוי הזה, לא בשיוך כללי אחר: מבחן 14 → פצע הדחייה (בורח), וגם פצע הנטישה כביטוי של התמכרות; מבחן 16 → פצע ההשפלה (מזוכיסט), והמזוכיזם עלול להופיע כמלכודת אפשרית בכל מבחן כשהוא נחווה כעונש ולא כהזדמנות למידה; מבחן 19 → פצע הבגידה (שולט), וגם פצע הנטישה כביטוי של הקוטב ההפוך לשליטה; מבחן 13 → פצע אי-הצדק (נוקשה). ההבחנה החשובה: המבחן מסביר למה הדפוס קיים, הפצע/המסיכה מתאר איך הוא מתנהג ביומיום
+- תהליך העבודה הוא דו-שלבי ומחייב: **שלב 1** — כתיבת המפה המלאה. **שלב 2** — עריכה לשונית נפרדת ומלאה על הטקסט שנכתב: קריאה מחדש של כל המפה מתחילתה ועד סופה, איתור ותיקון שגיאות כתיב, מילים לא תקניות, ניסוחים שבורים, משפטים תלויים, כפילויות וסימני פיסוק שגויים (כולל כל הכללים שלעיל). רק לאחר השלמת שלב העריכה יש למסור את הטקסט הערוך כתשובה הסופית — לעולם לא לוותר על שלב העריכה גם אם המפה נראית תקינה במבט ראשון
 - טון: חם, אמפתי, ישיר, מחזק
   `;
   ============================================================ */
