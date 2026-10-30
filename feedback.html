@@ -8,27 +8,38 @@
   @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Heebo:wght@300;400;500&display=swap');
 
   :root {
-    --void: #0a0118;
-    --deep: #12022a;
-    --mid: #1a0533;
-    --rim: #2d2150;
-    --gold: #c9a84c;
-    --gold-light: #e8d08a;
-    --violet: #7c5cbf;
-    --violet-light: #a98de0;
-    --rose: #c06080;
-    --teal: #3abbb0;
-    --text: #e8e0f0;
-    --text-dim: #9b91b8;
-    --card: linear-gradient(145deg,#12022a,#0d1b3e);
-    --card-border: rgba(201,168,76,0.25);
+    --void: #050a10;
+    --deep: #0d1620;
+    --mid: #142230;
+    --rim: #1e3446;
+    --gold: #d9b26e;
+    --gold-light: #f5dca0;
+    --violet: #3d6a8c;
+    --violet-light: #5fa0c9;
+    --rose: #a8bcc9;
+    --teal: #5fa0c9;
+    --text: #f0ece0;
+    --text-dim: #93a3b0;
+    --card: linear-gradient(145deg,#0d1620,#142230);
+    --card-border: rgba(217,178,110,0.35);
+    --heading: #f5dca0;
+    --label-gold: #d9b26e;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: linear-gradient(160deg, #1a0533 0%, #0d1b3e 50%, #1a0533 100%);
-    background-attachment: fixed;
+    background-color: #050a10;
+    background-image:
+      radial-gradient(ellipse 140% 45% at 50% 145%, #d9a24f 0%, #b8823f 15%, #4a7d82 32%, #2d5258 48%, transparent 68%),
+      radial-gradient(ellipse 60% 22% at 72% 18%, rgba(180,150,90,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 90% 30% at 60% 25%, rgba(90,70,140,0.3) 0%, transparent 65%),
+      radial-gradient(ellipse 110% 38% at 68% 24%, rgba(75,160,175,0.4) 0%, transparent 65%),
+      radial-gradient(ellipse at 25% 10%, #16283a 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, #1a2f42 0%, transparent 45%),
+      linear-gradient(180deg, #050a10 0%, #060d16 35%, #0a121c 60%, #142226 85%, #24201a 100%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     color: var(--text);
     font-family: 'Heebo', sans-serif;
     font-weight: 300;
@@ -39,32 +50,32 @@
   body::before {
     content: '';
     position: fixed;
-    inset: 0;
-    background-image:
-      radial-gradient(1px 1px at 10% 20%, rgba(201,168,76,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 80% 10%, rgba(160,130,220,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 50% 80%, rgba(201,168,76,0.2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 30% 60%, rgba(160,130,220,0.2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 70% 40%, rgba(201,168,76,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 90% 70%, rgba(160,130,220,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 20% 90%, rgba(201,168,76,0.2) 0%, transparent 100%),
-      radial-gradient(2px 2px at 60% 30%, rgba(201,168,76,0.15) 0%, transparent 100%);
+    inset: -10% -10% -10% -10%;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22300%22%20height%3D%22300%22%3E%3Ccircle%20cx%3D%22191.8%22%20cy%3D%227.5%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.48%22/%3E%3Ccircle%20cx%3D%2230.7%22%20cy%3D%22222.2%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.65%22/%3E%3Ccircle%20cx%3D%228.9%22%20cy%3D%2265.6%22%20r%3D%221.5%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.74%22/%3E%3Ccircle%20cx%3D%22214.8%22%20cy%3D%22210.4%22%20r%3D%221.2%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.75%22/%3E%3Ccircle%20cx%3D%22242.8%22%20cy%3D%221.9%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.6%22/%3E%3Ccircle%20cx%3D%2246.6%22%20cy%3D%22287.2%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.63%22/%3E%3Ccircle%20cx%3D%22107.7%22%20cy%3D%22103.2%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.84%22/%3E%3Ccircle%20cx%3D%22160.9%22%20cy%3D%22291.9%22%20r%3D%221.2%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.58%22/%3E%3Ccircle%20cx%3D%22188.6%22%20cy%3D%22265.6%22%20r%3D%221.0%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.82%22/%3E%3Ccircle%20cx%3D%2213.7%22%20cy%3D%2268.4%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.91%22/%3E%3Ccircle%20cx%3D%22259.9%22%20cy%3D%22114.0%22%20r%3D%221.2%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.62%22/%3E%3Ccircle%20cx%3D%22111.1%22%20cy%3D%2262.9%22%20r%3D%221.0%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.81%22/%3E%3Ccircle%20cx%3D%2221.4%22%20cy%3D%22190.5%22%20r%3D%221.5%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.5%22/%3E%3Ccircle%20cx%3D%22113.8%22%20cy%3D%22296.9%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.59%22/%3E%3Ccircle%20cx%3D%22230.5%22%20cy%3D%2216.8%22%20r%3D%220.6%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.64%22/%3E%3Ccircle%20cx%3D%2219.9%22%20cy%3D%22273.9%22%20r%3D%221.5%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.59%22/%3E%3Ccircle%20cx%3D%22196.6%22%20cy%3D%22118.7%22%20r%3D%221.2%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.48%22/%3E%3Ccircle%20cx%3D%22223.5%22%20cy%3D%22161.7%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.75%22/%3E%3Ccircle%20cx%3D%22108.6%22%20cy%3D%22299.2%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.45%22/%3E%3Ccircle%20cx%3D%2214.1%22%20cy%3D%2232.9%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.65%22/%3E%3Ccircle%20cx%3D%2219.1%22%20cy%3D%22114.5%22%20r%3D%221.2%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.98%22/%3E%3Ccircle%20cx%3D%22258.2%22%20cy%3D%223.4%22%20r%3D%220.6%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.72%22/%3E%3Ccircle%20cx%3D%2280.0%22%20cy%3D%22192.3%22%20r%3D%220.6%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.49%22/%3E%3Ccircle%20cx%3D%221.0%22%20cy%3D%22216.6%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.86%22/%3E%3Ccircle%20cx%3D%22152.3%22%20cy%3D%2231.9%22%20r%3D%221.0%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.7%22/%3E%3Ccircle%20cx%3D%2259.7%22%20cy%3D%22112.2%22%20r%3D%220.8%22%20fill%3D%22%23f5dca0%22%20fill-opacity%3D%220.87%22/%3E%3Ccircle%20cx%3D%22159.1%22%20cy%3D%220.2%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.47%22/%3E%3Ccircle%20cx%3D%22108.9%22%20cy%3D%22295.6%22%20r%3D%221.0%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.54%22/%3E%3Ccircle%20cx%3D%22170.2%22%20cy%3D%2223.6%22%20r%3D%221.2%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.99%22/%3E%3Ccircle%20cx%3D%22159.8%22%20cy%3D%2237.7%22%20r%3D%221.2%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.5%22/%3E%3Ccircle%20cx%3D%22158.3%22%20cy%3D%22182.0%22%20r%3D%220.8%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.85%22/%3E%3Ccircle%20cx%3D%22207.0%22%20cy%3D%22213.9%22%20r%3D%221.2%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.79%22/%3E%3Ccircle%20cx%3D%22131.4%22%20cy%3D%22155.3%22%20r%3D%220.6%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.44%22/%3E%3Ccircle%20cx%3D%226.3%22%20cy%3D%22166.2%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.44%22/%3E%3Ccircle%20cx%3D%22189.3%22%20cy%3D%2268.7%22%20r%3D%220.6%22%20fill%3D%22%235fa0c9%22%20fill-opacity%3D%220.44%22/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+    background-repeat: repeat;
+    animation: driftStars 90s linear infinite;
     pointer-events: none;
     z-index: 0;
+  }
+  @keyframes driftStars {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-300px, -300px); }
   }
 
   .container { max-width: 640px; margin: 0 auto; padding: 2rem 1.5rem; position: relative; z-index: 1; }
 
   header { text-align: center; padding: 2.5rem 0 1.5rem; }
-  header .spark { font-size: 1.6rem; color: var(--gold); }
+  header .spark { font-size: 1.6rem; color: var(--gold); text-shadow: 0 0 22px rgba(217,178,110,.6); }
   h1 {
     font-family: 'Frank Ruhl Libre', serif;
     font-weight: 900;
     font-size: 2.1rem;
-    background: linear-gradient(135deg, var(--violet-light), var(--gold-light));
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    filter: drop-shadow(0 0 14px rgba(217,178,110,0.55)) drop-shadow(0 2px 6px rgba(0,0,0,0.6));
     margin: 0.6rem 0 0.4rem;
   }
   .subtitle { color: var(--text-dim); font-size: 1rem; letter-spacing: 0.04em; }
@@ -73,20 +84,21 @@
     background: var(--card);
     border: 1px solid var(--card-border);
     border-radius: 16px;
+    backdrop-filter: blur(10px);
     padding: 2rem 1.6rem;
     margin-top: 1rem;
   }
 
-  label { display: block; color: var(--gold-light); font-size: 0.98rem; margin: 1.3rem 0 0.5rem; font-weight: 400; }
+  label { display: block; color: var(--label-gold); font-size: 0.98rem; margin: 1.3rem 0 0.5rem; font-weight: 400; }
   label:first-of-type { margin-top: 0; }
   .optional { color: var(--text-dim); font-size: 0.8rem; }
 
   input[type="text"], input[type="email"], textarea {
     width: 100%;
     padding: 0.8rem 1rem;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(201,168,76,0.25);
-    border-radius: 10px;
+    background: rgba(61,106,140,0.09);
+    border: 1px solid rgba(217,178,110,0.25);
+    border-radius: 18px;
     color: var(--text);
     font-family: 'Heebo', sans-serif;
     font-size: 1rem;
@@ -94,32 +106,49 @@
   }
   input::placeholder, textarea::placeholder { color: var(--text-dim); opacity: 0.7; }
   input:focus, textarea:focus { outline: none; border-color: var(--gold); }
-  textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+  textarea { border-radius: 14px; resize: vertical; min-height: 90px; line-height: 1.6; }
 
   /* Star rating */
   .stars { display: flex; flex-direction: row-reverse; justify-content: center; gap: 0.4rem; margin: 0.6rem 0; }
   .stars input { display: none; }
   .stars label {
     margin: 0; cursor: pointer; font-size: 2.6rem; line-height: 1;
-    color: rgba(201,168,76,0.25); transition: color 0.2s, transform 0.15s;
+    color: rgba(217,178,110,0.25); transition: color 0.2s, transform 0.15s;
   }
   .stars label:hover, .stars label:hover ~ label,
   .stars input:checked ~ label { color: var(--gold); }
   .stars label:hover { transform: scale(1.15); }
   .stars-hint { text-align: center; color: var(--text-dim); font-size: 0.85rem; margin-top: 0.2rem; min-height: 1.2em; }
 
+  .hint-small { color: var(--text-dim); font-size: 0.8rem; margin-top: 0.4rem; line-height: 1.6; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.4rem; }
+  .chips label.chip { margin: 0; display: inline-block; cursor: pointer; }
+  .chip input { display: none; }
+  .chip span {
+    display: inline-block; padding: 0.5rem 1rem; border-radius: 18px;
+    border: 1px solid rgba(217,178,110,0.35); background: rgba(61,106,140,0.09);
+    color: var(--text); font-size: 0.92rem; transition: all 0.2s;
+  }
+  .chip:hover span { border-color: var(--gold); }
+  .chip input:checked + span {
+    background: linear-gradient(135deg, #f0d090 0%, #d9b26e 50%, #f0d090 100%);
+    border-color: #f5dca0; color: #2a1a05; font-weight: 500;
+  }
+
   .btn-submit {
     display: block; width: 100%; margin-top: 1.8rem; padding: 1rem;
-    background: linear-gradient(135deg, rgba(124,92,191,0.5), rgba(201,168,76,0.35));
-    border: 1px solid var(--violet);
-    border-radius: 12px;
-    color: var(--text);
+    background: linear-gradient(135deg, #1e3446, #3d6a8c, #d9b26e);
+    border: none;
+    border-radius: 18px;
+    color: white;
     font-family: 'Frank Ruhl Libre', serif;
     font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: opacity 0.3s, transform 0.2s;
   }
-  .btn-submit:hover { background: linear-gradient(135deg, rgba(124,92,191,0.7), rgba(201,168,76,0.5)); }
+  .btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }
   .btn-submit:disabled { opacity: 0.6; cursor: wait; }
 
   .msg { text-align: center; margin-top: 1.2rem; font-size: 1rem; line-height: 1.6; display: none; }
@@ -136,7 +165,7 @@
   .success-card p { color: var(--text-dim); font-size: 1.05rem; line-height: 1.7; }
   .back-link {
     display: inline-block; margin-top: 1.6rem; color: var(--gold);
-    text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(201,168,76,0.4);
+    text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(217,178,110,0.4);
     padding-bottom: 2px;
   }
   .back-link:hover { color: var(--gold-light); }
@@ -161,6 +190,7 @@
 
     <label>אימייל <span class="optional">(לא חובה – אם תרצה/תרצי שנחזור אליך/אלייך)</span></label>
     <input type="email" id="email" placeholder="name@example.com">
+    <div class="hint-small">הפרטים שלך נשמרים בסודיות ומשמשים למענה אישי בלבד.</div>
 
     <label>עד כמה הפענוח יצא לך מדויק?</label>
     <div class="stars">
@@ -172,11 +202,38 @@
     </div>
     <div class="stars-hint" id="stars-hint"></div>
 
+    <label>עד כמה הפענוח נגע בך?</label>
+    <div class="stars" id="touch-stars">
+      <input type="radio" name="touch" id="t5" value="5"><label for="t5" title="נגע עמוק">★</label>
+      <input type="radio" name="touch" id="t4" value="4"><label for="t4">★</label>
+      <input type="radio" name="touch" id="t3" value="3"><label for="t3">★</label>
+      <input type="radio" name="touch" id="t2" value="2"><label for="t2">★</label>
+      <input type="radio" name="touch" id="t1" value="1" title="בכלל לא"><label for="t1">★</label>
+    </div>
+    <div class="stars-hint" id="touch-hint"></div>
+
+    <label>איזה חלק במפה דיבר אליך הכי הרבה? <span class="optional">(אפשר לבחור כמה)</span></label>
+    <div class="chips" id="sections">
+      <label class="chip"><input type="checkbox" name="section" value="מספרי השם והלידה"><span>מספרי השם והלידה</span></label>
+      <label class="chip"><input type="checkbox" name="section" value="מספרים חסרים"><span>מספרים חסרים</span></label>
+      <label class="chip"><input type="checkbox" name="section" value="מבחן קארמתי"><span>מבחן קארמתי</span></label>
+      <label class="chip"><input type="checkbox" name="section" value="פצעי הנשמה"><span>פצעי הנשמה</span></label>
+      <label class="chip"><input type="checkbox" name="section" value="חליפת האגו"><span>חליפת האגו</span></label>
+      <label class="chip"><input type="checkbox" name="section" value="הפענוח האישי"><span>הפענוח האישי</span></label>
+    </div>
+
     <label>האם היית משנה או משפר/ת משהו?</label>
     <textarea id="improve" placeholder="כל מחשבה או הצעה תתקבל באהבה..."></textarea>
 
     <label>מילים נוספות / מה הרגשת?</label>
     <textarea id="words" placeholder="חופשי לכתוב כאן..."></textarea>
+
+    <label>אפשר לצטט את המשוב שלך? <span class="optional">(לשימוש באתר ובתכנים שלי)</span></label>
+    <div class="chips" id="quote">
+      <label class="chip"><input type="radio" name="quote" value="לא"><span>לא</span></label>
+      <label class="chip"><input type="radio" name="quote" value="כן, בשם"><span>כן, בשמי</span></label>
+      <label class="chip"><input type="radio" name="quote" value="כן, בעילום שם"><span>כן, בעילום שם</span></label>
+    </div>
 
     <button class="btn-submit" id="submit-btn" onclick="sendFeedback()">✦ שליחת משוב ✦</button>
     <div class="msg" id="msg"></div>
@@ -191,7 +248,7 @@
 
   <footer>
     © 2026 הדר נדב | מפת הנשמה הנומרולוגית<br>
-    כל הזכויות שמורות | אין לשכפל ללא רשות
+    כל הזכויות שמורות
   </footer>
 </div>
 
@@ -207,19 +264,46 @@
     '5': 'מדויק להפליא ✦'
   };
 
-  document.querySelectorAll('.stars input').forEach(function(inp){
+  const touchHints = {
+    '1': 'בכלל לא נגע',
+    '2': 'קצת נגע',
+    '3': 'נגע חלקית',
+    '4': 'נגע מאוד',
+    '5': 'נגע עמוק ✦'
+  };
+
+  document.querySelectorAll('.stars input[name="rating"]').forEach(function(inp){
     inp.addEventListener('change', function(){
       document.getElementById('stars-hint').textContent = ratingHints[this.value] || '';
     });
   });
+  document.querySelectorAll('.stars input[name="touch"]').forEach(function(inp){
+    inp.addEventListener('change', function(){
+      document.getElementById('touch-hint').textContent = touchHints[this.value] || '';
+    });
+  });
 
   function getRating() {
-    const checked = document.querySelector('.stars input:checked');
+    const checked = document.querySelector('input[name="rating"]:checked');
+    return checked ? checked.value : '';
+  }
+  function getTouch() {
+    const checked = document.querySelector('input[name="touch"]:checked');
+    return checked ? checked.value : '';
+  }
+  function getSections() {
+    return Array.from(document.querySelectorAll('input[name="section"]:checked')).map(function(i){ return i.value; });
+  }
+  function getQuote() {
+    const checked = document.querySelector('input[name="quote"]:checked');
     return checked ? checked.value : '';
   }
 
   async function sendFeedback() {
     const rating = getRating();
+    const touch = getTouch();
+    const sections = getSections();
+    const quote = getQuote();
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const improve = document.getElementById('improve').value.trim();
@@ -228,7 +312,7 @@
     const btn = document.getElementById('submit-btn');
 
     // ולידציה רכה: לפחות דירוג או טקסט כלשהו
-    if (!rating && !improve && !words) {
+    if (!rating && !touch && !sections.length && !improve && !words) {
       msg.className = 'msg err show';
       msg.textContent = 'אפשר לדרג בכוכבים או לכתוב כמה מילים לפני השליחה 🙂';
       return;
@@ -242,6 +326,9 @@
 
     const payload = {
       rating: rating || 'לא דורג',
+      touch: touch || 'לא דורג',
+      sections: sections.length ? sections.join(', ') : '—',
+      quote_permission: quote || 'לא צוין',
       name: name || 'אנונימי/ת',
       email: email || 'לא צוין',
       improve: improve || '—',
@@ -264,7 +351,7 @@
       btn.disabled = false;
       btn.textContent = '✦ שליחת משוב ✦';
       msg.className = 'msg err show';
-      msg.textContent = 'אופס, השליחה לא הצליחה. אפשר לנסות שוב בעוד רגע.';
+      msg.textContent = 'אופס, השליחה לא הצליחה. אפשר לשלוח שוב בעוד רגע.';
     }
   }
 </script>
